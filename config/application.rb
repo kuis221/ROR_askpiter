@@ -36,6 +36,6 @@ module Askpiter
     config.active_record.raise_in_transactional_callbacks = true
     config.action_mailer.delivery_method = :postmark
     config.action_mailer.postmark_settings = { :api_token => ENV["POSTMARK_API_KEY"] }
-    config.action_mailer.default_options = { :from => "no-reply@askpiter.es" }
+    config.action_mailer.default_options = { :from => "no-reply@askpiter.es", :url => "www.askpiter.es" }
   end
 end
