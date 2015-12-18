@@ -17,6 +17,7 @@ end
 gem 'bootstrap-sass'
 gem 'devise'
 gem 'high_voltage'
+gem 'postmark-rails'
 group :development do
   gem 'better_errors'
   gem 'hub', :require=>nil
