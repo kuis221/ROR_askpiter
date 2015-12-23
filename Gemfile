@@ -7,6 +7,8 @@ gem 'coffee-rails', '~> 4.1.0'
 gem 'jquery-rails'
 gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
+gem 'postmark-rails'
+
 group :development, :test do
   gem 'byebug'
 end
@@ -17,7 +19,6 @@ end
 gem 'bootstrap-sass'
 gem 'devise'
 gem 'high_voltage'
-gem 'postmark-rails'
 group :development do
   gem 'better_errors'
   gem 'hub', :require=>nil
