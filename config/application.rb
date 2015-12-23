@@ -34,9 +34,11 @@ module Askpiter
 
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.active_record.raise_in_transactional_callbacks = true
+    
+    # Set postmark API as delivery method
     config.action_mailer.delivery_method = :postmark
-    config.action_mailer.postmark_settings = { :api_token => ENV["POSTMARK_API_KEY"] }
-    config.action_mailer.default_url_options = { :host => "askpiter-staging.herokuapp.com" }
-    config.action_mailer.default_options = { :from => "no-reply@askpiter.es" }
+    config.action_mailer.postmark_settings = { :api_token => Rails.application.secrets.postmark_api_key }
+    config.action_mailer.default_url_options = { :host => Rails.application.secrets.domain_name }
+    config.action_mailer.default_options = { :from => "no-reply@" + Rails.application.secrets.domain_name  }
   end
 end
