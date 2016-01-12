@@ -11,11 +11,7 @@
   <body>
     <section class="main-wrapper">
       <%= render 'layouts/header' %>
-      <%= render 'layouts/left_filters' %>
-      <main role="main">
-        <%= render 'layouts/messages' %>
-        <%= yield %>
-      </main>
+      <%= yield %>
       <%= render 'layouts/footer' %>
     </section>
   </body>

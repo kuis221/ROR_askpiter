@@ -1,0 +1,48 @@
+
+ <%= render 'layouts/left_filters' %>
+
+
+<!-- MAIN CONTENTS LAYOUT -->
+<main class="main-content-wrapper">
+    <div class="flex applied-filters-wrapper">
+    </div>
+    <div class="flex thumbs-matrix-wrapper">
+        <% 16.times do %>
+            <div class="thumb-wrapper">
+                <div class="flex thumb-header">
+                    <span class="thumb-header-abbr">WRC</span>
+                    <span class="thumb-time-date">
+                        <span class="glyphicon glyphicon-time"></span>
+                        <span>02 sep 04:33</span>
+                    </span>
+                </div>
+                <div class="thumb-image">
+                    <%= image_tag "thumb-img-1.jpg", alt: "thumb-image" %>
+                </div>
+                <div class="flex thumb-footer">
+                    <span class="thumb-footer-model">Pro XT 29 (2014)</span>
+                    <div class="thumb-star-wrapper">
+                        <span class="thumb-footer-star glyphicon glyphicon-star"></span>
+                        <span class="thumb-footer-star glyphicon glyphicon-star"></span>
+                        <span class="thumb-footer-star glyphicon glyphicon-star"></span>
+                        <span class="thumb-footer-star empty-star glyphicon glyphicon-star"></span>
+                    </div>
+                </div>
+                <div class="thumb-description">
+                    <p>The Pro XT was a really popular summer wave board... rider in Galicia with it</p>
+                </div>
+                <div class="thumb-moreinfo-link">
+                    <a href="#">More Info...</a>
+                </div>
+            </div>
+        <% end %>
+    </div>
+    <div class="flex showmore-thumbs-row">
+        <div class="plus-button-wrapper">
+            <a href="#"><span class="zmdi zmdi-plus-circle-o"></span></a>
+        </div>
+        <div class="showmore-text-wrapper">
+            <a href="#" class="show-more-text"><span>More Listing</span> </a>
+        </div>
+    </div>
+</main>

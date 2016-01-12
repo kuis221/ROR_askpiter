@@ -898,6 +898,9 @@ $morelisting-color: #929292;
 .main-content-wrapper{
   background: #EFEFEF;
   margin-left: 320px;
+  padding-bottom: 0;
+  margin-top: 0;
+  width: auto;
 
   .applied-filters-wrapper{
     background: $appfilters-background;
