@@ -1,6 +1,6 @@
 <% unless user_signed_in? %>
   <div class="authform" id="UserSignIn">
-    <%= form_for(new User, :url => session_path(resource_name), :html => { :role => 'form'}) do |f| %>
+    <%= form_for(resource, :as => resource_name, :url => session_path(resource_name), :html => { :role => 'form'}) do |f| %>
       <h3>Sign in</h3>
       <%= devise_error_messages! %>
       <div class="form-group">
