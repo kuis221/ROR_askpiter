@@ -1,3 +1,47 @@
-// Place all the styles related to the home controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.home-page {
+  min-height: 900px;
+  background: image-url('homepage-background.jpg') no-repeat top left;
+  background-size: cover;
+  padding-top: 200px;
+
+  .home-page-text {
+    text-align: center;
+    padding-top: 200px;
+    font-size: 18px;
+    line-height: 26px;
+    color: #fff;
+
+    p {
+      margin-bottom: 20px;
+    }
+
+    background-color: rgba( 0, 0, 0, 0.4 );
+    border: 0 solid #000;
+    border-radius: 6px;
+    padding: 30px;
+  }
+
+  .search-box {
+    display: inline-block;
+    &> div {
+      display: inline-block;
+    }
+    .search-field-wrapper {
+      margin-right: 0;
+    }
+  }
+}
+
+@media( max-width: 768px ) {
+  .search-box .compare-button-wrapper .btn {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+}
+@media( min-width: 1025px ) {
+  .search-box .compare-button-wrapper .btn {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+}
