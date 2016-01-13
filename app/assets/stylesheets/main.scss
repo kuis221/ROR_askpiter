@@ -119,6 +119,11 @@ $menu-line-color: #ffffff;
   display: flex;             /* NEW, Spec - Opera 12.1, Firefox 20+ */
 }
 
+@media( min-width: 769px ) {
+  header {
+    margin-bottom: 50px;
+  }
+}
 .black-header-stripe{
   background-color: #000;
   display: flex;
@@ -654,7 +659,7 @@ $subfilter-size: .8em;
   font-family: $sidepanel-main-font;
   float: left;
   position: absolute;
-  top: 635px;
+  top: 685px;
   width: 320px;
 
   .filter-group{
@@ -902,6 +907,14 @@ $thumb-background: #ffffff;
 $morelisting-color: #929292;
 
 
+
+//*******************************//
+//**       FLASH MESSAGES      **//
+//*******************************//
+
+.flash.alert {
+  margin-top: 30px;
+}
 
 //*******************************//
 //**MAIN CONTENT GENERAL STYLES**//
