@@ -21,8 +21,15 @@
         </div>
         <div class="login-btn-wrapper">
         <% if user_signed_in? %>
-            <%= link_to 'Account', edit_user_registration_path, class: 'btn login-btn' %>
-            <%= link_to 'Log out', destroy_user_session_path, method: 'delete', class: 'btn login-btn' %>
+          <div class="dropdown">
+            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+              <%= current_user.name %> <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu1">
+              <li><%= link_to 'Account', edit_user_registration_path %></li>
+              <li><%= link_to 'Log out', destroy_user_session_path, method: 'delete' %></li>
+            </ul>
+          </div>
         <% else %>
             <button type="button" class="btn login-btn" data-toggle='modal' data-target='#SignInModal'>Log in</button>
         <% end%>
