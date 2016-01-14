@@ -2,6 +2,13 @@
   <%= render partial: 'layouts/messages', locals: { flash_class: 'floating' } %>
 <% end %>
 
+<% content_for :mobile_icons do %>
+  <div class="mobile-burger-menu">
+    <span></span><span></span><span></span>
+  </div>
+  <div class="mobile-filter-button"></div>
+<% end %>
+
 <%= render 'search_header' %>
 <%= render 'left_filters' %>
 
