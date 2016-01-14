@@ -26,7 +26,7 @@
 
   .search-box {
     display: inline-block;
-    &> div {
+    .compare-button-wrapper, .search-field-wrapper {
       display: inline-block;
       margin-top: 15px;
     }

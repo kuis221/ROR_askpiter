@@ -28,6 +28,16 @@ $(document).ready(function(){
         });
     });
 
+    // 'Categories' show block
+    $('#categories-button').click(function(){
+        var leftPos = $(this).offset().left;
+        var topPos = $(this).offset().top + 30;
+        $('.categories-block-wrapper').toggle(300).css({
+            'left': leftPos,
+            'top': topPos
+        });
+    });
+
     // Show 'burger' menu on mobile screen
     $('.mobile-burger-menu').click(function(){
        $('.main-menu-wrapper').slideToggle(200);
