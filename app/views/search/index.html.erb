@@ -1,3 +1,7 @@
+<% content_for :messages do %>
+  <%= render partial: 'layouts/messages', locals: { flash_class: 'floating' } %>
+<% end %>
+
 <%= render 'search_header' %>
 <%= render 'left_filters' %>
 
