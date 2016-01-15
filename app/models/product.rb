@@ -4,4 +4,7 @@ class Product < ActiveRecord::Base
   has_many :photos
   has_many :prices
   has_many :attrs, class_name: "Attribute"
+  has_many :ratings
+  has_many :reviews
+  has_many :dimensions
 end
