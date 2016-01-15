@@ -3,4 +3,5 @@ class Product < ActiveRecord::Base
   has_many :videos
   has_many :photos
   has_many :prices
+  has_many :attributes
 end
