@@ -13,4 +13,6 @@ class User < ActiveRecord::Base
 
   belongs_to :currency
   belongs_to :language
+
+  has_one :address, as: :addressable
 end
