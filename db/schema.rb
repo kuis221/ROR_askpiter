@@ -11,11 +11,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160115060903) do
+ActiveRecord::Schema.define(version: 20160115061707) do
 
   create_table "categories", force: :cascade do |t|
     t.string  "name"
     t.integer "father_category_id"
+  end
+
+  create_table "dimensions", force: :cascade do |t|
+    t.string   "text"
+    t.integer  "product_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "father_categories", force: :cascade do |t|
@@ -49,6 +56,14 @@ ActiveRecord::Schema.define(version: 20160115060903) do
     t.datetime "updated_at",  null: false
   end
 
+  create_table "prices", force: :cascade do |t|
+    t.float    "amount"
+    t.integer  "currency_id"
+    t.integer  "product_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
   create_table "products", force: :cascade do |t|
     t.string   "name"
     t.string   "description"
@@ -57,6 +72,16 @@ ActiveRecord::Schema.define(version: 20160115060903) do
     t.integer  "sub_category_id"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
+  end
+
+  create_table "reviews", force: :cascade do |t|
+    t.string   "title"
+    t.text     "review"
+    t.integer  "language_id"
+    t.integer  "user_id"
+    t.integer  "product_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
   create_table "sub_categories", force: :cascade do |t|
