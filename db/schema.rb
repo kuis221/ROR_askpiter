@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160115064345) do
+ActiveRecord::Schema.define(version: 20160115065913) do
 
   create_table "attributes", force: :cascade do |t|
     t.string   "title"
@@ -108,6 +108,12 @@ ActiveRecord::Schema.define(version: 20160115064345) do
     t.integer  "sub_category_id"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
+  end
+
+  create_table "ratings", force: :cascade do |t|
+    t.integer  "value"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "reviews", force: :cascade do |t|
