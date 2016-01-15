@@ -57,7 +57,7 @@ user.update_attributes(address: address, picture: picture, language: language, c
 language.update_attributes(reviews: [review])
 currency.update_attributes(prices: [price])
 category.update_attributes(videos: [video], photos: [photo])
-product.update_attributes(sub_category: sub_category, ratings: [rating], videos: [video], dimension: [dimension], photos: [photo], pictures: [picture], prices: [price])
+product.update_attributes(sub_category: sub_category, ratings: [rating], videos: [video], dimensions: [dimension], photos: [photo], pictures: [picture], prices: [price])
 distributor.update_attributes(address: address)
 user.save
 
