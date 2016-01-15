@@ -12,4 +12,5 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   belongs_to :currency
+  belongs_to :language
 end
