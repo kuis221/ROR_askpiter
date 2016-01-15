@@ -5,4 +5,5 @@ class Video < ActiveRecord::Base
   
   has_many :favourite_videos
   has_many :users, through: :favourite_videos
+  has_one :picture, as: :imageable
 end

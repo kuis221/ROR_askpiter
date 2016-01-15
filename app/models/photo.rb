@@ -5,4 +5,5 @@ class Photo < ActiveRecord::Base
 
   has_many :favourite_photos
   has_many :users, through: :favourite_photos
+  has_one :picture, as: :imageable
 end

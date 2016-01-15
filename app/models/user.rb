@@ -30,5 +30,6 @@ class User < ActiveRecord::Base
   has_many :companies, through: :favourite_companies
   has_many :favourite_products
   has_many :products, through: :favourite_products
+  has_one :picture, as: :imageable
 
 end
