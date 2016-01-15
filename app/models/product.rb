@@ -7,4 +7,7 @@ class Product < ActiveRecord::Base
   has_many :ratings
   has_many :reviews
   has_many :dimensions
+
+  has_many :favourite_products
+  has_many :users, through: :favourite_products
 end
