@@ -3,5 +3,5 @@ class Product < ActiveRecord::Base
   has_many :videos
   has_many :photos
   has_many :prices
-  has_many :attributes
+  has_many :attrs, class_name: "Attribute"
 end
