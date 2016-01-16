@@ -8,6 +8,14 @@ $(document).ready(function(){
     var plusIcon = $('.filter-plus-icon');
     var checkBox = $('.checkbox-inline');
 
+    window.filterStatus = window.filterStatus || { 
+      'favourites': 'hide', 
+      'history-search': 'hide', 
+      'your-categories': 'show', 
+      'international-brands': 'hide', 
+      'local-brands': 'hide' };
+    var filterStatus = window.filterStatus;
+
     $(document).on("page:change", function() {
       window.prevPageYOffset = window.pageYOffset;
       window.prevPageXOffset = window.pageXOffset;
@@ -85,8 +93,15 @@ $(document).ready(function(){
     });
 
     // Showing 'Your categories' filters by default
-    $('.filter-group.your-categories').children('.filter-group-contents').toggle().addClass('visible');
-    $('.filter-group.your-categories .filter-group-arrow').addClass('rotated');
+    //$('.filter-group.your-categories').children('.filter-group-contents').toggle().addClass('visible');
+    //$('.filter-group.your-categories .filter-group-arrow').addClass('rotated');
+
+    for ( var filter in filterStatus ) {
+      if( filterStatus[filter] === 'show' ) {
+        $('.filter-group.' + filter).children('.filter-group-contents').toggle().addClass('visible');
+        $('.filter-group.' + filter + ' .filter-group-arrow').addClass('rotated');
+      }
+    }
 
 
     // Hiding more than 5 filters
@@ -98,6 +113,14 @@ $(document).ready(function(){
     $(filterHead).click(function(){
         $(this).siblings('.filter-group-contents').toggle(300).toggleClass('visible');
         $(this).children('.filter-group-arrow').toggleClass('rotated');
+        var filterType = $(this).parents('.filter-group').data('type');
+
+        if($(this).children('.filter-group-arrow').hasClass('rotated')){
+          filterStatus[filterType] = 'show';
+        }
+        else {
+          filterStatus[filterType] = 'hide';
+        }
 
         if($(this).nextAll('.showmore-link-wrapper:first').css('display') == 'block'){
             $(this).nextAll('.showmore-link-wrapper:first').hide(300);

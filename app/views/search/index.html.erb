@@ -17,7 +17,7 @@
     <div class="flex applied-filters-wrapper">
       <% @filters.each do |filter| %>
         <div class="applied-filter">
-          <%= link_to search_index_path(update_params(params, :remove, filter.type)) do %>
+          <%= link_to search_index_path(update_params(params, :remove, filter.type)), data: { 'turbolinks-scroll': false }  do %>
             <span class="glyphicon glyphicon-remove"></span>
           <% end %>
           <span class="applied-filter-text"><%= filter.name %></span>
