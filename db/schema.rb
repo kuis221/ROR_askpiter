@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160115090549) do
+ActiveRecord::Schema.define(version: 20160116055735) do
 
   create_table "addresses", force: :cascade do |t|
     t.string   "street"
@@ -200,6 +200,17 @@ ActiveRecord::Schema.define(version: 20160115090549) do
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
   end
+
+  create_table "user_favourites", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "favouriteable_id"
+    t.string   "favouriteable_type"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+  end
+
+  add_index "user_favourites", ["favouriteable_type", "favouriteable_id"], name: "favouriteable_polymorphic_index"
+  add_index "user_favourites", ["user_id"], name: "index_user_favourites_on_user_id"
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false

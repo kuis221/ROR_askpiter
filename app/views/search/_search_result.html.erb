@@ -10,7 +10,7 @@
         <%= image_tag "thumb-img-1.jpg", alt: "thumb-image" %>
     </div>
     <div class="flex thumb-footer">
-        <span class="thumb-footer-model">Pro XT 29 (2014)</span>
+        <span class="thumb-footer-model"><%= product.name %></span>
         <div class="thumb-star-wrapper">
             <span class="thumb-footer-star glyphicon glyphicon-star"></span>
             <span class="thumb-footer-star glyphicon glyphicon-star"></span>
@@ -19,7 +19,7 @@
         </div>
     </div>
     <div class="thumb-description">
-        <p>The Pro XT was a really popular summer wave board... rider in Galicia with it</p>
+        <p><%= product.description %></p>
     </div>
     <div class="thumb-moreinfo-link">
         <a href="#">More Info...</a>

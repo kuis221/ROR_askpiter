@@ -15,6 +15,7 @@ class User < ActiveRecord::Base
   belongs_to :language
   has_one :address, as: :addressable
   has_many :ratings
+  has_many :favourites, as: :favouriteable
   has_many :favourite_categories
   has_many :categories, through: :favourite_categories
   has_many :favourite_videos

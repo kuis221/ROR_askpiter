@@ -17,8 +17,14 @@
     <div class="flex applied-filters-wrapper">
     </div>
     <div class="flex thumbs-matrix-wrapper">
-        <% 16.times do %>
-          <%= render 'search_result' %>
+        <% @products.each do |product| %>
+          <%= render partial: 'search_result', locals: { product: product } %>
+        <% end %>
+        <% unless @products.any? %>
+        <div class="flash alert alert-danger">
+          <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+          Searching for <strong>'<%= params[:search] %>'</strong> returned no products.
+        </div>
         <% end %>
     </div>
     <div class="flex showmore-thumbs-row">

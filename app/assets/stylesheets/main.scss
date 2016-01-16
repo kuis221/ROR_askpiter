@@ -221,17 +221,27 @@ $menu-line-color: #ffffff;
   }
 }
 .search-field-wrapper{
+  
   margin-right: 50px;
+  border-radius: 0 4px 4px 0;
+  height: 30px;
+  width: 260px;
+  background-color: #fff;
+
   .search-field{
-    border: none;
-    border-radius: 0 4px 4px 0;
-    background-image: image-url('search-icon-small.png');
-    background-repeat: no-repeat;
-    background-position: 95% center;
-    background-size: 18px 18px;
     height: 30px;
-    padding-right: 40px;
-    width: 260px;
+    border: none;
+    width: 225px;
+    display: inline-block;
+  }
+  .submit-icon {
+    display: inline;
+    width: 18px;
+    height: 18px;
+    position: relative;
+    top: -1px;
+    line-height: 30px;
+    vertical-align: middle;
   }
   .form-control:focus{
     border: none;
