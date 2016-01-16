@@ -17,6 +17,7 @@ class Product < ActiveRecord::Base
       prods = all
       prods = prods.where('name LIKE :search or description LIKE :search', search: "%#{search}%") if search
       prods = prods.where(sub_category_id: category_id) if category_id
+      prods
     else
       all
     end
