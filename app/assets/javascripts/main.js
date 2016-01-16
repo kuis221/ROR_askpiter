@@ -8,6 +8,25 @@ $(document).ready(function(){
     var plusIcon = $('.filter-plus-icon');
     var checkBox = $('.checkbox-inline');
 
+    $(document).on("page:change", function() {
+      window.prevPageYOffset = window.pageYOffset;
+      window.prevPageXOffset = window.pageXOffset;
+    });
+    $(document).on("page:load", function() {
+      if( window.turbolinksScroll === false ){
+        window.scrollTo( window.prevPageXOffset, window.prevPageYOffset );
+      }
+    }); 
+
+    $(document).on('click', 'a', function() {
+      var scroll = $(this).data('turbolinks-scroll');
+      if( scroll === false ){
+        window.prevPageYOffset = window.pageYOffset;
+        window.prevPageXOffset = window.pageXOffset;
+      }
+      window.turbolinksScroll = scroll;
+    });
+
     // 'Buying guides' show block
     $('#buying-guides').click(function(){
         var leftPos = $(this).offset().left;
@@ -50,7 +69,7 @@ $(document).ready(function(){
 
     // Removing 'plus' icons if there are no sub-filters
     $(subFilter).each(function(){
-       if($(this).siblings('.sub-filter-wrapper').length == 0){
+       if($(this).siblings('.sub-filter-wrapper').find('.sub-filter-name').length == 0){
            $(this).siblings('.filter-plus-icon').hide();
        }
     });
@@ -111,47 +130,6 @@ $(document).ready(function(){
     }
 
 
-    // Toggle sub filters
-    $(subFilter).click(function(event){
-        event.preventDefault();
-        var isChecked;
-        if($(this).siblings('.sub-filter-wrapper').length > 0){
-            $(this).siblings('.sub-filter-wrapper:first').toggle(300);
-            $(this).siblings('.filter-plus-icon').toggleClass('glyphicon-minus');
-        }
-        if($(this).siblings('.checkbox-style:first').children('input').prop('checked') == true){
-            $(this).siblings('.checkbox-style:first').children('input').prop('checked', false);
-            isChecked = false;
-        }
-        else if($(this).siblings('.checkbox-style:first').children('input').prop('checked') == false) {
-            $(this).siblings('.checkbox-style:first').children('input').prop('checked', true);
-            isChecked = true;
-        }
-        var filterCheckBoxId = $(this).siblings('.checkbox-style:first').children('input').attr('id');
-        applyFilter($(this).text(), filterCheckBoxId, isChecked);
-    });
-
-
-    // Removing applied filters from grey bar
-    $('body').on('click','.applied-filter', function(){
-        var filterCheckBoxId = $(this).attr('data-filterId');
-        var checkBoxes = $('.checkbox-style').children('input');
-
-        $(checkBoxes).each(function(){
-           if($(this).attr('id') == filterCheckBoxId){
-               $(this).prop('checked', false);
-
-               if($(this).parent().siblings('.sub-filter-wrapper').length > 0){
-                   $(this).parent().siblings('.sub-filter-wrapper:first').toggle(300);
-                   $(this).parent().siblings('.filter-plus-icon:first').toggleClass('glyphicon-minus');
-               }
-           }
-        });
-
-        $(this).remove();
-
-    });
-
     //  Showing/hiding filters sub-groups
     $(plusIcon).click(function(){
         if($(this).siblings('.sub-filter-wrapper').length > 0){
@@ -166,9 +144,6 @@ $(document).ready(function(){
             $(this).siblings('.checkbox-style:first').children('input').prop('checked', true);
         }
 
-        var filterCheckBoxId = $(this).siblings('.checkbox-style:first').children('input').attr('id');
-        var isChecked = $(this).siblings('.checkbox-style:first').children('input').prop('checked')
-        applyFilter($(this).siblings('.filter-name:first').text(), filterCheckBoxId, isChecked);
     });
 
     $(checkBox).click(function(){
@@ -176,14 +151,13 @@ $(document).ready(function(){
             $(this).parent().siblings('.sub-filter-wrapper:first').toggle(300);
             $(this).parent().siblings('.filter-plus-icon').toggleClass('glyphicon-minus');
         }
-
-        var filterCheckBoxId = $(this).attr('id');
-        var isChecked = $(this).prop('checked');
-        applyFilter($(this).parent().siblings('.filter-name:first').text(), filterCheckBoxId, isChecked);
     });
 
     $('.filter-name').click(function(event){
-        event.stopImmediatePropagation();
+        //event.stopImmediatePropagation();
+        //var link = $(this).find('a');
+        //Turbolinks.visit(link.href, { scroll: false } );
+        //event.preventDefault();
     });
 
 

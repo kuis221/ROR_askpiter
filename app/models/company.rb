@@ -7,4 +7,7 @@ class Company < ActiveRecord::Base
 
   has_many :favourite_companies
   has_many :users, through: :favourite_companies
+
+  scope :international, -> { where( international: true ) }
+  scope :local, -> { where( international: false ) }
 end

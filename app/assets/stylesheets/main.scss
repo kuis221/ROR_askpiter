@@ -769,7 +769,6 @@ $subfilter-size: .8em;
           padding: 5px;
         }
         .sub-filter-wrapper{
-          display: none;
 
           .sub-filter-name{
             color: $subfilter-color;
@@ -779,6 +778,9 @@ $subfilter-size: .8em;
             padding-left: 38px;
             width: 100%;
           }
+        }
+        .sub-filter-wrapper:not(.display){
+          display: none;
         }
       }
     }

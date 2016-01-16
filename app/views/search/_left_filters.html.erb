@@ -6,18 +6,24 @@
             <span class="filter-group-arrow glyphicon glyphicon-play"></span>
         </div>
         <div class="filter-group-contents">
-            <div class="filter-wrapper">
-                <span class="glyphicon glyphicon-trash"></span>
-                <span class="filter-name">Pro XT 29</span>
-            </div>
-            <div class="filter-wrapper">
-                <span class="glyphicon glyphicon-trash"></span>
-                <span class="filter-name">The Answer - Superbrand</span>
-            </div>
-            <div class="filter-wrapper">
-                <span class="glyphicon glyphicon-trash"></span>
-                <span class="filter-name">Mini - CI Surfboards</span>
-            </div>
+            <% if user_signed_in? %>
+              <% current_user.categories.each do |category| %>
+                <div class="filter-wrapper">
+                    <span class="glyphicon glyphicon-trash"></span>
+                    <span class="filter-name">
+                      <%= link_to category.name, search_index_path( update_params( params, :update, :category_id, category.id ) ), data: { 'turbolinks-scroll': false }  %>
+                    </span>
+                </div>
+              <% end  %>
+              <% current_user.companies.each do |company| %>
+                <div class="filter-wrapper">
+                    <span class="glyphicon glyphicon-trash"></span>
+                    <span class="filter-name">
+                      <%= link_to company.name, search_index_path( update_params( params, :update, :company_id, company.id ) ), data: { 'turbolinks-scroll': false }  %>
+                    </span>
+                </div>
+              <% end  %>
+          <% end %>
         </div>
         <div class="showmore-link-wrapper">
             <span class="invisible-span"></span>
@@ -36,7 +42,9 @@
               current_user.searches.recent.each do |search| %>
             <div class="filter-wrapper">
                 <span class="glyphicon glyphicon-trash"></span>
-                <span class="filter-name"><%= search.text %></span>
+                <span class="filter-name">
+                  <%= link_to search.text, search_index_path( update_params( params, :update, :search, search.text ) ) , data: { 'turbolinks-scroll': false } %>
+                </span>
             </div>
             <% end
             end %>
@@ -54,54 +62,27 @@
             <span class="filter-group-arrow glyphicon glyphicon-play"></span>
         </div>
         <div class="filter-group-contents">
+            <% Category.all.each do |category| %>
             <div class="filter-wrapper">
                 <label class="checkbox-style">
-                    <input id="piterBikes-chck-3" type="checkbox" class="checkbox-inline">
+                  <input id="<%= "category-#{category.id}" %>" type="checkbox" class="checkbox-inline" <%= category.contains_sub_category?( params[:category_id] ) ? "checked='checked'" : "" %>>
                     <span></span>
                 </label>
-                <label for="piterBikes-chck-3" class="filter-name">Piter Bikes</label>
-                <span class="filter-plus-icon glyphicon glyphicon-plus">
-                <div class="sub-filter-wrapper">
-                    <span class="clearfix sub-filter-name">Mountain Bikes</span>
-                    <span class="sub-filter-name">City Bikes</span>
+                <label for="<%= "category-#{category.id}" %>" class="filter-name"><%= category.name %></label>
+                <% if category.contains_sub_category?( params[:category_id] ) %>
+                <span class="filter-plus-icon glyphicon glyphicon-plus glyphicon-minus"></span>
+                <% else %>
+                <span class="filter-plus-icon glyphicon glyphicon-plus"></span>
+                <% end %>
+                <div class="sub-filter-wrapper display">
+                    <% category.sub_categories.each do |sub_cat| %>
+                      <span class="clearfix sub-filter-name">
+                        <%= link_to sub_cat.name, search_index_path(update_params(params, :update, :category_id, sub_cat.id)), data: { 'turbolinks-scroll': false } %>
+                      </span>
+                    <% end %>
                 </div>
             </div>
-            <div class="filter-wrapper">
-                <label class="checkbox-style">
-                    <input id="piterLongboards-chck-3" type="checkbox" class="checkbox-inline">
-                    <span></span>
-                </label>
-                <label for="piterLongboards-chck-3" class="filter-name">Piter Longboards</label>
-                <span class="filter-plus-icon glyphicon glyphicon-plus"></span>
-            </div>
-            <div class="filter-wrapper">
-                <label class="checkbox-style">
-                    <input id="piterSkis-chck-3" type="checkbox" class="checkbox-inline">
-                    <span></span>
-                </label>
-                <label for="piterSkis-chck-3" class="filter-name">Piter Skis</label>
-                <span class="filter-plus-icon glyphicon glyphicon-plus"></span>
-            </div>
-            <div class="filter-wrapper">
-                <label class="checkbox-style">
-                    <input id="piterSnow-chck-3" type="checkbox" class="checkbox-inline">
-                    <span></span>
-                </label>
-                <label for="piterSnow-chck-3" class="filter-name">Piter Snow</label>
-                <span class="filter-plus-icon glyphicon glyphicon-plus"></span>
-            </div>
-            <div class="filter-wrapper">
-                <label class="checkbox-style">
-                    <input id="piterSurf-chck-3" type="checkbox" class="checkbox-inline">
-                    <span></span>
-                </label>
-                <label for="piterSurf-chck-3" class="filter-name">Piter Surf</label>
-                <span class="filter-plus-icon glyphicon glyphicon-plus"></span>
-                <div class="sub-filter-wrapper">
-                    <span class="clearfix sub-filter-name">Surfboards</span>
-                    <span class="sub-filter-name">Wetsuits</span>
-                </div>
-            </div>
+            <% end %>
         </div>
         <div class="showmore-link-wrapper">
             <span class="invisible-span"></span>
@@ -116,134 +97,18 @@
             <span class="filter-group-arrow glyphicon glyphicon-play"></span>
         </div>
         <div class="filter-group-contents">
+            <% Company.international.each do |company| %>
             <div class="filter-wrapper">
+                <%= link_to search_index_path( update_params( params, :update, :company_id, company.id ) ), data: { 'turbolinks-scroll': false }  do %>
                 <label class="checkbox-style">
-                    <input id="superBrand-chck" type="checkbox" class="checkbox-inline">
+                  <input "company-<%= company.id %>" type="checkbox" class="checkbox-inline" <%= company.id == params[:company_id] ? 'checked="checked"' : '' %>>
                     <span></span>
                 </label>
-                <label for="superBrand-chck" class="filter-name">Superbrand</label>
+                <label for="company-<%= company.id %>" class="filter-name"><%= company.name %></label>
+                <% end %>
                 <span class="filter-plus-icon glyphicon glyphicon-plus"></span>
             </div>
-            <div class="filter-wrapper">
-                <label class="checkbox-style">
-                    <input id="scottBrand-chck" type="checkbox" class="checkbox-inline">
-                    <span></span>
-                </label>
-                <label for="scottBrand-chck" class="filter-name">Scott</label>
-                <span class="filter-plus-icon glyphicon glyphicon-plus"></span>
-            </div>
-            <div class="filter-wrapper">
-                <label class="checkbox-style">
-                    <input id="burtonBrand-chck" type="checkbox" class="checkbox-inline">
-                    <span></span>
-                </label>
-                <label for="burtonBrand-chck" class="filter-name">Burton</label>
-                <span class="filter-plus-icon glyphicon glyphicon-plus"></span>
-            </div>
-            <div class="filter-wrapper">
-                <label class="checkbox-style">
-                    <input id="allMerrickBrand-chck" type="checkbox" class="checkbox-inline">
-                    <span></span>
-                </label>
-                <label for="allMerrickBrand-chck" class="filter-name">All Merrick</label>
-                <span class="filter-plus-icon glyphicon glyphicon-plus"></span>
-            </div>
-            <div class="filter-wrapper">
-                <label class="checkbox-style">
-                    <input id="superBrand-chck-2" type="checkbox" class="checkbox-inline">
-                    <span></span>
-                </label>
-                <label for="superBrand-chck-2" class="filter-name">Superbrand</label>
-                <span class="filter-plus-icon glyphicon glyphicon-plus"></span>
-            </div>
-            <div class="filter-wrapper">
-                <label class="checkbox-style">
-                    <input id="scottBrand-chck-2" type="checkbox" class="checkbox-inline">
-                    <span></span>
-                </label>
-                <label for="scottBrand-chck-2" class="filter-name">Scott</label>
-                <span class="filter-plus-icon glyphicon glyphicon-plus"></span>
-            </div>
-            <div class="filter-wrapper">
-                <label class="checkbox-style">
-                    <input id="burtonBrand-chck-2" type="checkbox" class="checkbox-inline">
-                    <span></span>
-                </label>
-                <label for="burtonBrand-chck-2" class="filter-name">Burton</label>
-                <span class="filter-plus-icon glyphicon glyphicon-plus"></span>
-            </div>
-            <div class="filter-wrapper">
-                <label class="checkbox-style">
-                    <input id="allMerrickBrand-chck-2" type="checkbox" class="checkbox-inline">
-                    <span></span>
-                </label>
-                <label for="allMerrickBrand-chck-2" class="filter-name">All Merrick</label>
-                <span class="filter-plus-icon glyphicon glyphicon-plus"></span>
-            </div>
-            <div class="filter-wrapper">
-                <label class="checkbox-style">
-                    <input id="superBrand-chck-3" type="checkbox" class="checkbox-inline">
-                    <span></span>
-                </label>
-                <label for="superBrand-chck-3" class="filter-name">Superbrand</label>
-                <span class="filter-plus-icon glyphicon glyphicon-plus"></span>
-            </div>
-            <div class="filter-wrapper">
-                <label class="checkbox-style">
-                    <input id="scottBrand-chck-3" type="checkbox" class="checkbox-inline">
-                    <span></span>
-                </label>
-                <label for="scottBrand-chck-3" class="filter-name">Scott</label>
-                <span class="filter-plus-icon glyphicon glyphicon-plus"></span>
-            </div>
-            <div class="filter-wrapper">
-                <label class="checkbox-style">
-                    <input id="burtonBrand-chck-3" type="checkbox" class="checkbox-inline">
-                    <span></span>
-                </label>
-                <label for="burtonBrand-chck-3" class="filter-name">Burton</label>
-                <span class="filter-plus-icon glyphicon glyphicon-plus"></span>
-            </div>
-            <div class="filter-wrapper">
-                <label class="checkbox-style">
-                    <input id="allMerrickBrand-chck-3" type="checkbox" class="checkbox-inline">
-                    <span></span>
-                </label>
-                <label for="allMerrickBrand-chck-3" class="filter-name">All Merrick</label>
-                <span class="filter-plus-icon glyphicon glyphicon-plus"></span>
-            </div>
-            <div class="filter-wrapper">
-                <label class="checkbox-style">
-                    <input id="superBrand-chck-5" type="checkbox" class="checkbox-inline">
-                    <span></span>
-                </label>
-                <label for="superBrand-chck-5" class="filter-name">Superbrand</label>
-                <span class="filter-plus-icon glyphicon glyphicon-plus"></span>
-            </div>
-            <div class="filter-wrapper">
-                <label class="checkbox-style">
-                    <input id="scottBrand-chck-5" type="checkbox" class="checkbox-inline">
-                    <span></span>
-                </label>
-                <label for="scottBrand-chck-5" class="filter-name">Scott</label>
-                <span class="filter-plus-icon glyphicon glyphicon-plus"></span>
-            </div>
-            <div class="filter-wrapper">
-                <label class="checkbox-style">
-                    <input id="burtonBrand-chck-5" type="checkbox" class="checkbox-inline">
-                    <span></span>
-                </label>
-                <label for="burtonBrand-chck-5" class="filter-name">Burton</label>
-                <span class="filter-plus-icon glyphicon glyphicon-plus"></span>
-            </div>
-            <div class="filter-wrapper">
-                <label class="checkbox-style">
-                    <input id="allMerrickBrand-chck-5" type="checkbox" class="checkbox-inline">
-                    <span></span>
-                </label>
-                <label for="allMerrickBrand-chck-5" class="filter-name">All Merrick</label>
-                <span class="filter-plus-icon glyphicon glyphicon-plus"></span>
-            </div>
+            <% end %>
         </div>
         <div class="showmore-link-wrapper">
             <span class="invisible-span"></span>
@@ -258,46 +123,18 @@
             <span class="filter-group-arrow glyphicon glyphicon-play"></span>
         </div>
         <div class="filter-group-contents">
+            <% Company.local.each do |company| %>
             <div class="filter-wrapper">
+                <%= link_to search_index_path( update_params( params, :update, :company_id, company.id ) ), data: { 'turbolinks-scroll': false }  do %>
                 <label class="checkbox-style">
-                    <input id="slashBrand-chck" type="checkbox" class="checkbox-inline">
+                  <input "company-<%= company.id %>" type="checkbox" class="checkbox-inline" <%= company.id == params[:company_id] ? 'checked="checked"' : '' %>>
                     <span></span>
                 </label>
-                <label for="slashBrand-chck" class="filter-name">Slash</label>
+                <label for="company-<%= company.id %>" class="filter-name"><%= company.name %></label>
+                <% end %>
                 <span class="filter-plus-icon glyphicon glyphicon-plus"></span>
             </div>
-            <div class="filter-wrapper">
-                <label class="checkbox-style">
-                    <input id="scottBrand-chck-4" type="checkbox" class="checkbox-inline">
-                    <span></span>
-                </label>
-                <label for="scottBrand-chck-4" class="filter-name">Scott</label>
-                <span class="filter-plus-icon glyphicon glyphicon-plus"></span>
-            </div>
-            <div class="filter-wrapper">
-                <label class="checkbox-style">
-                    <input id="burtonBrand-chck-4" type="checkbox" class="checkbox-inline">
-                    <span></span>
-                </label>
-                <label for="burtonBrand-chck-4" class="filter-name">Burton</label>
-                <span class="filter-plus-icon glyphicon glyphicon-plus"></span>
-            </div>
-            <div class="filter-wrapper">
-                <label class="checkbox-style">
-                    <input id="allMerrickBrand-chck-4" type="checkbox" class="checkbox-inline">
-                    <span></span>
-                </label>
-                <label for="allMerrickBrand-chck-4" class="filter-name">All Merrick</label>
-                <span class="filter-plus-icon glyphicon glyphicon-plus"></span>
-            </div>
-            <div class="filter-wrapper">
-                <label class="checkbox-style">
-                    <input id="someBrand-chck-4" type="checkbox" class="checkbox-inline">
-                    <span></span>
-                </label>
-                <label for="someBrand-chck-4" class="filter-name">Some Brand</label>
-                <span class="filter-plus-icon glyphicon glyphicon-plus"></span>
-            </div>
+            <% end %>
         </div>
         <div class="showmore-link-wrapper">
             <span class="invisible-span"></span>
