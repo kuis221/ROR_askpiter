@@ -33,4 +33,9 @@ class User < ActiveRecord::Base
   has_many :products, through: :favourite_products
   has_one :picture, as: :imageable
 
+  def save_search( search_string )
+    searches.build( text: search_string )
+    save
+  end
+
 end

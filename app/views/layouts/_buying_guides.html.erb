@@ -1,39 +1,18 @@
-<div class="buying-guides-left-column">
+<%
+Category.all.in_groups(2, false) do |cats|
+col = col == 'left' ? 'right' : 'left'
+%>
+<div class="buying-guides-<%= col %>-column">
+  <% cats.each do |cat| %>
     <div class="buying-list">
-        <span class="buying-list-header">Piter Bikes</span>
+        <span class="buying-list-header"><%= cat.name %></span>
         <ul>
-            <li><a href="#">Mountain Bikes</a></li>
-          <li> <a href="#">City Bikes</a></li>
+          <% cat.sub_categories.each do |sub_cat| %>
+          <li><a href="<%= search_index_path( category_id: sub_cat.id ) %>"><%= sub_cat.name %></a></li>
+          <% end %>
         </ul>
     </div>
-    <div class="buying-list">
-        <span class="buying-list-header">Piter Snowboard</span>
-        <ul>
-            <li><a href="#">Mountain Bikes</a></li>
-          <li> <a href="#">City Bikes</a></li>
-        </ul>
-    </div>
-    <div class="buying-list">
-        <span class="buying-list-header">Piter Ski</span>
-        <ul>
-            <li><a href="#">Skis</a></li>
-            <li><a href="#">Ski Boots</a></li>
-        </ul>
-    </div>
+  <% end %>
 </div>
-<div class="buying-guides-right-column">
-    <div class="buying-list">
-        <span class="buying-list-header">Piter Surf</span>
-        <ul>
-            <li><a href="#">Surfboards</a></li>
-          <li><a href="#">Wetsuits</a></li>
-        </ul>
-    </div>
-    <div class="buying-list">
-        <span class="buying-list-header">Piter Longboards</span>
-        <ul>
-            <li><a href="#">Longboards</a></li>
-        </ul>
-    </div>
-</div>
+<% end %>
 

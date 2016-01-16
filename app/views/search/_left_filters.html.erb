@@ -32,18 +32,14 @@
             <span class="filter-group-arrow glyphicon glyphicon-play"></span>
         </div>
         <div class="filter-group-contents">
+            <% if user_signed_in?
+              current_user.searches.recent.each do |search| %>
             <div class="filter-wrapper">
                 <span class="glyphicon glyphicon-trash"></span>
-                <span class="filter-name">surf</span>
+                <span class="filter-name"><%= search.text %></span>
             </div>
-            <div class="filter-wrapper">
-                <span class="glyphicon glyphicon-trash"></span>
-                <span class="filter-name">moutain</span>
-            </div>
-            <div class="filter-wrapper">
-                <span class="glyphicon glyphicon-trash"></span>
-                <span class="filter-name">Pukas</span>
-            </div>
+            <% end
+            end %>
         </div>
         <div class="showmore-link-wrapper">
             <span class="invisible-span"></span>

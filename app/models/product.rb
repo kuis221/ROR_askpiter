@@ -12,9 +12,11 @@ class Product < ActiveRecord::Base
   has_many :users, through: :favourite_products
   has_many :pictures, as: :imageable
 
-  def self.search(search)
-    if search
-      where('name LIKE :search or description LIKE :search', search: "%#{search}%")
+  def self.search(search, category_id)
+    if search || category_id
+      prods = all
+      prods = prods.where('name LIKE :search or description LIKE :search', search: "%#{search}%") if search
+      prods = prods.where(sub_category_id: category_id) if category_id
     else
       all
     end
