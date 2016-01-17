@@ -24,15 +24,21 @@ $(document).ready(function(){
       if( window.turbolinksScroll === false ){
         window.scrollTo( window.prevPageXOffset, window.prevPageYOffset );
       }
+      window.turbolinksScroll = undefined;
     }); 
 
-    $(document).on('click', 'a', function() {
+    $(document).on('click', 'a', function(event) {
       var scroll = $(this).data('turbolinks-scroll');
-      if( scroll === false ){
+      if( scroll === false || window.turbolinksScroll === false ){
         window.prevPageYOffset = window.pageYOffset;
         window.prevPageXOffset = window.pageXOffset;
       }
+      if( this.removeElement ) { this.removeElement.remove(); }
       window.turbolinksScroll = scroll;
+    });
+
+    $('body').on('click','.applied-filter', function(){
+        this.removeElement = $(this);
     });
 
     // 'Buying guides' show block
@@ -173,10 +179,6 @@ $(document).ready(function(){
             $(this).parent().siblings('.sub-filter-wrapper:first').toggle(300);
             $(this).parent().siblings('.filter-plus-icon').toggleClass('glyphicon-minus');
         }
-    });
-
-    $('body').on('click','.applied-filter', function(){
-        $(this).remove();
     });
 
     // Behaviour of 'Show more' button
