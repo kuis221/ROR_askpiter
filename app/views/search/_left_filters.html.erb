@@ -62,7 +62,7 @@
             <span class="filter-group-arrow glyphicon glyphicon-play"></span>
         </div>
         <div class="filter-group-contents">
-            <% Category.all.each do |category| %>
+            <% @categories.all.each do |category| %>
               <%= render partial: 'category_filter', locals: { category: category } %>
             <% end %>
         </div>
