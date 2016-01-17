@@ -31,7 +31,7 @@ class User < ActiveRecord::Base
   has_one :picture, as: :imageable
 
   def save_search( search_string )
-    if !searches.last.nil? and searches.last.text != search_string and !search_string.blank?
+    if ( searches.last.nil? or searches.last.text != search_string ) and !search_string.blank?
       searches.build( text: search_string )
       save
     end
