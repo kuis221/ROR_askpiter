@@ -11,15 +11,21 @@ class SearchFilter
   def self.build( params )
 
     filters = Array.new
-    filters << build_category_filter(params) if params[:category_id]
+    filters << build_category_filter(params) if params[:category_id] and !params[:sub_category_id]
+    filters << build_sub_category_filter(params) if params[:sub_category_id]
     filters << build_company_filter(params) if params[:company_id]
     filters << build_search_filter(params) if params[:search] and !params[:search].blank?
     filters
   end
 
   def self.build_category_filter( params )
-    cat = SubCategory.find_by_id( params[:category_id] )
+    cat = Category.find_by_id( params[:category_id] )
     SearchFilter.new( name: cat.name, type: :category_id, id: cat.id, obj: cat )
+  end
+
+  def self.build_sub_category_filter( params )
+    cat = SubCategory.find_by_id( params[:sub_category_id] )
+    SearchFilter.new( name: cat.name, type: :sub_category_id, id: cat.id, obj: cat )
   end
 
   def self.build_company_filter( params )

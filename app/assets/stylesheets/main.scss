@@ -797,6 +797,10 @@ $subfilter-size: .8em;
             padding-left: 38px;
             width: 100%;
           }
+
+          .sub-filter-checkbox {
+            margin-left: 20px;
+          }
         }
         .sub-filter-wrapper:not(.display){
           display: none;

@@ -65,26 +65,7 @@
         </div>
         <div class="filter-group-contents">
             <% Category.all.each do |category| %>
-            <div class="filter-wrapper">
-                <label class="checkbox-style">
-                  <input id="<%= "category-#{category.id}" %>" type="checkbox" class="checkbox-inline" <%= category.contains_sub_category?( params[:category_id] ) ? "checked='checked'" : "" %>>
-                    <span></span>
-                </label>
-                <label for="<%= "category-#{category.id}" %>" class="filter-name"><%= category.name %></label>
-                <% if category.contains_sub_category?( params[:category_id] ) %>
-                <span class="filter-plus-icon glyphicon glyphicon-plus glyphicon-minus"></span>
-                <div class="sub-filter-wrapper display">
-                <% else %>
-                <span class="filter-plus-icon glyphicon glyphicon-plus"></span>
-                <div class="sub-filter-wrapper">
-                <% end %>
-                    <% category.sub_categories.each do |sub_cat| %>
-                      <span class="clearfix sub-filter-name">
-                        <%= link_to sub_cat.name, search_index_path(update_params(params, :update, :category_id, sub_cat.id)), data: { 'turbolinks-scroll': false } %>
-                      </span>
-                    <% end %>
-                </div>
-            </div>
+              <%= render partial: 'category_filter', locals: { category: category } %>
             <% end %>
         </div>
         <div class="showmore-link-wrapper">

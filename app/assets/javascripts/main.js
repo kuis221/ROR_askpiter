@@ -3,7 +3,7 @@
  */
 $(document).ready(function(){
     var filterHead = $('.filter-heading-wrapper');
-    var subFilter = $('.filter-name');
+    var subFilter = $('.sub-filter-wrapper');
     var showMoreLink = $('.showmore-link-wrapper');
     var plusIcon = $('.filter-plus-icon');
     var checkBox = $('.checkbox-inline');
@@ -77,7 +77,7 @@ $(document).ready(function(){
 
     // Removing 'plus' icons if there are no sub-filters
     $(subFilter).each(function(){
-       if($(this).siblings('.sub-filter-wrapper').find('.sub-filter-name').length == 0){
+       if($(this).find('.sub-filter-checkbox').length == 0){
            $(this).siblings('.filter-plus-icon').hide();
        }
     });
