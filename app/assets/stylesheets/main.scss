@@ -943,7 +943,7 @@ $morelisting-color: #929292;
 
 .main-content-wrapper{
   background: #EFEFEF;
-  padding-bottom: 0;
+  padding-bottom: 75px;
   margin-top: 0;
   display: table-cell;
 
@@ -1180,7 +1180,6 @@ $footer-links-color: #333333;
 
   justify-content: space-between;
   height: 100px;
-  margin-top: 75px;
 
   .footer-mainlinks-wrapper{
     display: flex;
