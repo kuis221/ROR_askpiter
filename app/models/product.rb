@@ -13,7 +13,7 @@ class Product < ActiveRecord::Base
   has_many :pictures, as: :imageable
 
   def self.search(search, category_id, sub_category_id, company_id)
-    if search || category_id
+    if search || category_id || sub_category_id || company_id
       prods = all
       prods = prods.where('products.name LIKE :search or products.description LIKE :search', search: "%#{search}%") if search
       prods = prods.joins(:sub_category).where('sub_categories.category_id = ?', category_id) if category_id

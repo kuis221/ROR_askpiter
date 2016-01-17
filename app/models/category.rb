@@ -10,7 +10,7 @@ class Category < ActiveRecord::Base
   def searched_for?(category_id, sub_category_id)
     return false if category_id.nil? && sub_category_id.nil?
     return true if !category_id.nil? && category_id.to_i == self.id
-    return true if !sub_category_id.nil? && sub_categories.where(category_id: sub_category_id).any? 
+    return true if !sub_category_id.nil? && sub_categories.where(id: sub_category_id).any? 
     false
   end
 end
