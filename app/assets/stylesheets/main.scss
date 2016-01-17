@@ -760,6 +760,10 @@ $subfilter-size: .8em;
             background: image-url('checkbox_style_small.png') no-repeat center center;
             background-size: 15px 15px;
           }
+          .checkbox-inline:checked + span.dash{
+            background: image-url('checkbox_style_small_dash.png') no-repeat center center;
+            background-size: 15px 15px;
+          }
         }
 
         .filter-name{

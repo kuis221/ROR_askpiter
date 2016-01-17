@@ -5,7 +5,11 @@
     <%= link_to url, data: { 'turbolinks-scroll': false }  do %>
     <label class="checkbox-style">
       <input id="<%= "category-#{category.id}" %>" type="checkbox" class="checkbox-inline" <%= category.searched_for?( params[:category_id], params[:sub_category_id] ) ? "checked='checked'" : "" %>>
-        <span></span>
+        <% if params[:sub_category_id] %>
+          <span class="dash"></span>
+        <% else %>
+          <span></span>
+        <% end %>
     </label>
     <label for="<%= "category-#{category.id}" %>" class="filter-name"><%= category.name %></label>
   <% end %>
