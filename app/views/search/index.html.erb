@@ -17,7 +17,9 @@
 
   <!-- MAIN CONTENTS LAYOUT -->
   <main class="main-content-wrapper">
+    <div>
     <div class="flex applied-filters-wrapper">
+      <div></div>
       <% @filters.each do |filter| %>
         <div class="applied-filter">
           <%= link_to search_index_path(update_params(params, :remove, filter.type)), data: { 'turbolinks-scroll': false }  do %>
@@ -45,6 +47,7 @@
         <div class="showmore-text-wrapper">
             <a href="#" class="show-more-text"><span>More Listing</span> </a>
         </div>
+    </div>
     </div>
   </main>
 </div>
