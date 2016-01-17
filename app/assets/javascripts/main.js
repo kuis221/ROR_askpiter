@@ -175,13 +175,9 @@ $(document).ready(function(){
         }
     });
 
-    $('.filter-name').click(function(event){
-        //event.stopImmediatePropagation();
-        //var link = $(this).find('a');
-        //Turbolinks.visit(link.href, { scroll: false } );
-        //event.preventDefault();
+    $('body').on('click','.applied-filter', function(){
+        $(this).remove();
     });
-
 
     // Behaviour of 'Show more' button
     $(showMoreLink).click(function(event){
