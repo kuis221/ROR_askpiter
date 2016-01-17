@@ -10,10 +10,13 @@
 <% end %>
 
 <%= render 'search_header' %>
-<%= render 'left_filters' %>
 
-<!-- MAIN CONTENTS LAYOUT -->
-<main class="main-content-wrapper">
+<div class="main-container">
+
+  <%= render 'left_filters' %>
+
+  <!-- MAIN CONTENTS LAYOUT -->
+  <main class="main-content-wrapper">
     <div class="flex applied-filters-wrapper">
       <% @filters.each do |filter| %>
         <div class="applied-filter">
@@ -43,4 +46,5 @@
             <a href="#" class="show-more-text"><span>More Listing</span> </a>
         </div>
     </div>
-</main>
+  </main>
+</div>

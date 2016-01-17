@@ -667,9 +667,9 @@ $subfilter-size: .8em;
   background: $sidepanel-background;
   bottom: 100px;
   font-family: $sidepanel-main-font;
-  float: left;
   top: 685px;
   width: 320px;
+  display: table-cell;
 
   .filter-group{
     border-bottom: 1px solid #ffffff;
@@ -935,12 +935,17 @@ $morelisting-color: #929292;
 //**MAIN CONTENT GENERAL STYLES**//
 //*******************************//
 
+.main-container {
+  display: table;
+  table-layout: fixed;
+  width: 100%;
+}
+
 .main-content-wrapper{
   background: #EFEFEF;
-  margin-left: 320px;
   padding-bottom: 0;
   margin-top: 0;
-  width: auto;
+  display: table-cell;
 
   .applied-filters-wrapper{
     background: $appfilters-background;
