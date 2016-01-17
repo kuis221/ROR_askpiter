@@ -41,7 +41,9 @@
             <% if user_signed_in?
               current_user.searches.recent.each do |search| %>
             <div class="filter-wrapper">
-                <span class="glyphicon glyphicon-trash"></span>
+                <%= link_to search_index_path( update_params( params, :update, :delete_search, search.id ) ), data: { 'turbolinks-scroll': false } do %>
+                  <span class="glyphicon glyphicon-trash"></span>
+                <% end  %>
                 <span class="filter-name">
                   <%= link_to search.text, search_index_path( update_params( params, :update, :search, search.text ) ) , data: { 'turbolinks-scroll': false } %>
                 </span>
@@ -100,7 +102,9 @@
         <div class="filter-group-contents">
             <% Company.international.each do |company| %>
             <div class="filter-wrapper">
-                <%= link_to search_index_path( update_params( params, :update, :company_id, company.id ) ), data: { 'turbolinks-scroll': false }  do %>
+              <% url = company.id == params[:company_id].to_i ? search_index_path( update_params( params, :remove, :company_id, company.id ) ) :
+                                  search_index_path( update_params( params, :update, :company_id, company.id ) ) %>
+                <%= link_to url, data: { 'turbolinks-scroll': false }  do %>
                 <label class="checkbox-style">
                   <input "company-<%= company.id %>" type="checkbox" class="checkbox-inline" <%= company.id == params[:company_id].to_i ? 'checked="checked"' : '' %>>
                     <span></span>
@@ -126,7 +130,9 @@
         <div class="filter-group-contents">
             <% Company.local.each do |company| %>
             <div class="filter-wrapper">
-                <%= link_to search_index_path( update_params( params, :update, :company_id, company.id ) ), data: { 'turbolinks-scroll': false }  do %>
+              <% url = company.id == params[:company_id].to_i ? search_index_path( update_params( params, :remove, :company_id, company.id ) ) :
+                                  search_index_path( update_params( params, :update, :company_id, company.id ) ) %>
+                <%= link_to url, data: { 'turbolinks-scroll': false }  do %>
                 <label class="checkbox-style">
                   <input "company-<%= company.id %>" type="checkbox" class="checkbox-inline" <%= company.id == params[:company_id].to_i ? 'checked="checked"' : '' %>>
                     <span></span>

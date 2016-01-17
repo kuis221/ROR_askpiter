@@ -33,11 +33,14 @@
     .search-field-wrapper {
       margin-right: 0;
     }
+    form {
+      display: inline-block;
+    }
   }
 }
 
 @media( max-width: 499px ) {
-  .search-box .search-field-wrapper input {
+  .search-box .search-field-wrapper {
     border-top-left-radius: 4px;
     border-bottom-left-radius: 4px;
   }

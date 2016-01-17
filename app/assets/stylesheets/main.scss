@@ -430,6 +430,9 @@ $menu-line-color: #ffffff;
   }
 
   .search-field-wrapper{
+    width: 185px;
+    border-radius: 4px;
+
     .search-field{
       border-radius: 4px;
       width: 150px;
@@ -534,11 +537,19 @@ $menu-line-color: #ffffff;
         width: 80px;
       }
     }
+    form {
+      width: 225px;
+      margin: auto;
+
+    }
     .search-field-wrapper{
-      input{
-        border-radius: 4px;
-        width: 180px;
+      border-radius: 4px;
+      .search-field{
+        width: 225px;
         margin: 0 auto;
+        input {
+          border-radius: 4px;
+        }
       }
     }
     .mobile-burger-menu{
@@ -755,10 +766,20 @@ $subfilter-size: .8em;
           color: $filtername-color;
           cursor: pointer;
           display: inline-block;
-          font-size: $filtername-size;
           margin: 10px 0;
           width: 155px;
+        
+          a, a:hover, a:visited, a:active, &label {
+            color: $filtername-color;
+            font-size: $filtername-size;
+          }
         }
+        label.filter-name {
+          color: $filtername-color;
+          font-size: $filtername-size;
+        }
+        
+        
 
         .filter-plus-icon{
           color: $filterplus-color;
