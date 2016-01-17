@@ -93,13 +93,15 @@ $(document).ready(function(){
     });
 
     // Showing 'Your categories' filters by default
-    //$('.filter-group.your-categories').children('.filter-group-contents').toggle().addClass('visible');
-    //$('.filter-group.your-categories .filter-group-arrow').addClass('rotated');
 
     for ( var filter in filterStatus ) {
       if( filterStatus[filter] === 'show' ) {
-        $('.filter-group.' + filter).children('.filter-group-contents').toggle().addClass('visible');
+        var section = $('.filter-group.' + filter);
+        section.children('.filter-group-contents').toggle().addClass('visible');
         $('.filter-group.' + filter + ' .filter-group-arrow').addClass('rotated');
+        if(section.find('.filter-wrapper').length > 5){
+          section.find('.showmore-link-wrapper:first').show();
+        }
       }
     }
 
@@ -117,18 +119,15 @@ $(document).ready(function(){
 
         if($(this).children('.filter-group-arrow').hasClass('rotated')){
           filterStatus[filterType] = 'show';
+          if($(this).siblings('.filter-group-contents').find('.filter-wrapper').length > 5){
+            $(this).nextAll('.showmore-link-wrapper:first').show(300);
+          }
         }
         else {
           filterStatus[filterType] = 'hide';
+          $(this).nextAll('.showmore-link-wrapper:first').hide(300);
         }
 
-        if($(this).nextAll('.showmore-link-wrapper:first').css('display') == 'block'){
-            $(this).nextAll('.showmore-link-wrapper:first').hide(300);
-        }
-
-        if($(this).siblings('.filter-group-contents').find('.filter-wrapper').length > 5 && $(this).nextAll('.showmore-link-wrapper:first').css('display') == 'none'){
-            $(this).nextAll('.showmore-link-wrapper:first').show(300);
-        }
     });
 
     // Adding filter boxes to grey bar
