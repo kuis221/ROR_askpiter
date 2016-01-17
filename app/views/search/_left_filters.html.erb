@@ -1,4 +1,5 @@
 <aside class="side-panel-wrapper">
+  <% if user_signed_in? %>
     <div class="filter-group favourites" data-type="favourites">
         <div class="filter-heading-wrapper">
             <span class="filter-group-icon glyphicon glyphicon-star" aria-hidden="true"></span>
@@ -6,24 +7,22 @@
             <span class="filter-group-arrow glyphicon glyphicon-play"></span>
         </div>
         <div class="filter-group-contents">
-            <% if user_signed_in? %>
-              <% current_user.categories.each do |category| %>
-                <div class="filter-wrapper">
-                    <span class="glyphicon glyphicon-trash"></span>
-                    <span class="filter-name">
-                      <%= link_to category.name, search_index_path( update_params( params, :update, :category_id, category.id ) ), data: { 'turbolinks-scroll': false }  %>
-                    </span>
-                </div>
-              <% end  %>
-              <% current_user.companies.each do |company| %>
-                <div class="filter-wrapper">
-                    <span class="glyphicon glyphicon-trash"></span>
-                    <span class="filter-name">
-                      <%= link_to company.name, search_index_path( update_params( params, :update, :company_id, company.id ) ), data: { 'turbolinks-scroll': false }  %>
-                    </span>
-                </div>
-              <% end  %>
-          <% end %>
+            <% current_user.categories.each do |category| %>
+              <div class="filter-wrapper">
+                  <span class="glyphicon glyphicon-trash"></span>
+                  <span class="filter-name">
+                    <%= link_to category.name, search_index_path( update_params( params, :update, :category_id, category.id ) ), data: { 'turbolinks-scroll': false }  %>
+                  </span>
+              </div>
+            <% end  %>
+            <% current_user.companies.each do |company| %>
+              <div class="filter-wrapper">
+                  <span class="glyphicon glyphicon-trash"></span>
+                  <span class="filter-name">
+                    <%= link_to company.name, search_index_path( update_params( params, :update, :company_id, company.id ) ), data: { 'turbolinks-scroll': false }  %>
+                  </span>
+              </div>
+            <% end  %>
         </div>
         <div class="showmore-link-wrapper">
             <span class="invisible-span"></span>
@@ -38,8 +37,7 @@
             <span class="filter-group-arrow glyphicon glyphicon-play"></span>
         </div>
         <div class="filter-group-contents">
-            <% if user_signed_in?
-              current_user.searches.recent.each do |search| %>
+            <% current_user.searches.recent.each do |search| %>
             <div class="filter-wrapper">
                 <%= link_to search_index_path( update_params( params, :update, :delete_search, search.id ) ), data: { 'turbolinks-scroll': false } do %>
                   <span class="glyphicon glyphicon-trash"></span>
@@ -48,8 +46,7 @@
                   <%= link_to search.text, search_index_path( update_params( params, :update, :search, search.text ) ) , data: { 'turbolinks-scroll': false } %>
                 </span>
             </div>
-            <% end
-            end %>
+            <% end %>
         </div>
         <div class="showmore-link-wrapper">
             <span class="invisible-span"></span>
@@ -57,6 +54,7 @@
             <span class="invisible-span"></span>
         </div>
     </div>
+    <% end %>
     <div class="filter-group your-categories" data-type="your-categories">
         <div class="filter-heading-wrapper">
             <span class="filter-group-icon glyphicon glyphicon-home" aria-hidden="true"></span>
@@ -82,18 +80,7 @@
         </div>
         <div class="filter-group-contents">
             <% Company.international.each do |company| %>
-            <div class="filter-wrapper">
-              <% url = company.id == params[:company_id].to_i ? search_index_path( update_params( params, :remove, :company_id, company.id ) ) :
-                                  search_index_path( update_params( params, :update, :company_id, company.id ) ) %>
-                <%= link_to url, data: { 'turbolinks-scroll': false }  do %>
-                <label class="checkbox-style">
-                  <input "company-<%= company.id %>" type="checkbox" class="checkbox-inline" <%= company.id == params[:company_id].to_i ? 'checked="checked"' : '' %>>
-                    <span></span>
-                </label>
-                <label for="company-<%= company.id %>" class="filter-name"><%= company.name %></label>
-                <% end %>
-                <span class="filter-plus-icon glyphicon"></span>
-            </div>
+              <%= render partial: 'company_filter', locals: { company: company } %>
             <% end %>
         </div>
         <div class="showmore-link-wrapper">
@@ -110,18 +97,7 @@
         </div>
         <div class="filter-group-contents">
             <% Company.local.each do |company| %>
-            <div class="filter-wrapper">
-              <% url = company.id == params[:company_id].to_i ? search_index_path( update_params( params, :remove, :company_id, company.id ) ) :
-                                  search_index_path( update_params( params, :update, :company_id, company.id ) ) %>
-                <%= link_to url, data: { 'turbolinks-scroll': false }  do %>
-                <label class="checkbox-style">
-                  <input "company-<%= company.id %>" type="checkbox" class="checkbox-inline" <%= company.id == params[:company_id].to_i ? 'checked="checked"' : '' %>>
-                    <span></span>
-                </label>
-                <label for="company-<%= company.id %>" class="filter-name"><%= company.name %></label>
-                <% end %>
-                <span class="filter-plus-icon glyphicon"></span>
-            </div>
+              <%= render partial: 'company_filter', locals: { company: company } %>
             <% end %>
         </div>
         <div class="showmore-link-wrapper">
