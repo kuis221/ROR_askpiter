@@ -13,7 +13,7 @@ class SearchFilter
     filters = Array.new
     filters << build_category_filter(params) if params[:category_id]
     filters << build_company_filter(params) if params[:company_id]
-    filters << build_search_filter(params) if params[:search]
+    filters << build_search_filter(params) if params[:search] and !params[:search].blank?
     filters
   end
 
