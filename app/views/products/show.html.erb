@@ -1,0 +1,111 @@
+<div class='main-container'>
+  <main class='main-content-wrapper'>
+    <%= render 'breadcrumbs' %>
+    <div class='page-header'>
+      <h1>
+        <%= product.title %>
+      </h1>
+    </div>
+    <div class='container-fluid'>
+      <div class='row'>
+        <div class='col-md-2'>
+          <%= render partial: 'picture', collection: pictures %>
+        </div>
+        <div class='col-md-10'>
+          <%= image_tag picture.url, alt: picture.title, id: 'large-image',
+                                     class: 'img-responsive center-block' %>
+        </div>
+      </div>
+    </div>
+  </main>
+  <aside class='side-panel-wrapper'>
+    <div class='product-brief'>
+      <h1>
+        Price: <%= product.price_string %>
+      </h1>
+      <p>
+        <%= render 'rating', rating: product.rating %>
+      </p>
+      <% if product.url.present? %>
+        <p>
+          <%= link_to 'Product Website', product.url %>
+        </p>
+      <% end %>
+      <p>
+        <% if product.users.include? current_user %>
+          Added to Favourites <%= link_to '(Remove)', '#' %>
+        <% else %>
+          <%= link_to 'Add to Favourites', '#' %>
+        <% end %>
+      </p>
+    </div>
+  </aside>
+</div>
+<div class='product-description text-center'>
+  <%= product.description %>
+</div>
+<div class='product-reviews'>
+  <%= render 'reviews', reviews: reviews unless reviews.empty? %>
+  <div class='buttons text-center'>
+    <%= link_to 'Read More Reviews', '#', class: 'btn btn-default', role: 'button' %>
+    <%= link_to 'Add a Review', '#', class: 'btn btn-default', role: 'button' %>
+  </div>
+</div>
+<div class='product-photos'>
+  <div class='flex thumbs-matrix-wrapper'>
+    <%= render partial: 'photo', collection: photos %>
+  </div>
+  <div class='buttons text-center'>
+    <%= link_to "See more (#{product.photos_count})", '#',
+                class: 'btn btn-default', role: 'button' %>
+    <%= link_to 'Upload', '#', class: 'btn btn-default', role: 'button' %>
+  </div>
+</div>
+<div class='product-videos'>
+  <div class='flex thumbs-matrix-wrapper'>
+    <%= render partial: 'video', collection: videos %>
+  </div>
+  <div class='buttons text-center'>
+    <%= link_to "See more (#{product.videos_count})", '#',
+                class: 'btn btn-default', role: 'button' %>
+    <%= link_to 'Upload', '#', class: 'btn btn-default', role: 'button' %>
+  </div>
+</div>
+<div class='product-details text-center'>
+  <div>
+    <ul class='nav nav-pills' role='tablist'>
+      <li role='presentation' class='active'>
+        <a href='#characteristics' aria-controls='characteristics' role='tab' data-toggle='pill'>
+          Characteristics
+        </a>
+      </li>
+      <li role='presentation'>
+        <a href='#company' aria-controls='company' role='tab' data-toggle='pill'>
+          Company
+        </a>
+      </li>
+      <li role='presentation'>
+        <a href='#distributors' aria-controls='distributors' role='tab' data-toggle='pill'>
+          Where to buy it
+        </a>
+      </li>
+    </ul>
+    <div class='tab-content container text-left'>
+      <div role='tabpanel' class='tab-pane active' id='characteristics'>
+        <%= render partial: 'characteristic', collection: product.characteristics %>
+        <% unless product.dimensions.empty? %>
+          <h1>Dimensions:</h1>
+          <% product.dimensions.each do |dimension| %>
+            <p><%= dimension.text %></p>
+          <% end %>
+        <% end %>
+      </div>
+      <div role='tabpanel' class='tab-pane' id='company'>
+        <%= render 'company', company: product.company if product.company %>
+      </div>
+      <div role='tabpanel' class='tab-pane' id='distributors'>
+        <%= render partial: 'distributor', collection: product.distributors %>
+      </div>
+    </div>
+  </div>
+</div>
