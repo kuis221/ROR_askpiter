@@ -1,7 +1,5 @@
 <div class="filter-wrapper">
-  <% url = company.id == params[:company_id].to_i ? search_index_path( update_params( params, :remove, :company_id, company.id ) ) :
-                      search_index_path( update_params( params, :update, :company_id, company.id ) ) %>
-    <%= link_to url, data: { 'turbolinks-scroll': false }  do %>
+    <%= search_company_link company, params[:company_id] do %>
     <label class="checkbox-style">
       <input "company-<%= company.id %>" type="checkbox" class="checkbox-inline" <%= company.id == params[:company_id].to_i ? 'checked="checked"' : '' %>>
         <span></span>

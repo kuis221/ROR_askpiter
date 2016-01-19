@@ -5,6 +5,7 @@ $(document).ready(function(){
     var filterHead = $('.filter-heading-wrapper');
     var subFilter = $('.sub-filter-wrapper');
     var showMoreLink = $('.showmore-link-wrapper');
+    var showMoreProducts = $('.showmore-thumbs-row');
     var plusIcon = $('.filter-plus-icon');
     var checkBox = $('.checkbox-inline');
 
@@ -29,16 +30,38 @@ $(document).ready(function(){
 
     $(document).on('click', 'a', function(event) {
       var scroll = $(this).data('turbolinks-scroll');
-      if( scroll === false || window.turbolinksScroll === false ){
+      if( scroll === false ){
         window.prevPageYOffset = window.pageYOffset;
         window.prevPageXOffset = window.pageXOffset;
       }
-      if( this.removeElement ) { this.removeElement.remove(); }
       window.turbolinksScroll = scroll;
     });
 
-    $('body').on('click','.applied-filter', function(){
-        this.removeElement = $(this);
+
+    var displaySearchResultsMore = function() {
+      var hasMore = $('.search-results-have-more:last-child').data('hasmore');
+      if( hasMore ) {
+        showMoreProducts.show();
+      }
+      else {
+        showMoreProducts.hide();
+      }
+    }
+
+    displaySearchResultsMore();
+
+    showMoreProducts.on('ajax:success', function( e, data, status, xhr ) {
+      $('.search-results-container').append(data);
+      displaySearchResultsMore();
+      var prodLength = $('.search-results-container .thumb-wrapper').length;
+
+      showMoreProducts.find('a').each(function(idx, el){
+        this.href = this.href.replace(/start_row_index=(\d+)/, 'start_row_index='+prodLength);
+      });
+    });
+
+    $('.applied-filters-wrapper').on('click','.applied-filter', function(){
+        $(this).hide();
     });
 
     // 'Buying guides' show block
