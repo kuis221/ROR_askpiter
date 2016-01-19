@@ -10,6 +10,9 @@ Rails.application.routes.draw do
       resources :companies
       resources :reviews
     end
+    resources :father_categories do
+      resources :categories
+    end
     resources :categories do
       resources :sub_categories
       resources :photos
