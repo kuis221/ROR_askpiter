@@ -30,6 +30,9 @@ class User < ActiveRecord::Base
   has_many :searches
   has_one :picture, as: :imageable
 
+  accepts_nested_attributes_for :address
+  accepts_nested_attributes_for :picture
+
   def save_search( search_string )
     if ( searches.last.nil? or searches.last.text != search_string ) and !search_string.blank?
       searches.build( text: search_string )

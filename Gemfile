@@ -9,6 +9,7 @@ gem 'turbolinks'
 gem 'jquery-turbolinks'
 gem 'jbuilder', '~> 2.0'
 gem 'postmark-rails'
+gem 'activeadmin', github: 'activeadmin/activeadmin'
 
 group :development, :test do
   gem 'byebug'
