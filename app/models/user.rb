@@ -17,12 +17,22 @@ class User < ActiveRecord::Base
   has_many :ratings
   
   has_many :favourites, foreign_key: 'user_id', class_name: 'UserFavourite'
-  has_many :favourite_categories, -> { UserFavourite.categories }, class_name: 'UserFavourite'
-  has_many :categories, through: :favourite_categories, source: :favouriteable, source_type: 'Category'
-  has_many :favourite_companies, -> { UserFavourite.companies }, class_name: 'UserFavourite'
-  has_many :companies, through: :favourite_companies, source: :favouriteable, source_type: 'Company'
-  has_many :favourite_products, -> { UserFavourite.products }, class_name: 'UserFavourite'
-  has_many :products, through: :favourite_products, source: :favouriteable, source_type: 'Product'
+
+  has_many :user_favourite_categories, -> { UserFavourite.categories }, class_name: 'UserFavourite'
+  has_many :favourite_categories, through: :user_favourite_categories, source: :favouriteable, source_type: 'Category'
+
+  has_many :user_favourite_companies, -> { UserFavourite.companies }, class_name: 'UserFavourite'
+  has_many :favourite_companies, through: :user_favourite_companies, source: :favouriteable, source_type: 'Company'
+
+  has_many :user_favourite_photos, -> { UserFavourite.photos }, class_name: 'UserFavourite'
+  has_many :favourite_photos, through: :user_favourite_photos, source: :favouriteable, source_type: 'Photo'
+
+  has_many :user_favourite_products, -> { UserFavourite.products }, class_name: 'UserFavourite'
+  has_many :favourite_products, through: :user_favourite_products, source: :favouriteable, source_type: 'Product'
+
+  has_many :user_favourite_videos, -> { UserFavourite.videos }, class_name: 'UserFavourite'
+  has_many :favourite_videos, through: :user_favourite_videos, source: :favouriteable, source_type: 'Video'
+
   has_many :videos
   has_many :photos
 
