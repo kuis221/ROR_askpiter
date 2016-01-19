@@ -12,6 +12,32 @@ class Product < ActiveRecord::Base
   has_many :users, through: :favourite_products
   has_many :pictures, as: :imageable
 
+  alias_attribute :category, :sub_category # .category method
+  alias_attribute :characteristics, :attrs # .characteristics method
+
+  delegate :name, to: :company, prefix: true # .company_name method
+  delegate :name, to: :category, prefix: true # .category_name method
+  delegate :count, to: :photos, prefix: true # .photos_count method
+  delegate :count, to: :videos, prefix: true # .videos_count method
+  delegate :distributors, to: :company, allow_nil: true # .distributors method
+
+  def title
+    "#{name} - #{category_name}"
+  end
+
+  def price_string
+    prices.first.try(:title) # TODO: select a proper price record
+  end
+
+  def rating
+    [ratings.average(:value).to_i, 5].min
+  end
+
+  cattr_reader :default_picture do
+    OpenStruct.new url: 'thumb-img-1.jpg', title: 'No images found'
+  end
+  default_picture.deep_freeze
+
   def self.search(search, category_id, sub_category_id, company_id)
     if search || category_id || sub_category_id || company_id
       prods = all
