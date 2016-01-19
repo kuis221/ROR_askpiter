@@ -28,6 +28,9 @@ Rails.application.routes.draw do
       resources :reviews
       resources :users
     end
+    resources :videos do
+      resources :users
+    end
   end
 
   root to: 'home#index'
