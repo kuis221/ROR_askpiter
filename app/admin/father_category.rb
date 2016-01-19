@@ -5,14 +5,16 @@ ActiveAdmin.register FatherCategory do
   filter :name
   filter :created_at
 
+  action_item :categories, only: :show do
+    link_to 'Categories', admin_father_category_categories_path(father_category)
+  end
+
   index do
     id_column
     column :name
     column :created_at
     column :updated_at
-    actions do |father_category|
-      link_to 'Categories', admin_categories_path(q: { father_category_id_eq: father_category.id })
-    end
+    actions
   end
 
 end

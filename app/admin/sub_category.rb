@@ -1,5 +1,7 @@
 ActiveAdmin.register SubCategory do
 
+  belongs_to :category, optional: true
+
   permit_params :name, :category_id
 
   filter :name
