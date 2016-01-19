@@ -31,6 +31,9 @@ Rails.application.routes.draw do
     resources :videos do
       resources :users
     end
+    resources :photos do
+      resources :users
+    end
   end
 
   root to: 'home#index'
