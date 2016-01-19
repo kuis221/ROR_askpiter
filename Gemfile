@@ -14,6 +14,7 @@ gem 'bootstrap-sass'
 gem 'devise'
 gem 'high_voltage'
 gem 'activeadmin', github: 'activeadmin/activeadmin'
+gem 'geocoder'
 
 group :development, :test do
   gem 'byebug'
