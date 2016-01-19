@@ -1,6 +1,9 @@
 ActiveAdmin.register Video do
 
-  belongs_to :user, optional: true
+  controller do
+    belongs_to :user, :category, optional: true
+  end
+
 
 # See permitted parameters documentation:
 # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters

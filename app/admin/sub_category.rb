@@ -8,6 +8,10 @@ ActiveAdmin.register SubCategory do
   filter :category
   filter :created_at
 
+  action_item :products, only: :show do
+    link_to 'Products', admin_sub_category_products_path(sub_category)
+  end
+
   index do
     id_column
     column :name

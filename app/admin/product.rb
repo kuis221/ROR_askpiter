@@ -1,7 +1,8 @@
 ActiveAdmin.register Product do
 
-  belongs_to :user, optional: true
-  belongs_to :company, optional: true
+  controller do
+    belongs_to :company, :user, :sub_category, optional: true
+  end
 
 # See permitted parameters documentation:
 # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
