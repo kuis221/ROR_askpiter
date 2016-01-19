@@ -8,4 +8,4 @@ Rails.application.config.assets.version = '1.0'
 
 # Precompile additional assets.
 # application.js, application.css, and all non-JS/CSS in app/assets folder are already added.
-# Rails.application.config.assets.precompile += %w( white_logo.png )
+Rails.application.config.assets.precompile += %w( active_admin/active_admin.js active_admin/active_admin.css )
