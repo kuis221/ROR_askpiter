@@ -12,8 +12,8 @@
           <%= render partial: 'picture', collection: pictures %>
         </div>
         <div class='col-md-10'>
-          <%= image_tag picture.url, alt: picture.title, id: 'large-image',
-                                     class: 'img-responsive center-block' %>
+          <%= image_tag product.picture_url, alt: product.picture_title,
+                        id: 'large-image', class: 'img-responsive center-block' %>
         </div>
       </div>
     </div>
@@ -41,9 +41,13 @@
     </div>
   </aside>
 </div>
+
+<!-- description section -->
 <div class='product-description text-center'>
   <%= product.description %>
 </div>
+
+<!-- reviews section -->
 <div class='product-reviews'>
   <%= render 'reviews', reviews: reviews unless reviews.empty? %>
   <div class='buttons text-center'>
@@ -51,26 +55,34 @@
     <%= link_to 'Add a Review', '#', class: 'btn btn-default', role: 'button' %>
   </div>
 </div>
-<div class='product-photos'>
+
+<!-- photos section -->
+<div class='product-photos text-center'>
+  <h1>Latest photos of <%= product.name %></h1>
   <div class='flex thumbs-matrix-wrapper'>
     <%= render partial: 'photo', collection: photos %>
   </div>
-  <div class='buttons text-center'>
+  <div class='buttons'>
     <%= link_to "See more (#{product.photos_count})", '#',
                 class: 'btn btn-default', role: 'button' %>
     <%= link_to 'Upload', '#', class: 'btn btn-default', role: 'button' %>
   </div>
 </div>
-<div class='product-videos'>
+
+<!-- videos section -->
+<div class='product-videos text-center'>
+  <h1>Latest videos of <%= product.name %></h1>
   <div class='flex thumbs-matrix-wrapper'>
     <%= render partial: 'video', collection: videos %>
   </div>
-  <div class='buttons text-center'>
+  <div class='buttons'>
     <%= link_to "See more (#{product.videos_count})", '#',
                 class: 'btn btn-default', role: 'button' %>
     <%= link_to 'Upload', '#', class: 'btn btn-default', role: 'button' %>
   </div>
 </div>
+
+<!-- details section -->
 <div class='product-details text-center'>
   <div>
     <ul class='nav nav-pills' role='tablist'>
@@ -107,5 +119,22 @@
         <%= render partial: 'distributor', collection: product.distributors %>
       </div>
     </div>
+  </div>
+</div>
+
+<!-- similar products section -->
+<div class='product-similars text-center'>
+  <h1>Similar Products</h1>
+  <div class='main-container'>
+    <div class='main-content-wrapper'>
+      <div class='flex thumbs-matrix-wrapper'>
+        <%= render partial: 'thumbnail', collection: similars, as: :product %>
+      </div>
+    </div>
+  </div>
+  <div class='buttons'>
+    <%= link_to "See all (#{product.similars_count})",
+                search_index_path(sub_category_id: product.sub_category_id),
+                class: 'btn btn-default', role: 'button' %>
   </div>
 </div>

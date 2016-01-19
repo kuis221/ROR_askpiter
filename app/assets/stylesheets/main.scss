@@ -221,7 +221,7 @@ $menu-line-color: #ffffff;
   }
 }
 .search-field-wrapper{
-  
+
   margin-right: 50px;
   border-radius: 0 4px 4px 0;
   height: 30px;
@@ -772,7 +772,7 @@ $subfilter-size: .8em;
           display: inline-block;
           margin: 10px 0;
           width: 155px;
-        
+
           a, a:hover, a:visited, a:active, &label {
             color: $filtername-color;
             font-size: $filtername-size;
@@ -782,8 +782,8 @@ $subfilter-size: .8em;
           color: $filtername-color;
           font-size: $filtername-size;
         }
-        
-        
+
+
 
         .filter-plus-icon{
           color: $filterplus-color;
@@ -1056,11 +1056,11 @@ $morelisting-color: #929292;
         }
       }
 
-      .thumb-image{
-
-        img{
+      .thumb-image {
+        img {
           width: 250px;
         }
+        height: 187.5px; // keep thumbnail sizes consistent (4:3 aspect ratio)
       }
 
       .thumb-footer{
