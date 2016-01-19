@@ -19,6 +19,22 @@ ActiveAdmin.register Video do
   filter :caption_cont, label: 'Caption'
   filter :created_at
 
+  index do
+    selectable_column
+    id_column
+    column :title
+    column :url
+    column :main
+    column :comment
+    column :day
+    column :caption
+    column :category
+    column :product
+    column :user
+    column :created_at
+    actions
+  end
+
   form do |f|
     f.inputs do
       f.input :category
