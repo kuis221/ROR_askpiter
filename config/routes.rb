@@ -6,9 +6,6 @@ Rails.application.routes.draw do
       resources :products
       resources :videos
       resources :photos
-      resources :ratings
-      resources :companies
-      resources :reviews
     end
     resources :categories do
       resources :sub_categories

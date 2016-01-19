@@ -5,8 +5,8 @@ class Photo < ActiveRecord::Base
   belongs_to :user
   belongs_to :category
 
-  has_many :user_favourites, as: :favouriteable
-  has_many :users, through: :user_favourites
+  has_many :favourite_photos
+  has_many :users, through: :favourite_photos
   has_one :picture, as: :imageable
 
   delegate :url, :title, to: :picture, allow_nil: true # .url and .title methods

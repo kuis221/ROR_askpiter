@@ -6,6 +6,4 @@ class UserFavourite < ActiveRecord::Base
   scope :categories, -> { where( favouriteable_type: 'Category' ) }
   scope :companies, -> { where( favouriteable_type: 'Company' ) }
   scope :products, -> { where( favouriteable_type: 'Product' ) }
-  scope :photos, -> { where( favouriteable_type: 'Photo' ) }
-  scope :videos, -> { where( favouriteable_type: 'Video' ) }
 end

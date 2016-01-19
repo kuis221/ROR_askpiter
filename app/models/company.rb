@@ -5,8 +5,8 @@ class Company < ActiveRecord::Base
 
   has_one :address, as: :addressable
 
-  has_many :user_favourites, as: :favouriteable
-  has_many :users, through: :user_favourites
+  has_many :favourite_companies
+  has_many :users, through: :favourite_companies
 
   accepts_nested_attributes_for :address
 
