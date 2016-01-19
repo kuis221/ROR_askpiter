@@ -1,109 +1,59 @@
 <aside class="side-panel-wrapper">
   <% if user_signed_in? %>
-    <div class="filter-group favourites" data-type="favourites">
-        <div class="filter-heading-wrapper">
-            <span class="filter-group-icon glyphicon glyphicon-star" aria-hidden="true"></span>
-            <span class="filter-group-heading">Favourites</span>
-            <span class="filter-group-arrow glyphicon glyphicon-play"></span>
+
+    <%= render layout: 'left_filter', 
+        locals: { filter_name: 'Favourites', filter_type: 'favourites', icon_class: 'glyphicon glyphicon-star' } do %>
+      <% current_user.categories.each do |category| %>
+        <div class="filter-wrapper">
+            <span class="glyphicon glyphicon-trash"></span>
+            <span class="filter-name">
+              <%= search_link category.name, [ param_change( :update, :category_id, category.id) ] %>
+            </span>
         </div>
-        <div class="filter-group-contents">
-            <% current_user.categories.each do |category| %>
-              <div class="filter-wrapper">
-                  <span class="glyphicon glyphicon-trash"></span>
-                  <span class="filter-name">
-                    <%= link_to category.name, search_index_path( update_params( params, :update, :category_id, category.id ) ), data: { 'turbolinks-scroll': false }  %>
-                  </span>
-              </div>
-            <% end  %>
-            <% current_user.companies.each do |company| %>
-              <div class="filter-wrapper">
-                  <span class="glyphicon glyphicon-trash"></span>
-                  <span class="filter-name">
-                    <%= link_to company.name, search_index_path( update_params( params, :update, :company_id, company.id ) ), data: { 'turbolinks-scroll': false }  %>
-                  </span>
-              </div>
-            <% end  %>
+      <% end  %>
+      <% current_user.companies.each do |company| %>
+        <div class="filter-wrapper">
+            <span class="glyphicon glyphicon-trash"></span>
+            <span class="filter-name">
+              <%= search_link company.name, [ param_change( :update, :company_id, company.id) ] %>
+            </span>
         </div>
-        <div class="showmore-link-wrapper">
-            <span class="invisible-span"></span>
-            <span class="more-link">More...</span>
-            <span class="invisible-span"></span>
-        </div>
-    </div>
-    <div class="filter-group history-search" data-type="history-search">
-        <div class="filter-heading-wrapper">
-            <span class="filter-group-icon glyphicon glyphicon-search" aria-hidden="true"></span>
-            <span class="filter-group-heading">History Search</span>
-            <span class="filter-group-arrow glyphicon glyphicon-play"></span>
-        </div>
-        <div class="filter-group-contents">
-            <% current_user.searches.recent.each do |search| %>
-            <div class="filter-wrapper">
-                <%= link_to search_index_path( update_params( params, :update, :delete_search, search.id ) ), data: { 'turbolinks-scroll': false } do %>
-                  <span class="glyphicon glyphicon-trash"></span>
-                <% end  %>
-                <span class="filter-name">
-                  <%= link_to search.text, search_index_path( update_params( params, :update, :search, search.text ) ) , data: { 'turbolinks-scroll': false } %>
-                </span>
-            </div>
-            <% end %>
-        </div>
-        <div class="showmore-link-wrapper">
-            <span class="invisible-span"></span>
-            <span class="more-link">More...</span>
-            <span class="invisible-span"></span>
-        </div>
-    </div>
+      <% end  %>
     <% end %>
-    <div class="filter-group your-categories" data-type="your-categories">
-        <div class="filter-heading-wrapper">
-            <span class="filter-group-icon glyphicon glyphicon-home" aria-hidden="true"></span>
-            <span class="filter-group-heading">Your Categories</span>
-            <span class="filter-group-arrow glyphicon glyphicon-play"></span>
-        </div>
-        <div class="filter-group-contents">
-            <% @categories.all.each do |category| %>
-              <%= render partial: 'category_filter', locals: { category: category } %>
-            <% end %>
-        </div>
-        <div class="showmore-link-wrapper">
-            <span class="invisible-span"></span>
-            <span class="more-link">More...</span>
-            <span class="invisible-span"></span>
-        </div>
-    </div>
-    <div class="filter-group international-brands" data-type="international-brands">
-        <div class="filter-heading-wrapper">
-            <span class="filter-group-icon glyphicon glyphicon-plane" aria-hidden="true"></span>
-            <span class="filter-group-heading">International Brands</span>
-            <span class="filter-group-arrow glyphicon glyphicon-play"></span>
-        </div>
-        <div class="filter-group-contents">
-            <% Company.international.each do |company| %>
-              <%= render partial: 'company_filter', locals: { company: company } %>
-            <% end %>
-        </div>
-        <div class="showmore-link-wrapper">
-            <span class="invisible-span"></span>
-            <span class="more-link">More...</span>
-            <span class="invisible-span"></span>
-        </div>
-    </div>
-    <div class="filter-group local-brands" data-type="local-brands">
-        <div class="filter-heading-wrapper">
-            <span class="filter-group-icon zmdi zmdi-directions-walk"></span>
-            <span class="filter-group-heading">Local Brands</span>
-            <span class="filter-group-arrow glyphicon glyphicon-play"></span>
-        </div>
-        <div class="filter-group-contents">
-            <% Company.local.each do |company| %>
-              <%= render partial: 'company_filter', locals: { company: company } %>
-            <% end %>
-        </div>
-        <div class="showmore-link-wrapper">
-            <span class="invisible-span"></span>
-            <span class="more-link">More...</span>
-            <span class="invisible-span"></span>
-        </div>
-    </div>
+    
+    <%= render layout: 'left_filter', 
+        locals: { filter_name: 'History Search', filter_type: 'history-search', icon_class: 'glyphicon glyphicon-search' } do %>
+      <% current_user.searches.recent.each do |search| %>
+      <div class="filter-wrapper">
+        <%= search_link [ param_change( :update, :delete_search, search.id) ] do %>
+            <span class="glyphicon glyphicon-trash"></span>
+          <% end  %>
+          <span class="filter-name">
+            <%= search_link search.text, [ param_change( :update, :search, search.text) ] %>
+          </span>
+      </div>
+      <% end %>
+    <% end %>
+  <% end %>
+
+  <%= render layout: 'left_filter', 
+      locals: { filter_name: 'Your Categories', filter_type: 'your-categories', icon_class: 'glyphicon glyphicon-home' } do %>
+    <% @categories.all.each do |category| %>
+      <%= render partial: 'category_filter', locals: { category: category } %>
+    <% end %>
+  <% end %>
+
+  <%= render layout: 'left_filter', 
+      locals: { filter_name: 'International Brands', filter_type: 'international-brands', icon_class: 'glyphicon glyphicon-plane' } do %>
+    <% Company.international.each do |company| %>
+      <%= render partial: 'company_filter', locals: { company: company } %>
+    <% end %>
+  <% end %>
+
+  <%= render layout: 'left_filter', 
+      locals: { filter_name: 'Local Brands', filter_type: 'local-brands', icon_class: 'zmdi zmdi-directions-walk' } do %>
+    <% Company.local.each do |company| %>
+      <%= render partial: 'company_filter', locals: { company: company } %>
+    <% end %>
+  <% end %>
 </aside>

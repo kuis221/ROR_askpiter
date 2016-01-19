@@ -29,16 +29,15 @@ $(document).ready(function(){
 
     $(document).on('click', 'a', function(event) {
       var scroll = $(this).data('turbolinks-scroll');
-      if( scroll === false || window.turbolinksScroll === false ){
+      if( scroll === false ){
         window.prevPageYOffset = window.pageYOffset;
         window.prevPageXOffset = window.pageXOffset;
       }
-      if( this.removeElement ) { this.removeElement.remove(); }
       window.turbolinksScroll = scroll;
     });
 
-    $('body').on('click','.applied-filter', function(){
-        this.removeElement = $(this);
+    $('.applied-filters-wrapper').on('click','.applied-filter', function(){
+        $(this).hide();
     });
 
     // 'Buying guides' show block
