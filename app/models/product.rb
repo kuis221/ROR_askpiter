@@ -12,6 +12,11 @@ class Product < ActiveRecord::Base
   has_many :users, through: :favourite_products
   has_many :pictures, as: :imageable
 
+  accepts_nested_attributes_for :attrs, allow_destroy: true
+  accepts_nested_attributes_for :prices, allow_destroy: true
+  accepts_nested_attributes_for :dimensions, allow_destroy: true
+  accepts_nested_attributes_for :pictures, allow_destroy: true
+
   def self.search(search, category_id, sub_category_id, company_id)
     if search || category_id || sub_category_id || company_id
       prods = all

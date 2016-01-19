@@ -1,7 +1,7 @@
 ActiveAdmin.register User do
 
   controller do
-    belongs_to :company, :category, optional: true
+    belongs_to :company, :category, :product, optional: true
   end
 
   permit_params do

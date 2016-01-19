@@ -8,12 +8,24 @@ Rails.application.routes.draw do
       resources :photos
     end
     resources :categories do
+      resources :sub_categories
       resources :photos
       resources :videos
       resources :users
     end
+    resources :sub_categories do
+      resources :products
+    end
     resources :companies do
       resources :products
+      resources :users
+    end
+    resources :products do
+      resources :videos
+      resources :photos
+      resources :prices
+      resources :ratings
+      resources :reviews
       resources :users
     end
   end
