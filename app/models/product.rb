@@ -21,6 +21,11 @@ class Product < ActiveRecord::Base
   delegate :count, to: :videos, prefix: true # .videos_count method
   delegate :distributors, to: :company, allow_nil: true # .distributors method
 
+  accepts_nested_attributes_for :attrs, allow_destroy: true
+  accepts_nested_attributes_for :prices, allow_destroy: true
+  accepts_nested_attributes_for :dimensions, allow_destroy: true
+  accepts_nested_attributes_for :pictures, allow_destroy: true
+
   def title
     "#{name} - #{category_name}"
   end

@@ -8,6 +8,8 @@ class Company < ActiveRecord::Base
   has_many :favourite_companies
   has_many :users, through: :favourite_companies
 
+  accepts_nested_attributes_for :address
+
   scope :international, -> { where( international: true ) }
   scope :local, -> { where( international: false ) }
 end

@@ -8,4 +8,7 @@ class Video < ActiveRecord::Base
   has_many :favourite_videos
   has_many :users, through: :favourite_videos
   has_one :picture, as: :imageable
+
+  accepts_nested_attributes_for :picture, allow_destroy: true
+
 end

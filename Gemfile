@@ -13,6 +13,7 @@ gem 'postmark-rails'
 gem 'bootstrap-sass'
 gem 'devise'
 gem 'high_voltage'
+gem 'activeadmin', github: 'activeadmin/activeadmin'
 
 group :development, :test do
   gem 'byebug'
