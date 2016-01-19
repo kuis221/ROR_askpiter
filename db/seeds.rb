@@ -13,7 +13,7 @@ user = User.create(name: "John", email: "john.smith@yahoo.com", password: "12345
 father_category = FatherCategory.create(name: "Default father category")
 
 category = Category.create(name: "Default category", father_category: father_category)
-user.categories << category
+user.favourite_categories << category
 
 video = Video.create(title: "New video", url: "http://yahoo.com", main: false, comment: "New comment for video", day: false, caption: "New caption")
 user.videos << video
@@ -23,7 +23,7 @@ address = Address.create(street: "Default address", postcode: "000000", city: "V
 company = Company.create(name: "Name for company", url: "http://yahoo.com", description: "Description for company", international: true, email: "c@yahoo.com", phone: "+7000000", fax: "fax")
 company.address = address
 
-user.companies << company
+user.favourite_companies << company
 
 picture = Picture.create(title: "Default title for picture", url: "s3.url.com")
 
@@ -53,7 +53,7 @@ dimension = Dimension.create(text: "300x400")
 
 pos = POS.create(company: company, distributor: distributor)
 price = Price.create(amount: 34.0)
-user.update_attributes(address: address, picture: picture, language: language, currency: currency, ratings: [rating], photos: [photo], searches: [search], companies: [company], products: [product], videos: [video])
+user.update_attributes(address: address, picture: picture, language: language, currency: currency, ratings: [rating], photos: [photo], searches: [search], favourite_companies: [company], favourite_products: [product], videos: [video])
 language.update_attributes(reviews: [review])
 currency.update_attributes(prices: [price])
 category.update_attributes(videos: [video], photos: [photo])

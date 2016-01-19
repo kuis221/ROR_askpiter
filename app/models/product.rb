@@ -8,8 +8,8 @@ class Product < ActiveRecord::Base
   has_many :ratings
   has_many :reviews
   has_many :dimensions
-  has_many :favourite_products
-  has_many :users, through: :favourite_products
+  has_many :user_favourites, as: :favouriteable
+  has_many :users, through: :user_favourites
   has_many :pictures, as: :imageable
 
   alias_attribute :category, :sub_category # .category method
