@@ -34,6 +34,9 @@ Rails.application.routes.draw do
     resources :photos do
       resources :users
     end
+    resources :distributors do
+      resources :companies
+    end
   end
 
   root to: 'home#index'

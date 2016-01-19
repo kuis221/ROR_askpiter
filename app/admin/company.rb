@@ -1,6 +1,8 @@
 ActiveAdmin.register Company do
 
-  belongs_to :user, optional: true
+  controller do
+    belongs_to :user, :distributor, optional: true
+  end
 
   permit_params :name, :url, :description, :international,
                 :email, :phone, :fax,
