@@ -7,8 +7,15 @@ module Paperclip
 
   class Attachment
 
+    def cleanup_filename filename
+      return filename_cleaner.call(filename) if @options[:filename_cleaner]
+      mime = MIME::Types[@file.content_type.to_s.strip].first
+      ext = mime.try(:extensions).try(:first) || File.extname(filename)
+      ext = ".#{ext}" if ext.present? && ext.first != '.'
+      "#{SecureRandom.hex}#{ext}"
+    end
+
     default_options.merge!({
-      filename_cleaner: -> (filename) { SecureRandom.hex },
       default_url: ':placeholder',
     })
 
