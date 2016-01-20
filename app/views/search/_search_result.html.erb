@@ -19,7 +19,7 @@
         </div>
     </div>
     <div class="thumb-description">
-        <p><%= product.description %></p>
+        <p><%= truncate( product.description, length: 110, separator: ' ' ) %></p>
     </div>
     <div class="thumb-moreinfo-link">
         <%= link_to 'More Info...', product %>
