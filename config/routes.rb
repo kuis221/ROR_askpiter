@@ -52,4 +52,17 @@ Rails.application.routes.draw do
   resources :home, only: [:index]
   resources :search, only: [:index]
   resources :products, only: :show
+
+  # controller :favourites, as: :favourite, path: :favourites,
+  #            format: true, constraints: { format: :json } do
+  #   %i(products photos videos).each do |type|
+  #     defaults type: type do
+  #       post type, to: :create
+  #       delete type, to: :destroy
+  #     end
+  #   end
+  # end
+
+  get '/modals/:action', controller: :modals, as: :modal
+
 end
