@@ -25,7 +25,7 @@ class Product < ActiveRecord::Base
   delegate :count, to: :videos, prefix: true # .videos_count method
   delegate :count, to: :similars, prefix: true # .similars_count method
   delegate :distributors, to: :company, allow_nil: true # .distributors method
-  delegate :url, :title, to: :picture, prefix: true, allow_nil: true # .picture_url, .picture_title
+  delegate :title, to: :picture, prefix: true, allow_nil: true # .picture_url, .picture_title
 
   accepts_nested_attributes_for :attrs, allow_destroy: true
   accepts_nested_attributes_for :prices, allow_destroy: true
@@ -50,6 +50,11 @@ class Product < ActiveRecord::Base
 
   def picture
     pictures.first || default_picture
+  end
+
+  def picture_url *args
+    args.clear if picture == default_picture
+    picture.url *args
   end
 
   cattr_reader :default_picture do
