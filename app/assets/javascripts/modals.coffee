@@ -5,23 +5,21 @@ $ ->
     true
 
   $(document).on 'click', 'button.show-modal', (event) ->
-    action = $(this).data('action')
+    modal = $ '#modal'
+    form  = $(this).find 'form'
 
-    modal  = $ '#modal'
-    body   = modal.find '.modal-body'
-    title  = modal.find '.modal-title'
-    button = modal.find '.btn-primary'
+    title = modal.find '.modal-title'
+    body  = modal.find '.modal-body'
 
-    body.html $('#spinner').html()
     title.text 'Loading page...'
-    button.addClass 'hidden'
+    body.html $('#spinner').html()
 
-    $.ajax "/modals/#{action}",
+    $.ajax form.attr('action'),
+      method: form.attr('method')
+      data: form.serialize()
       success: (data) ->
-        body.html data.body || ''
         title.text data.title || ''
-        button.text data.button || ''
-        button.removeClass 'hidden' if data.button
+        body.html data.body || ''
 
     modal.modal()
     true

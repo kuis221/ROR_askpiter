@@ -5,7 +5,8 @@
       <h1>
         <%= product.title %>
         <div class='pull-right'>
-          <%= modal_button_for :upload_picture, 'Upload picture' %>
+          <%= modal_button_for :upload_picture, 'Upload picture',
+                               **product.polymorphic_params(as: :imageable) %>
         </div>
       </h1>
     </div>

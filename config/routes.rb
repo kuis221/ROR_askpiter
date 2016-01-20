@@ -53,6 +53,10 @@ Rails.application.routes.draw do
   resources :search, only: [:index]
   resources :products, only: :show
 
+  # post 'pictures/:imageable_type/:imageable_id', to: 'pictures#create', format: false,
+  #                                                as: :upload_picture
+  resource :pictures, format: false, only: :create
+
   # controller :favourites, as: :favourite, path: :favourites,
   #            format: true, constraints: { format: :json } do
   #   %i(products photos videos).each do |type|
@@ -63,6 +67,6 @@ Rails.application.routes.draw do
   #   end
   # end
 
-  get '/modals/:action', controller: :modals, as: :modal
+  post '/modals/:action', controller: :modals, format: false, as: :modals
 
 end
