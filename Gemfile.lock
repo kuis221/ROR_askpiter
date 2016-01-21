@@ -229,7 +229,6 @@ GEM
       activesupport (>= 3.0)
       i18n
       polyamorous (~> 1.2)
-    remotipart (1.2.1)
     responders (2.1.0)
       railties (>= 4.2.0, < 5)
     rspec-core (3.4.1)
@@ -324,7 +323,6 @@ DEPENDENCIES
   rails (= 4.2.4)
   rails_12factor
   rails_layout
-  remotipart
   rspec-rails
   sass-rails (~> 5.0)
   selenium-webdriver
