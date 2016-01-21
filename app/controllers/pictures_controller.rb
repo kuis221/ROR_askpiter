@@ -1,4 +1,6 @@
 class PicturesController < ApplicationController
+  include ImitateDelay
+  imitate_delay only: :create
 
   def create
     Picture.create! creation_params
