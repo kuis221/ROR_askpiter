@@ -16,11 +16,10 @@ class Product < ActiveRecord::Base
   has_many :pictures, as: :imageable
   has_many :similars, -> (p) { where.not(id: p) }, through: :sub_category, source: :products
 
-  alias_attribute :category, :sub_category # .category method
   alias_attribute :characteristics, :attrs # .characteristics method
 
   delegate :name, to: :company, prefix: true # .company_name method
-  delegate :name, to: :category, prefix: true # .category_name method
+  delegate :name, to: :sub_category, prefix: true # .sub_category_name method
   delegate :count, to: :photos, prefix: true # .photos_count method
   delegate :count, to: :videos, prefix: true # .videos_count method
   delegate :count, to: :similars, prefix: true # .similars_count method
@@ -33,7 +32,7 @@ class Product < ActiveRecord::Base
   accepts_nested_attributes_for :pictures, allow_destroy: true
 
   def title
-    "#{name} - #{category_name}"
+    "#{name} - #{sub_category_name}"
   end
 
   def date_string
