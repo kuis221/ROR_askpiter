@@ -17,6 +17,7 @@ gem 'activeadmin', github: 'activeadmin/activeadmin'
 gem 'geocoder'
 gem 'paperclip'
 gem 'aws-sdk'
+gem 'remotipart'
 
 group :development, :test do
   gem 'byebug'

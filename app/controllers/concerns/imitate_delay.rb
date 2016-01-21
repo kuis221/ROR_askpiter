@@ -3,7 +3,7 @@ module ImitateDelay
 
   included do
     private def imitate_delay
-      sleep 2
+      sleep rand(2) + 1 # 1..2 seconds
     end
   end
 
