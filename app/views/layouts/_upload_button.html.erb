@@ -1,0 +1,14 @@
+<div class='dropdown'>
+  <button type='button' id='upload-menu' class='btn btn-warning upload-btn dropdown-toggle'
+          data-toggle='dropdown' aria-haspopup='true' aria-expanded='true'>
+    Upload
+    <span class='caret'></span>
+  </button>
+  <ul class='dropdown-menu' aria-labelledby='upload-menu'>
+    <li>
+      <%= modal_button_tag 'Photo', :upload_photo, link: true %>
+    </li>
+    <li role='separator' class='divider'></li>
+    <li><a href='#'>Video</a></li>
+  </ul>
+</div>

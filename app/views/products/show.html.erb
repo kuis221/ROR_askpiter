@@ -65,7 +65,11 @@
   <div class='buttons'>
     <%= link_to "See more (#{product.photos_count})", '#',
                 class: 'btn btn-default', role: 'button' %>
-    <%= modal_button_tag 'Upload', :upload_photo, class: 'btn btn-default' %>
+    <% if user_signed_in? %>
+      <%= modal_button_tag 'Upload', :upload_photo,
+                           class: 'btn btn-success pull-right',
+                           product_id: product.id %>
+    <% end %>
   </div>
 </div>
 

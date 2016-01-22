@@ -12,7 +12,8 @@ $ ->
     title: 'Loading page...'
     body: $('#spinner').html()
 
-  open_modal = ->
+  open_modal = (event) ->
+    event.preventDefault()
     modal = $ modal_selector
     return unless modal.length
     modal.data modal_active_key, true
@@ -108,6 +109,6 @@ $ ->
     $(this).data modal_active_key, false
     true
 
-  $(document).on 'click', 'button.show-modal', open_modal
+  $(document).on 'click', 'button.show-modal, a.show-modal', open_modal
 
   true

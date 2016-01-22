@@ -13,7 +13,7 @@ class Photo < ActiveRecord::Base
 
   accepts_nested_attributes_for :picture
 
-  def self.upload_billet
+  def self.new_upload
     new main: false, day: false, picture: Picture.new
   end
 end

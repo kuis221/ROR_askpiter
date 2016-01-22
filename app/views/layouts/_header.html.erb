@@ -18,7 +18,7 @@
         <% end %>
         <div class="upload-btn-wrapper">
             <% if user_signed_in? %>
-              <button type="button" class="btn btn-warning upload-btn">Upload</button>
+              <%= render 'layouts/upload_button' %>
             <% end %>
         </div>
         <%= render 'layouts/nav_links_for_auth' %>
