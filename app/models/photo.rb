@@ -10,4 +10,10 @@ class Photo < ActiveRecord::Base
   has_one :picture, as: :imageable
 
   delegate :url, :title, to: :picture, allow_nil: true # .url and .title methods
+
+  accepts_nested_attributes_for :picture
+
+  def self.upload_billet
+    new main: false, day: false, picture: Picture.new
+  end
 end

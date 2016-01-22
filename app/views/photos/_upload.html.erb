@@ -1,0 +1,54 @@
+<%= form_for Photo.upload_billet, url: photos_path,
+             html: { multipart: true, class: 'form-horizontal' } do |form| %>
+
+  <%= form.hidden_field :main %>
+  <%= form.hidden_field :day %>
+
+  <div class='form-group'>
+    <%= form.label :category, class: 'col-sm-2 control-label' %>
+    <div class='col-sm-10'>
+      <%= form.collection_select :category_id, Category.all, :id, :name,
+                                 { prompt: true }, { class: 'form-control' } %>
+    </div>
+  </div>
+
+  <div class='form-group'>
+    <%= form.label :product, class: 'col-sm-2 control-label' %>
+    <div class='col-sm-10'>
+      <%= form.collection_select :product_id, Product.all, :id, :title,
+                                 { prompt: true }, { class: 'form-control' } %>
+    </div>
+  </div>
+
+  <%= form.fields_for :picture do |fields| %>
+
+    <div class='form-group'>
+      <%= fields.label :title, class: 'col-sm-2 control-label' %>
+      <div class='col-sm-10'>
+        <%= fields.text_field :title, class: 'form-control' %>
+      </div>
+    </div>
+
+    <div class='form-group'>
+      <%= fields.label :image, class: 'col-sm-2 control-label' %>
+      <div class='col-sm-10'>
+        <%= fields.file_field :image, class: 'form-control' %>
+      </div>
+    </div>
+
+  <% end %>
+
+  <div class='form-group'>
+    <%= form.label :comment, class: 'col-sm-2 control-label' %>
+    <div class='col-sm-10'>
+      <%= form.text_area :comment, class: 'form-control' %>
+    </div>
+  </div>
+
+  <div class='form-group'>
+    <div class='col-sm-offset-2 col-sm-10'>
+      <%= form.submit class: 'btn btn-primary' %>
+    </div>
+  </div>
+
+<% end %>
