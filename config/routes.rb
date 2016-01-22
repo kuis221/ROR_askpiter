@@ -55,6 +55,7 @@ Rails.application.routes.draw do
 
   resource :pictures, format: false, only: :create
   resource :photos, format: false, only: :create
+  resource :videos, format: false, only: :create
 
   # controller :favourites, as: :favourite, path: :favourites,
   #            format: true, constraints: { format: :json } do

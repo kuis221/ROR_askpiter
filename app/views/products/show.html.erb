@@ -66,7 +66,7 @@
     <%= link_to "See more (#{product.photos_count})", '#',
                 class: 'btn btn-default', role: 'button' %>
     <% if user_signed_in? %>
-      <%= modal_button_tag 'Upload', :upload_photo,
+      <%= modal_button_tag 'Upload', :add_photo,
                            class: 'btn btn-success pull-right',
                            product_id: product.id %>
     <% end %>
@@ -82,7 +82,11 @@
   <div class='buttons'>
     <%= link_to "See more (#{product.videos_count})", '#',
                 class: 'btn btn-default', role: 'button' %>
-    <%= link_to 'Upload', '#', class: 'btn btn-default', role: 'button' %>
+    <% if user_signed_in? %>
+      <%= modal_button_tag 'Upload', :add_video,
+                           class: 'btn btn-success pull-right',
+                           product_id: product.id %>
+    <% end %>
   </div>
 </div>
 

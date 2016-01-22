@@ -4,13 +4,12 @@ module ApplicationHelper
     action, content = content, nil unless action
     is_button = !options.delete(:link)
 
-    modal_mark = 'show-modal'
     if tag_class = options.delete(:class)
       tag_class.join(' ') if tag_class.is_a? Array
-      tag_class << " #{modal_mark}" unless tag_class =~ /\b#{modal_mark}\b/
     else
-      tag_class = "#{modal_mark}#{' btn btn-primary' if is_button}"
+      tag_class = is_button ? 'btn btn-primary' : ''
     end
+    tag_class.with_word! 'show-modal'
 
     tag_data = options.delete(:data) || {}
     tag_data.merge! options.extract! :disable_cache

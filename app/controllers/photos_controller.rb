@@ -10,7 +10,7 @@ class PhotosController < ApplicationController
   private
 
   def creation_params
-    params.require(:photo).permit %i(main day comment product_id category_id),
+    params.require(:photo).permit %i(comment product_id category_id),
                                   picture_attributes: %i(title image)
   end
 end
