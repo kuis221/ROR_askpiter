@@ -35,6 +35,7 @@ ActiveAdmin.register Company do
   form do |f|
     f.inputs do
       f.input :name
+      f.input :international
       f.input :url
       f.input :description
       f.input :email
