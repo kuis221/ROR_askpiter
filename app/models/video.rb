@@ -11,4 +11,7 @@ class Video < ActiveRecord::Base
 
   accepts_nested_attributes_for :picture, allow_destroy: true
 
+  def self.add_billet
+    new main: false, day: false
+  end
 end

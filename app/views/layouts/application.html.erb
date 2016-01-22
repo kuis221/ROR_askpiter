@@ -9,6 +9,7 @@
     <%= csrf_meta_tags %>
   </head>
   <body>
+    <%= render 'modals/modal' %>
     <section class="main-wrapper">
       <%= render 'layouts/header' %>
       <%= content_for?(:messages) ? yield(:messages) : render( 'layouts/messages' ) %>

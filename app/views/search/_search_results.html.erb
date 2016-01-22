@@ -1,10 +1,9 @@
-<% results.products.each do |product| %>
-  <%= render partial: 'search_result', locals: { product: product } %>
-<% end %>
 <% if results.no_results? %>
-<div class="flash alert alert-danger">
-  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-  Sorry, your search returned no products.
-</div>
+  <div class="flash alert alert-danger">
+    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+    Sorry, your search returned no products.
+  </div>
+<% else %>
+  <%= render partial: 'products/thumbnail', collection: results.products, as: :product %>
 <% end %>
 <div class="hidden search-results-have-more" data-hasmore="<%= results.has_more.to_s %>"></div>

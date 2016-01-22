@@ -113,3 +113,14 @@
     padding-top: 0.6em;
   }
 }
+
+.product-similars {
+  padding: 3em;
+  color: #7a7a7a;
+  background-color: #ecf0f1;
+
+  .main-container, .main-content-wrapper, .thumbs-matrix-wrapper {
+    padding: 0;
+    margin: 0;
+  }
+}
