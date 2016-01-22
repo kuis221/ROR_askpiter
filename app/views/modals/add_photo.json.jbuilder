@@ -1,2 +1,2 @@
 json.title 'Add a photo'
-json.body render partial: 'photos/add', formats: %i(html)
+json.body render partial: 'photos/add', formats: %i(html), locals: body_locals

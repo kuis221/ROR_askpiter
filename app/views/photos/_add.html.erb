@@ -1,9 +1,9 @@
-<%= addendum_storage 'photo' %>
+<%= addendum_storage addendum_locals, 'photo' %>
 
 <%= form_for Photo.add_billet, url: photos_path,
              html: { multipart: true, class: 'form-horizontal' } do |form| %>
 
-  <%= addendum_selectors form %>
+  <%= addendum_selectors addendum_locals, form %>
 
   <%= form.fields_for :picture do |fields| %>
 
