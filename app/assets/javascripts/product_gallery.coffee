@@ -3,7 +3,7 @@ $ ->
     event.preventDefault()
     thumbnail = $(this).children('img').first()
     large = $('#large-image')
-    if thumbnail && large
+    if thumbnail.length && large.length
       large.attr 'src', thumbnail.attr('data-src')
       large.attr 'alt', thumbnail.attr('alt')
     false

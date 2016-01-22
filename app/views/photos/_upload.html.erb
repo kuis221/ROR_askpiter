@@ -7,9 +7,15 @@
     category = Category.find_by id: params[:category_id]
     products = category.products
   else
-    products = Product.all
+    categories = Category.includes(:products).all
   end
 %>
+
+<% if categories %>
+  <%= grouped_collection_select nil, nil, categories, :products, :id, :id, :name, {},
+        name: nil, id: nil, class: 'storage hidden',
+        data: { owner: 'photo_category_id', dependant: 'photo_product_id' } %>
+<% end %>
 
 <%= form_for Photo.new_upload, url: photos_path,
              html: { multipart: true, class: 'form-horizontal' } do |form| %>
@@ -17,26 +23,43 @@
   <div class='form-group'>
     <%= form.label :category, class: 'col-sm-2 control-label' %>
     <div class='col-sm-10'>
+
       <% if category %>
+
         <p class='form-control-static'><%= category.name %></p>
         <%= form.hidden_field :category_id, value: category.id %>
+
       <% else %>
-        <%= form.collection_select :category_id, Category.all, :id, :name,
-                                   { prompt: true }, { class: 'form-control' } %>
+
+        <%= form.collection_select :category_id, categories, :id, :name,
+                                   { prompt: true }, class: 'form-control leader' %>
+
       <% end %>
+
     </div>
   </div>
 
   <div class='form-group'>
     <%= form.label :product, class: 'col-sm-2 control-label' %>
     <div class='col-sm-10'>
+
       <% if product %>
+
         <p class='form-control-static'><%= product.name %></p>
         <%= form.hidden_field :product_id, value: product.id %>
-      <% else %>
+
+      <% elsif products %>
+
         <%= form.collection_select :product_id, products, :id, :title,
-                                   { prompt: true }, { class: 'form-control' } %>
+                                   { prompt: true }, class: 'form-control' %>
+
+      <% else %>
+
+        <%= form.select :product_id, [], { prompt: true }, class: 'form-control',
+                        disabled: true, data: { leader: 'photo_category_id' } %>
+
       <% end %>
+
     </div>
   </div>
 
