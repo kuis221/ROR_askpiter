@@ -57,11 +57,9 @@
 </div>
 
 <!-- photos section -->
-<div class='product-photos text-center'>
+<div class='product-assets product-photos text-center'>
   <h1>Latest photos of <%= product.name %></h1>
-  <div class='flex thumbs-matrix-wrapper'>
-    <%= photo_thumbnails photos %>
-  </div>
+  <%= thumbnails_container { photo_thumbnails photos } %>
   <div class='buttons'>
     <%= link_to "See more (#{product.photos_count})", '#',
                 class: 'btn btn-default', role: 'button' %>
@@ -74,11 +72,9 @@
 </div>
 
 <!-- videos section -->
-<div class='product-videos text-center'>
+<div class='product-assets product-videos text-center'>
   <h1>Latest videos of <%= product.name %></h1>
-  <div class='flex thumbs-matrix-wrapper'>
-    <%= video_thumbnails videos %>
-  </div>
+  <%= thumbnails_container { video_thumbnails videos } %>
   <div class='buttons'>
     <%= link_to "See more (#{product.videos_count})", '#',
                 class: 'btn btn-default', role: 'button' %>
@@ -91,7 +87,7 @@
 </div>
 
 <!-- details section -->
-<div class='product-details text-center'>
+<div class='product-assets product-details text-center'>
   <div>
     <ul class='nav nav-pills' role='tablist'>
       <li role='presentation' class='active'>
@@ -131,15 +127,9 @@
 </div>
 
 <!-- similar products section -->
-<div class='product-similars text-center'>
+<div class='product-assets product-similars text-center'>
   <h1>Similar Products</h1>
-  <div class='main-container'>
-    <div class='main-content-wrapper'>
-      <div class='flex thumbs-matrix-wrapper'>
-        <%= product_thumbnails similars %>
-      </div>
-    </div>
-  </div>
+  <%= thumbnails_container { product_thumbnails similars } %>
   <div class='buttons'>
     <%= link_to "See all (#{product.similars_count})",
                 search_index_path(sub_category_id: product.sub_category_id),
