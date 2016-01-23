@@ -4,6 +4,6 @@
     Sorry, your search returned no products.
   </div>
 <% else %>
-  <%= render partial: 'products/thumbnail', collection: results.products, as: :product %>
+  <%= product_thumbnails results.products %>
 <% end %>
 <div class="hidden search-results-have-more" data-hasmore="<%= results.has_more.to_s %>"></div>

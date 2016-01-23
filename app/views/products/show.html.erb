@@ -9,7 +9,7 @@
     <div class='container-fluid'>
       <div class='row'>
         <div class='col-md-2'>
-          <%= render partial: 'picture', collection: pictures %>
+          <%= picture_thumbnails pictures %>
         </div>
         <div class='col-md-10'>
           <%= image_tag product.picture_url, alt: product.picture_title,
@@ -60,7 +60,7 @@
 <div class='product-photos text-center'>
   <h1>Latest photos of <%= product.name %></h1>
   <div class='flex thumbs-matrix-wrapper'>
-    <%= render partial: 'photo', collection: photos %>
+    <%= photo_thumbnails photos %>
   </div>
   <div class='buttons'>
     <%= link_to "See more (#{product.photos_count})", '#',
@@ -77,7 +77,7 @@
 <div class='product-videos text-center'>
   <h1>Latest videos of <%= product.name %></h1>
   <div class='flex thumbs-matrix-wrapper'>
-    <%= render partial: 'video', collection: videos %>
+    <%= video_thumbnails videos %>
   </div>
   <div class='buttons'>
     <%= link_to "See more (#{product.videos_count})", '#',
@@ -136,7 +136,7 @@
   <div class='main-container'>
     <div class='main-content-wrapper'>
       <div class='flex thumbs-matrix-wrapper'>
-        <%= render partial: 'thumbnail', collection: similars, as: :product %>
+        <%= product_thumbnails similars %>
       </div>
     </div>
   </div>
