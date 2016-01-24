@@ -1,8 +1,8 @@
-<%= addendum_storage 'video' %>
+<%= addendum_storage addendum_locals, 'video' %>
 
 <%= form_for Video.add_billet, url: videos_path, html: { class: 'form-horizontal' } do |form| %>
 
-  <%= addendum_selectors form %>
+  <%= addendum_selectors addendum_locals, form %>
 
   <div class='form-group'>
     <%= form.label :url, class: 'col-sm-2 control-label' %>
