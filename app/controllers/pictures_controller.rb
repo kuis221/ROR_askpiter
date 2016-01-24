@@ -3,8 +3,12 @@ class PicturesController < ApplicationController
   imitate_delay only: :create
 
   def create
-    Picture.create! creation_params
-    redirect_to :back
+    picture = Picture.new creation_params
+    if picture.save
+      redirect_to :back
+    else
+      render 'shared/errors', locals: { errors: picture.errors }
+    end
   end
 
   private
