@@ -22,6 +22,7 @@ module Paperclip
     unless %w(development test).include? Rails.env
       default_options.merge!({
         storage: :s3,
+        path: ':class/:attachment/:id_partition/:style/:filename',
         url: ':s3_domain_url',
         s3_credentials:
         {
