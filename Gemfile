@@ -15,8 +15,8 @@ gem 'devise'
 gem 'high_voltage'
 gem 'activeadmin', github: 'activeadmin/activeadmin'
 gem 'geocoder'
-gem 'paperclip'
-gem 'aws-sdk'
+gem 'paperclip', '~> 4.3'
+gem 'aws-sdk', '< 2'
 
 group :development, :test do
   gem 'byebug'
