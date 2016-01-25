@@ -22,6 +22,7 @@ module Paperclip
     unless %w(development test).include? Rails.env
       default_options.merge!({
         storage: :s3,
+        url: ':s3_domain_url',
         s3_credentials:
         {
           bucket: ENV['S3_BUCKET_NAME'],
