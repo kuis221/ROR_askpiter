@@ -3,7 +3,7 @@ class Search < ActiveRecord::Base
   has_many :products
 
   scope :recent, -> {
-    order( 'created_at DESC').take(4)
+    order( 'created_at DESC').take(10)
   }
 
 end

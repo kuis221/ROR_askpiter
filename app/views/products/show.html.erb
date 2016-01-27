@@ -32,10 +32,12 @@
         </p>
       <% end %>
       <p>
-        <% if product.users.include? current_user %>
-          Added to Favourites <%= link_to '(Remove)', '#' %>
-        <% else %>
-          <%= link_to 'Add to Favourites', '#' %>
+        <% if user_signed_in? %>
+          <% if product.users.include? current_user %>
+            Added to Favourites <%= link_to '(Remove)', '#' %>
+          <% else %>
+            <%= link_to 'Add to Favourites', '#' %>
+          <% end %>
         <% end %>
       </p>
     </div>
