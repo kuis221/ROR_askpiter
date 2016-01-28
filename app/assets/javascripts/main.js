@@ -104,6 +104,10 @@ $(document).ready(function(){
        $('.side-panel-wrapper').toggleClass('mobile-visible');
     });
 
+        $('.mobile-filter-button').click(function(){
+       $('.panel-wrapper').toggleClass('mobile-visible');
+    });
+
     // Removing 'plus' icons if there are no sub-filters
     $(subFilter).each(function(){
        if($(this).find('.sub-filter-checkbox').length == 0){

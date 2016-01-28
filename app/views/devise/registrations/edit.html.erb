@@ -1,41 +1,135 @@
-<div class="authform">
-  <h3>Edit <%= resource_name.to_s.humanize %></h3>
+<div style="padding-right: 15%; padding-left: 15%;">
   <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put, :role => 'form'}) do |f| %>
-    <%= devise_error_messages! %>
-    <div class="form-group">
-      <%= f.label :name %>
-      <%= f.text_field :name, :autofocus => true, class: 'form-control' %>
+        <%= devise_error_messages! %>
+    <div style="display: flex; justify-content: space-around; background-color: rgba( 255, 255, 255, 0.8 ); margin: 10% 10% 0 10%; border-radius: 10px; padding-bottom: 3%;">
+      <div class="authform" >
+        <h3>Change your details</h3>
+        <div class="form-group">
+          <%= f.label :name %>
+          <%= f.text_field :name, :autofocus => true, class: 'form-control', placeholder: "Name" %>
+        </div>
+        <div class="form-group">
+          <%= f.label "Surname" %>
+          <%= f.text_field :last_name, :autofocus => true, class: 'form-control', placeholder: "Surname" %>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :email %>
+          <%= f.email_field :email, class: 'form-control', placeholder: "Email" %>
+          <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+              <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+          <% end %>
+        </div>
+        
+        <fieldset>
+          <p>Leave these fields blank if you don't want to change your password.</p>
+          <div class="form-group">
+            <%= f.label :password %>
+            <%= f.password_field :password, :autocomplete => 'off', class: 'form-control', placeholder: "New Password" %>
+          </div>
+          <div class="form-group">
+            <%= f.label :password_confirmation %>
+            <%= f.password_field :password_confirmation, class: 'form-control', placeholder: "Confirm New Password" %>
+          </div>
+        </fieldset>
+
+        <%= f.fields_for :address, Address.new do |address_fields| %>
+          <div class="form-group">
+            <%= address_fields.label :country %>
+            <%= address_fields.text_field :country, :autofocus => true, class: 'form-control', placeholder: "Country" %>
+          </div>
+          <div class="form-group">
+            <%= address_fields.label :city %>
+            <%= address_fields.text_field :city, :autofocus => true, class: 'form-control', placeholder: "City"%>
+          </div>
+        <% end %>
+
+        <%= image_tag(current_user.picture.url(:thumbnail)) if current_user.picture %>
+
+        <div class="form-group">
+          <% if current_user.picture %>
+            <%= link_to "Change your Profile image", "#" %>
+            <% else %>
+            <%= link_to "Upload your Profile image", "#"%>
+          <% end %>
+        </div>
+
+        <h3>Language</h3>
+        <%= f.select(:language_id, Language.all.collect {|p| [ p.name, p.id ] }, {}, :style => "width:100%") %>
+        </br>
+        </br>
+        </br>
+
+        <h3>Currency</h3>
+        <%= f.select(:currency_id, Currency.all.collect {|p| [ p.name, p.id ] }, {}, :style => "width:100%") %>
+        </br>
+        </br>
+        </br>  
+
+        <fieldset>
+          <p>You must enter your current password to make changes.</p>
+          <div class="form-group">
+            <%= f.label :current_password %>
+            <%= f.password_field :current_password, class: 'form-control', placeholder: "Current Password" %>
+          </div>
+        </fieldset>
+        <div><%= f.submit 'Update', :class => 'button right' %></div>
+        </br>
+      </div>
+
+      <div class="authform">
+        <aside class="panel-wrapper search-side-panel">
+          <% if user_signed_in? %>
+            <%= render layout: 'right_filter', 
+                locals: { filter_name: 'Favourites', filter_type: 'favourites' } do %>
+              <% current_user.favourite_categories.each do |category| %>
+                <div class="filter-wrapper">
+                    <span class="glyphicon glyphicon-trash"></span>
+                    <span class="filter-name">
+                      <%= search_link category.name, [ param_change( :update, :category_id, category.id) ] %>
+                    </span>
+                </div>
+              <% end  %>
+              <% current_user.favourite_companies.each do |company| %>
+                <div class="filter-wrapper">
+                    <span class="glyphicon glyphicon-trash"></span>
+                    <span class="filter-name">
+                      <%= search_link company.name, [ param_change( :update, :company_id, company.id) ] %>
+                    </span>
+                </div>
+              <% end  %>
+            <% end %>      
+            <%= render layout: 'right_filter', 
+                locals: { filter_name: 'History Search', filter_type: 'history-search' } do %>
+              <% current_user.searches.recent.each do |search| %>
+              <div class="filter-wrapper">
+                <%= search_link [ param_change( :update, :delete_search, search.id) ] do %>
+                  <span class="glyphicon glyphicon-trash"></span>
+                  <% end  %>
+                  <span class="filter-name">
+                    <%= search_link search.text, [ param_change( :update, :search, search.text) ] %>
+                  </span>
+              </div>
+              <% end %>
+            <% end %>
+            <%= render layout: 'right_filter', 
+                locals: { filter_name: 'Reviews', filter_type: 'reviews-search' } do %>
+            <% end %>
+            <%= render layout: 'right_filter', 
+                locals: { filter_name: 'Photos', filter_type: 'photos-search' } do %>
+            <% end %>
+            <%= render layout: 'right_filter', 
+                locals: { filter_name: 'Videos', filter_type: 'videos-search' } do %>
+            <% end %>
+          <% end %>
+        </aside>
+      </div>
     </div>
-    <div class="form-group">
-      <%= f.label :email %>
-      <%= f.email_field :email, class: 'form-control' %>
-      <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-        <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
-      <% end %>
-    </div>
-    <fieldset>
-      <p>Leave these fields blank if you don't want to change your password.</p>
-      <div class="form-group">
-        <%= f.label :password %>
-        <%= f.password_field :password, :autocomplete => 'off', class: 'form-control' %>
-      </div>
-      <div class="form-group">
-        <%= f.label :password_confirmation %>
-        <%= f.password_field :password_confirmation, class: 'form-control' %>
-      </div>
-    </fieldset>
-    <fieldset>
-      <p>You must enter your current password to make changes.</p>
-      <div class="form-group">
-        <%= f.label :current_password %>
-        <%= f.password_field :current_password, class: 'form-control' %>
-      </div>
-    </fieldset>
-    <%= f.submit 'Update', :class => 'button right' %>
   <% end %>
-</div>
-<div class="authform">
-<h3>Cancel Account</h3>
-<p>Unhappy? We'll be sad to see you go.</p>
-<%= button_to "Cancel my account", registration_path(resource_name), :data => { :confirm => "Are you sure?" }, :method => :delete, :class => 'button right' %>
+
+  <div class="authform">
+    <h3>Cancel Account</h3>
+    <p>Unhappy? We'll be sad to see you go.</p>
+    <%= button_to "Cancel my account", registration_path(resource_name), :data => { :confirm => "Are you sure?" }, :method => :delete, :class => 'button right' %>
+  </div>
 </div>
