@@ -46,7 +46,7 @@ Rails.application.routes.draw do
   end
 
   root to: 'home#index'
-  devise_for :users
+  devise_for :users, :controllers => { registrations: 'registrations'}
   resources :users
 
   resources :home, only: [:index]

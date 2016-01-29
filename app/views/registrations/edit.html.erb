@@ -33,14 +33,15 @@
           </div>
         </fieldset>
 
-        <%= f.fields_for :address, Address.new do |address_fields| %>
+        <%= f.fields_for :address do |address_field| %>
           <div class="form-group">
-            <%= address_fields.label :country %>
-            <%= address_fields.text_field :country, :autofocus => true, class: 'form-control', placeholder: "Country" %>
+            <%= address_field.label :country %>
+            <%= address_field.text_field :country, :autofocus => true, 
+                class: 'form-control', placeholder: "Country" %>
           </div>
           <div class="form-group">
-            <%= address_fields.label :city %>
-            <%= address_fields.text_field :city, :autofocus => true, class: 'form-control', placeholder: "City"%>
+            <%= address_field.label :city %>
+            <%= address_field.text_field :city, :autofocus => true, class: 'form-control', placeholder: "City"%>
           </div>
         <% end %>
 
