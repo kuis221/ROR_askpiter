@@ -56,6 +56,11 @@ html, body, .main-wrapper{
 .main-wrapper{
   background: $main-background-color;
   position: relative;
+
+  .sides-indents{
+    padding-right: 15%;
+    padding-left: 15%;
+  }
 }
 
 /********************************/
@@ -1165,6 +1170,20 @@ $morelisting-color: #929292;
 //*******************************//
 //**MAIN CONTENT GENERAL STYLES**//
 //*******************************//
+
+.edit-user-background{
+  display: flex;
+  justify-content: space-around;
+  background-color: rgba( 255, 255, 255, 0.8 );
+  margin: 10% 10% 0 10%;
+  border-radius: 10px;
+  padding-bottom: 3%;
+  flex-wrap: wrap;
+
+  .side-edit-columns{
+    flex: 1 0 100px;
+  }
+}
 
 .main-container {
   display: table;

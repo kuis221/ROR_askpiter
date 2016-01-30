@@ -1,8 +1,8 @@
-<div style="padding-right: 15%; padding-left: 15%;">
+<div class="sides-indents">
   <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put, :role => 'form'}) do |f| %>
         <%= devise_error_messages! %>
-    <div style="display: flex; justify-content: space-around; background-color: rgba( 255, 255, 255, 0.8 ); margin: 10% 10% 0 10%; border-radius: 10px; padding-bottom: 3%;flex-wrap: wrap;">
-      <div class="authform" style="flex: 1 0 100px;" >
+    <div class="edit-user-background">
+      <div class="authform side-edit-columns" >
         <h3>Change your details</h3>
         <div class="form-group">
           <%= f.label :name %>
@@ -55,7 +55,6 @@
         </br>
         </br>
         
-
         <h3>Language</h3>
         <%= f.select(:language_id, Language.all.collect {|p| [ p.name, p.id ] }, {}, :style => "width:100%") %>
         </br>
