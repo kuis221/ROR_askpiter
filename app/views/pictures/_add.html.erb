@@ -1,5 +1,6 @@
-<%= form_for Picture.new, url: pictures_path,
-             html: { multipart: true, class: 'form-horizontal' } do |form| %>
+<%= addendum_storage addendum_locals, 'picture' %>
+
+<%= form_for Picture.new, url: pictures_path, html: { multipart: true, class: 'form-horizontal' } do |form| %>
 
   <%= form.hidden_field :imageable_id,   value: params[:imageable_id] %>
   <%= form.hidden_field :imageable_type, value: params[:imageable_type] %>

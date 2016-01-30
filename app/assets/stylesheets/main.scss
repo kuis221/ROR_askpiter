@@ -864,7 +864,7 @@ $panel-background: #ffffff;
 $glyphicon-color: #232323;
 $glyphicon-arrow-white: #232323;
 
-$filtername-white: #232323;
+$filtername-black: #232323;
 $filterplus-white: #C0C0C0;
 $subfilter-white: #888888;
 
@@ -935,6 +935,13 @@ $subfilter-white: #888888;
         opacity: 1 !important;
       }
 
+      .destroy_all_link {
+        a, a:hover, a:visited, a:active, &label {
+          color: $filtername-black;
+          font-size: $filtername-size;
+        }
+      }
+
       .filter-wrapper{
 
         .checkbox-style{
@@ -963,19 +970,19 @@ $subfilter-white: #888888;
         }
 
         .filter-name{
-          color: $filtername-white;
+          color: $filtername-black;
           cursor: pointer;
           display: inline-block;
           margin: 10px 0;
           width: 155px;
 
           a, a:hover, a:visited, a:active, &label {
-            color: $filtername-white;
+            color: $filtername-black;
             font-size: $filtername-size;
           }
         }
         label.filter-name {
-          color: $filtername-white;
+          color: $filtername-black;
           font-size: $filtername-size;
         }
 
@@ -1035,7 +1042,7 @@ $subfilter-white: #888888;
         width: 27px;
       }
       .more-link{
-        color: $filtername-white;
+        color: $filtername-black;
         cursor: pointer;
         display: inline-block;
         font-size: $filtername-size;

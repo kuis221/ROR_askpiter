@@ -38,7 +38,7 @@ class User < ActiveRecord::Base
 
   has_many :reviews
   has_many :searches
-  has_one :picture, as: :imageable
+  has_one :picture, as: :imageable, dependent: :destroy
 
   accepts_nested_attributes_for :address
   accepts_nested_attributes_for :picture

@@ -6,7 +6,7 @@ class ModalsController < ApplicationController
 
   before_action { request.format = :json }
   before_action { self.body_locals ||= {} }
-  before_action :set_addendum_locals, only: %i(add_photo add_video)
+  before_action :set_addendum_locals, only: %i(add_photo add_video add_picture)
 
   imitate_delay
   layout false
