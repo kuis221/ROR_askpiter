@@ -56,6 +56,11 @@ html, body, .main-wrapper{
 .main-wrapper{
   background: $main-background-color;
   position: relative;
+
+  .sides-indents{
+    padding-right: 15%;
+    padding-left: 15%;
+  }
 }
 
 /********************************/
@@ -854,6 +859,207 @@ $subfilter-size: .8em;
 }
 // End of side panel general styles
 
+
+/************************************/
+/* FAVOURITES FONTS AND COLORS SETUP*/
+/************************************/
+
+// Colors
+$panel-background: #ffffff;
+$glyphicon-color: #232323;
+$glyphicon-arrow-white: #232323;
+
+$filtername-black: #232323;
+$filterplus-white: #C0C0C0;
+$subfilter-white: #888888;
+
+
+/***********************************/
+/* GENERAL FAVOURITES PANEL STYLES */
+/***********************************/
+
+.panel-wrapper{
+  background: $panel-background;
+  bottom: 100px;
+  font-family: $sidepanel-main-font;
+  top: 685px;
+  width: 320px;
+  display: table-cell;
+
+  .filter-group{
+    border-bottom: 1px solid #ffffff;
+    padding: 10px 34px 10px 10px;
+
+    .glyphicon, .zmdi{
+      color: $glyphicon-color;
+    }
+    .zmdi{
+      font-size: 1.4em;
+    }
+    .glyphicon-trash{
+      margin-right: 10px;
+    }
+    .filter-heading-wrapper{
+      cursor: pointer;
+
+      .filter-group-icon{
+        width: 50px;
+      }
+      .filter-group-heading{
+        display: inline-block;
+        font-size: $sidepanel-heading-size;
+        font-weight: $sidepanel-heading-weight;
+        width: 200px;
+      }
+      .filter-group-arrow, .filter-group-heading{
+        color: $glyphicon-arrow-white;
+      }
+      .filter-group-arrow{
+        right: -2px;
+        transition: all .2s;
+      }
+      .filter-group-arrow.rotated{
+        -webkit-transform: rotate(-90deg);
+        -moz-transform: rotate(-90deg);
+        -o-transform: rotate(-90deg);
+        -ms-transform: rotate(-90deg);
+        transform: rotate(-90deg);
+
+      }
+    }
+    .filter-group-contents{
+      display: none;
+      opacity: 0;
+      overflow: auto;
+      padding-left: 54px;
+      position: relative;
+      transition: opacity .3s;
+
+      .ps-scrollbar-y-rail{
+        background: $custom-scrollbar-color;
+        opacity: 1 !important;
+      }
+
+      .destroy_all_link {
+        a, a:hover, a:visited, a:active, &label {
+          color: $filtername-black;
+          font-size: $filtername-size;
+        }
+      }
+
+      .filter-wrapper{
+
+        .checkbox-style{
+
+          span{
+            background: image-url('checkbox_style_small_white.jpg') no-repeat center center;
+            background-size: 15px 15px;
+            border-radius: 3px;
+            display: block;
+            height: 15px;
+            position: relative;
+            top: 2px;
+            width: 15px;
+          }
+          .checkbox-inline{
+            display: none;
+          }
+          .checkbox-inline:checked + span{
+            background: image-url('checkbox_style_small.png') no-repeat center center;
+            background-size: 15px 15px;
+          }
+          .checkbox-inline:checked + span.dash{
+            background: image-url('checkbox_style_small_dash.png') no-repeat center center;
+            background-size: 15px 15px;
+          }
+        }
+
+        .filter-name{
+          color: $filtername-black;
+          cursor: pointer;
+          display: inline-block;
+          margin: 10px 0;
+          width: 155px;
+
+          a, a:hover, a:visited, a:active, &label {
+            color: $filtername-black;
+            font-size: $filtername-size;
+          }
+        }
+        label.filter-name {
+          color: $filtername-black;
+          font-size: $filtername-size;
+        }
+
+        .filter-plus-icon{
+          color: $filterplus-white;
+          cursor: pointer;
+          font-size: $filterplus-size;
+          padding: 5px;
+        }
+        .sub-filter-wrapper{
+
+          .sub-filter-name{
+            color: $subfilter-white;
+            display: inline-block;
+            font-size: $subfilter-size;
+            margin: 10px 0;
+            padding-left: 38px;
+            width: 100%;
+          }
+
+          .sub-filter-checkbox {
+            margin-left: 20px;
+            display: block;
+          }
+        }
+        .sub-filter-wrapper:not(.display){
+          display: none;
+        }
+      }
+    }
+
+    .filter-group-contents::-webkit-scrollbar{
+      width: 8px;
+    }
+    .filter-group-contents::-webkit-scrollbar-track{
+      background-color: #cccccc;
+      border-radius: 8px;
+    }
+    .filter-group-contents::-webkit-scrollbar-thumb{
+      background-color: #777777;
+      border-radius: 8px;
+      height: 15px;
+    }
+
+    .filter-group-contents.visible{
+      opacity: 1;
+      margin-top: 20px;
+    }
+    .showmore-link-wrapper{
+      display: none;
+      margin-top: 10px;
+      position: relative;
+
+      .invisible-span{
+        height: 1px;
+        float: left;
+        width: 27px;
+      }
+      .more-link{
+        color: $filtername-black;
+        cursor: pointer;
+        display: inline-block;
+        font-size: $filtername-size;
+        margin: 10px 0;
+        padding-left: 38px;
+        width: 164px;
+      }
+    }
+  }
+}
+// End of favourites panel general styles
+
 /***************************/
 /* SIDE PANEL TABLET STYLES*/
 /***************************/
@@ -884,7 +1090,7 @@ $subfilter-size: .8em;
 /***************************/
 
 @media screen and (max-width: 767px){
-  .side-panel-wrapper{
+  .side-panel-wrapper, .panel-wrapper{
     bottom: inherit;
     padding: 0;
     left: -255px;
@@ -908,7 +1114,7 @@ $subfilter-size: .8em;
       }
     }
   }
-  .side-panel-wrapper.mobile-visible{
+  .side-panel-wrapper.mobile-visible, .panel-wrapper.mobile-visible{
     left: 0;
   }
 }
@@ -964,6 +1170,20 @@ $morelisting-color: #929292;
 //*******************************//
 //**MAIN CONTENT GENERAL STYLES**//
 //*******************************//
+
+.edit-user-background{
+  display: flex;
+  justify-content: space-around;
+  background-color: rgba( 255, 255, 255, 0.8 );
+  margin: 10% 10% 0 10%;
+  border-radius: 10px;
+  padding-bottom: 3%;
+  flex-wrap: wrap;
+
+  .side-edit-columns{
+    flex: 1 0 100px;
+  }
+}
 
 .main-container {
   display: table;
