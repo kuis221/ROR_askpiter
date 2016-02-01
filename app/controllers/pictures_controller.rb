@@ -20,6 +20,6 @@ class PicturesController < ApplicationController
 
   def destroy_old_picture
     old_picture = Picture.where(imageable_type: params[:picture][:imageable_type], imageable_id: params[:picture][:imageable_id]).last
-    old_picture if old_picture.destroy 
+    old_picture.destroy if old_picture
   end
 end
