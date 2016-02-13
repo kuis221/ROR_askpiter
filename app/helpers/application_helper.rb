@@ -1,6 +1,6 @@
 module ApplicationHelper
 
-  def modal_button_tag content, action = nil, **options
+  def modal_button_tag content, action = nil, method: :post, **options
     action, content = content, nil unless action
     is_button = !options.delete(:link)
 
@@ -30,7 +30,7 @@ module ApplicationHelper
       concat content if content
       concat capture yield if block_given?
       capture do
-        form_tag modals_path(action), class: 'hidden' do
+        form_tag action, method: method, class: 'hidden' do
           options.each { |key, value| concat hidden_field_tag key, value, id: nil }
         end
       end.tap { |form| concat form }

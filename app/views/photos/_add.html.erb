@@ -31,8 +31,12 @@
 
   <div class='form-group'>
     <div class='col-sm-offset-2 col-sm-10'>
-      <%= form.submit class: 'btn btn-primary' %>
+      <%= form.submit class: 'btn btn-primary', id:'submit-photo', style:'display:none;' %>
     </div>
   </div>
 
+<% end %>
+
+<% content_for :action do %>
+  <%= link_to "Upload", '#', class:'btn upload-button', data:{submit_button:true, submit_target:'#submit-photo'} %>
 <% end %>

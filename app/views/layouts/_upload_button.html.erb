@@ -6,11 +6,11 @@
   </button>
   <ul class='dropdown-menu' aria-labelledby='upload-menu'>
     <li>
-      <%= modal_button_tag 'Photo', :add_photo, link: true %>
+      <%= modal_button_tag 'Photo', modals_path(action: :add_photo), link: true %>
     </li>
     <li role='separator' class='divider'></li>
     <li>
-      <%= modal_button_tag 'Video', :add_video, link: true %>
+      <%= modal_button_tag 'Video', modals_path(action: :add_video), link: true %>
     </li>
   </ul>
 </div>

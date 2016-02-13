@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+
   ActiveAdmin.routes(self)
 
   namespace :admin do
@@ -55,7 +56,9 @@ Rails.application.routes.draw do
 
   resources :home, only: [:index]
   resources :search, only: [:index]
-  resources :products, only: :show
+  resources :products, only: :show do
+    resources :reviews, only:[:new, :create], defaults: {format: :json}
+  end
 
   resource :pictures, format: false, only: :create
   resource :photos, format: false, only: :create

@@ -1,19 +1,19 @@
 class ProductsController < ApplicationController
   include HelperAttr
   helper_attr :product, :pictures, :reviews, :photos, :videos, :similars
+  before_action :set_product, only:[:show]
 
   def show
-    set_product
-    self.pictures = product.pictures.recent.first(6)
-    self.reviews = product.reviews.recent.first(3)
-    self.photos = product.photos.recent.first(5)
-    self.videos = product.videos.recent.first(5)
-    self.similars = product.similars.recent.first(10)
+    @pictures = product.pictures.recent.first(6)
+    @reviews = product.reviews.recent.first(3)
+    @photos = product.photos.recent.first(5)
+    @videos = product.videos.recent.first(5)
+    @similars = product.similars.recent.first(10)
   end
 
   private
 
   def set_product
-    self.product = Product.find params[:id]
+    @product = Product.find params[:id]
   end
 end

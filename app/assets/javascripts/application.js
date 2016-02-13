@@ -15,4 +15,5 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require bootstrap-sprockets
+//= require third-party
 //= require_directory .

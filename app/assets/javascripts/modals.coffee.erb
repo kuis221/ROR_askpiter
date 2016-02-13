@@ -5,6 +5,7 @@ $ ->
   modal_owner_key  = <%= "'#{data_namespace}.modal.owner'" %>
   modal_title_key  = <%= "'#{data_namespace}.modal.elements.title'" %>
   modal_body_key   = <%= "'#{data_namespace}.modal.elements.body'" %>
+  modal_footer_key   = <%= "'#{data_namespace}.modal.elements.footer'" %>
   modal_data_key   = <%= "'#{data_namespace}.modal.data'" %>
   cacheable_key    = <%= "'#{data_namespace}.cacheable'" %>
 
@@ -26,6 +27,7 @@ $ ->
       modal.data modal_owner_key,  owner
       modal.data modal_title_key,  modal.find '.modal-title'
       modal.data modal_body_key,   modal.find '.modal-body'
+      modal.data modal_footer_key,   modal.find '.modal-footer'
 
       if cacheable && data = owner.data modal_data_key
         update_modal_data modal, data
@@ -66,6 +68,7 @@ $ ->
   update_modal_data = (modal, data) ->
     update_title  modal, data.title
     update_body   modal, data.body
+    update_footer   modal, data.footer
     attach_events modal, data.events
     modal.modal 'handleUpdate'
     true
@@ -76,6 +79,10 @@ $ ->
 
   update_body = (modal, body) ->
     modal.data(modal_body_key).html(body || '')
+    true
+
+  update_footer = (modal, footer) ->
+    modal.data(modal_footer_key).html(footer) if footer
     true
 
   attach_events = (modal, events) ->

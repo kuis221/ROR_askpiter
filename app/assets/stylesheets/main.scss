@@ -1151,6 +1151,7 @@ $thumbscotnainer-background: #EFEFEF;
 $thumb-background: #ffffff;
 
 $morelisting-color: #929292;
+$upload-button-color: #70B29F;
 
 
 
@@ -1532,5 +1533,28 @@ $footer-links-color: #333333;
     .footer-sociallinks-wrapper{
       margin-top: 20px;
     }
+  }
+}
+
+.asp-modal{
+  .modal-header{
+    border-bottom: none;
+    font-weight: bold;
+    color: #444455;
+  }
+  .modal-footer{
+    border-top: none;
+  }
+}
+
+.btn.upload-button {
+  &{
+    background-color: $upload-button-color;
+    color: #ffffff;
+    padding-left: 40px;
+    padding-right: 40px;
+  }
+  &:hover, &:focus{
+    background-color: darken($upload-button-color, 10%);
   }
 }

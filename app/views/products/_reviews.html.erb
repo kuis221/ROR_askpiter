@@ -15,7 +15,7 @@
           <%= review.review %>
         </h2>
         <p>
-          <%= render 'rating', rating: rand(6) %>
+          <%= render partial:'rating', locals:{rating: review.rating && review.rating.value || 0} %>
           &nbsp;
           <%= review.user_name %> - <%= review.date_string %>
         </p>

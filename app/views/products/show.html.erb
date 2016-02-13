@@ -54,7 +54,11 @@
   <%= render 'reviews', reviews: reviews unless reviews.empty? %>
   <div class='buttons text-center'>
     <%= link_to 'Read More Reviews', '#', class: 'btn btn-default', role: 'button' %>
-    <%= link_to 'Add a Review', '#', class: 'btn btn-default', role: 'button' %>
+    <%= modal_button_tag 'Add a review',
+        new_product_review_path(@product),
+        method: :get,
+        link: true,
+        class:'btn btn-default' %>
   </div>
 </div>
 
@@ -66,7 +70,7 @@
     <%= link_to "See more (#{product.photos_count})", '#',
                 class: 'btn btn-default', role: 'button' %>
     <% if user_signed_in? %>
-      <%= modal_button_tag 'Upload', :add_photo,
+      <%= modal_button_tag 'Upload', modals_path(action: :add_photo),
                            class: 'btn btn-success pull-right',
                            product_id: product.id %>
     <% end %>
@@ -81,7 +85,7 @@
     <%= link_to "See more (#{product.videos_count})", '#',
                 class: 'btn btn-default', role: 'button' %>
     <% if user_signed_in? %>
-      <%= modal_button_tag 'Upload', :add_video,
+      <%= modal_button_tag 'Upload', modals_path(action: :add_video),
                            class: 'btn btn-success pull-right',
                            product_id: product.id %>
     <% end %>

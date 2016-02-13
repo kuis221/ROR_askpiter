@@ -8,12 +8,13 @@ $(document).ready(function(){
     var showMoreProducts = $('.showmore-thumbs-row');
     var plusIcon = $('.filter-plus-icon');
     var checkBox = $('.checkbox-inline');
+    var submitButtonSelector = 'a[data-submit-button="true"]';
 
-    window.filterStatus = window.filterStatus || { 
-      'favourites': 'hide', 
-      'history-search': 'hide', 
-      'your-categories': 'show', 
-      'international-brands': 'hide', 
+    window.filterStatus = window.filterStatus || {
+      'favourites': 'hide',
+      'history-search': 'hide',
+      'your-categories': 'show',
+      'international-brands': 'hide',
       'local-brands': 'hide' };
     var filterStatus = window.filterStatus;
 
@@ -26,7 +27,7 @@ $(document).ready(function(){
         window.scrollTo( window.prevPageXOffset, window.prevPageYOffset );
       }
       window.turbolinksScroll = undefined;
-    }); 
+    });
 
     $(document).on('click', 'a', function(event) {
       var scroll = $(this).data('turbolinks-scroll');
@@ -222,4 +223,28 @@ $(document).ready(function(){
 
         }
     });
+
+    // Submit form with javascript
+    $(document).on( "click", submitButtonSelector, function(event) {
+      event.preventDefault();
+      var targetButtonSelector = $(this).data('submit-target');
+      if (targetButtonSelector && $(targetButtonSelector)) {
+        $(targetButtonSelector).click();
+      }
+    });
+
+    // Creates select stars widget for reviews
+    document.linkRating = function(options){
+      var widget = document.querySelector(options.widget);
+      var field = $(options.field);
+
+      var currentRating = field.val();
+
+      var maxRating= 5;
+
+      var callback = function(rating) { field.val(rating); };
+
+      var myRating = rating(widget, currentRating, maxRating, callback);
+    }
+
 });
