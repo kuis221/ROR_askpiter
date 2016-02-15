@@ -20,7 +20,7 @@
               <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
           <% end %>
         </div>
-        
+
         <fieldset>
           <p>Leave these fields blank if you don't want to change your password.</p>
           <div class="form-group">
@@ -36,7 +36,7 @@
         <%= f.fields_for :address do |address_field| %>
           <div class="form-group">
             <%= address_field.label :country %>
-            <%= address_field.text_field :country, :autofocus => true, 
+            <%= address_field.text_field :country, :autofocus => true,
                 class: 'form-control', placeholder: "Country" %>
           </div>
           <div class="form-group">
@@ -50,11 +50,11 @@
         <%= image_tag(current_user.picture.url(:thumbnail)) if current_user.picture %>
         </br>
         <% picture_image = current_user.picture ? "Change your Profile image" : "Upload your Profile image" %>
-        <%= modal_button_tag picture_image, :add_picture, { link: true, imageable_type: "User", imageable_id: current_user.id  } %>
+        <%= modal_button_tag picture_image, modals_path(action: :add_picture), { link: true, imageable_type: "User", imageable_id: current_user.id  } %>
 
         </br>
         </br>
-        
+
         <h3>Language</h3>
         <%= f.select(:language_id, Language.all.collect {|p| [ p.name, p.id ] }, {}, :style => "width:100%") %>
         </br>
@@ -65,7 +65,7 @@
         <%= f.select(:currency_id, Currency.all.collect {|p| [ p.name, p.id ] }, {}, :style => "width:100%") %>
         </br>
         </br>
-        </br>  
+        </br>
 
         <fieldset>
           <p>You must enter your current password to make changes.</p>
