@@ -34,9 +34,9 @@
       <p>
         <% if user_signed_in? %>
           <% if product.users.include? current_user %>
-            Added to Favourites <%= link_to '(Remove)', '#' %>
+            Added to Favourites <%= link_to '(Remove)', remove_product_user_favourite_products_path(@product) %>
           <% else %>
-            <%= link_to 'Add to Favourites', '#' %>
+            <%= link_to 'Add to Favourites', add_product_user_favourite_products_path(@product) %>
           <% end %>
         <% end %>
       </p>

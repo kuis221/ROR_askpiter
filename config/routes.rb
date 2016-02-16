@@ -58,6 +58,12 @@ Rails.application.routes.draw do
   resources :search, only: [:index]
   resources :products, only: :show do
     resources :reviews, only:[:new, :create], defaults: {format: :json}
+    resources :user_favourite_products, only:[:add, :remove] do
+      collection do
+        get 'add'
+        get 'remove'
+      end
+    end
   end
 
   resource :pictures, format: false, only: :create
