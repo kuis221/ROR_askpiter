@@ -3,6 +3,7 @@ class Address < ActiveRecord::Base
   def full_address
     "#{street}, #{city}"
   end
-  geocoded_by :full_address
+  geocoded_by :full_address,
+              & -> (address, result) {address.country_code = result && result.first && result.first.country_code}
   after_validation :geocode
 end

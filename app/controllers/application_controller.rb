@@ -6,6 +6,15 @@ class ApplicationController < ActionController::Base
   helper_method :resource_name, :resource, :devise_mapping
 
   before_action :configure_permitted_parameters, if: :devise_controller?
+  before_action :get_user_location
+
+  private
+
+  def get_user_location
+    cookies[:country_code] ||= request.location && request.location.country_code
+    @user_country = cookies[:country_code]
+  end
+
 
   protected
 
@@ -17,11 +26,11 @@ class ApplicationController < ActionController::Base
   def resource_name
     :user
   end
- 
+
   def resource
     @resource ||= User.new
   end
- 
+
   def devise_mapping
     @devise_mapping ||= Devise.mappings[:user]
   end

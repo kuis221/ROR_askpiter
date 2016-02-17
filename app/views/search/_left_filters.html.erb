@@ -45,14 +45,16 @@
 
   <%= render layout: 'left_filter',
       locals: { filter_name: 'International Brands', filter_type: 'international-brands', icon_class: 'glyphicon glyphicon-plane' } do %>
-    <% Company.international.with_sub_categories(params[:sub_categories]).each do |company| %>
+    <% Company.international(@user_country)
+              .with_sub_categories(params[:sub_categories]).each do |company| %>
       <%= render partial: 'company_filter', locals: { company: company } %>
     <% end %>
   <% end %>
 
   <%= render layout: 'left_filter',
       locals: { filter_name: 'Local Brands', filter_type: 'local-brands', icon_class: 'zmdi zmdi-directions-walk' } do %>
-    <% Company.local.with_sub_categories(params[:sub_categories]).each do |company| %>
+    <% Company.local(@user_country)
+              .with_sub_categories(params[:sub_categories]).each do |company| %>
       <%= render partial: 'company_filter', locals: { company: company } %>
     <% end %>
   <% end %>
