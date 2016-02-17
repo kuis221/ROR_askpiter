@@ -11,26 +11,27 @@ class SearchFilter
   def self.build( params )
 
     filters = Array.new
-    filters << build_category_filter(params) if params[:category_id] and !params[:sub_category_id]
-    filters << build_sub_category_filter(params) if params[:sub_category_id]
-    filters << build_company_filter(params) if params[:company_id]
+    # filters << build_category_filter(params) if params[:category_id] and !params[:sub_category_id]
+    filters += build_sub_categories_filter(params) if params[:sub_categories]
+    filters += build_companies_filter(params) if params[:companies]
     filters << build_search_filter(params) if params[:search] and !params[:search].blank?
     filters
   end
 
-  def self.build_category_filter( params )
-    cat = Category.find_by_id( params[:category_id] )
-    SearchFilter.new( name: cat.name, type: :category_id, id: cat.id, obj: cat )
+  def self.build_sub_categories_filter( params )
+    sub_categories = SubCategory.where( id: params[:sub_categories] )
+    sub_categories.map {|sub_category| SearchFilter.new( name: sub_category.name,
+                                                         type: :sub_categories,
+                                                         id: sub_category.id,
+                                                         obj: sub_category )}
   end
 
-  def self.build_sub_category_filter( params )
-    cat = SubCategory.find_by_id( params[:sub_category_id] )
-    SearchFilter.new( name: cat.name, type: :sub_category_id, id: cat.id, obj: cat )
-  end
-
-  def self.build_company_filter( params )
-    company = Company.find_by_id( params[:company_id] )
-    SearchFilter.new( name: company.name, type: :company_id, id: company.id, obj: company )
+  def self.build_companies_filter( params )
+    companies = Company.where( id: params[:companies] )
+    companies.map {|company| SearchFilter.new( name: company.name,
+                                               type: :companies,
+                                               id: company.id,
+                                               obj: company )}
   end
 
   def self.build_search_filter( params )

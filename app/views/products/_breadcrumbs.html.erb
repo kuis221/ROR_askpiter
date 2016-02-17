@@ -4,12 +4,12 @@
   </li>
   <li>
     <%= link_to product.sub_category_name,
-                search_index_path(sub_category_id: product.sub_category_id) %>
+                search_index_path(sub_categories: [product.sub_category_id]) %>
   </li>
   <li>
     <%= link_to product.company_name,
-                search_index_path(sub_category_id: product.sub_category_id,
-                                  company_id: product.company_id) %>
+                search_index_path(sub_categories: [product.sub_category_id],
+                                  companies: [product.company_id]) %>
   </li>
   <li class='active'>
     <%= product.name %>

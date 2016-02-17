@@ -14,5 +14,5 @@ class SearchController < ApplicationController
       render
     end
   end
-  
+
 end

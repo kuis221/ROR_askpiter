@@ -1,28 +1,46 @@
 module SearchHelper
 
   def update_params( params, action, key, value = nil )
-    p = params.clone
+    p = params.dup
     p.delete(:controller)
     p.delete(:action)
     p.delete(:delete_search)
-    p.delete(:category_id) if action == :update and key == :sub_category_id
-    p.delete(:sub_category_id) if action == :update and key == :category_id
-    p.delete(key) if action == :remove
+    add_param( params:p, key: key, value: value ) if action == :add
+    remove_param( params:p, key: key, value: value ) if action == :remove
     p[key] = value if action == :update
     p
+  end
+
+  # Add filter to search
+  def add_param(params:, key:, value: nil)
+    if params[key].is_a?(Array)
+      params[key] << (value.to_s)
+    else
+      params[key] = [value.to_s]
+    end
+  end
+
+  # Removes filter from search
+  def remove_param(params:, key:, value: nil)
+    if params[key].is_a?(Array)
+      params[key].delete(value.to_s)
+      params.delete(key) if params[key].empty?
+    else
+      params.delete(key)
+    end
   end
 
   def search_link( name = nil, param_changes = nil, html_options = nil, &block )
 
     # Handle the case where param_changes is the first argument (block provided so no name)
-    if name.kind_of?( Array ) 
+    if name.kind_of?( Array )
       html_options = param_changes
       param_changes = name
       name = nil
     end
     html_options = {} if html_options.nil?
 
-    p = params.clone
+    p = params.dup
     param_changes.each do |change|
       p = update_params( p, change[:action], change[:key], change[:value] )
     end
@@ -38,29 +56,38 @@ module SearchHelper
     { action: action, key: key, value: value }
   end
 
-  def search_company_link( company, param_company_id, &block )
-    if company.id == param_company_id.to_i 
-      param_changes = [param_change( :remove, :company_id )]
+  def search_company_link( company, params_company_ids, &block )
+    params_company_ids ||= []
+    if params_company_ids.include?(company.id.to_s)
+      param_changes = [param_change( :remove, :companies, company.id.to_s)]
     else
-      param_changes = [param_change( :update, :company_id, company.id )]
+      param_changes = [param_change( :add, :companies, company.id.to_s)]
     end
     search_link param_changes, {}, &block
   end
 
-  def search_category_link( category, param_category_id, &block )
-    if category.id == param_category_id.to_i 
-      param_changes = [param_change( :remove, :category_id )]
-    else
-      param_changes = [param_change( :update, :category_id, category.id )]
+  def search_category_link( category, params_sub_categories, &block )
+    sub_categories_ids = category.sub_categories.ids.map(&:to_s)
+    params_sub_categories ||= []
+    # Sub categories not selected? add!
+    if (sub_categories_ids - params_sub_categories).count == sub_categories_ids.count
+      param_changes = sub_categories_ids.map{|id| param_change( :add, :sub_categories, id)}
+    else # Sub categories selected? remove all!
+      param_changes = []
+      sub_categories_ids.each do |id|
+        if params_sub_categories.include?(id)
+          param_changes << param_change( :remove, :sub_categories, id)
+        end
+      end
     end
     search_link param_changes, {}, &block
   end
 
-  def search_sub_category_link( sub_category, param_sub_category_id, &block )
-    if sub_category.id == param_sub_category_id.to_i 
-      param_changes = [param_change( :remove, :sub_category_id ), param_change( :update, :category_id, sub_category.category.id )]
+  def search_sub_category_link( sub_category, params_sub_categories, &block )
+    if params_sub_categories.is_a?(Array) && params_sub_categories.include?(sub_category.id.to_s)
+      param_changes = [param_change( :remove, :sub_categories, sub_category.id.to_s)]
     else
-      param_changes = [param_change( :update, :sub_category_id, sub_category.id )]
+      param_changes = [param_change( :add, :sub_categories, sub_category.id.to_s)]
     end
     search_link nil, param_changes, { class: 'sub-filter-checkbox' }, &block
   end

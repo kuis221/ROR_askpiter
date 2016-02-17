@@ -62,23 +62,22 @@ class Product < ActiveRecord::Base
   end
   default_picture.deep_freeze
 
-  def self.base_search(search, category_id, sub_category_id, company_id)
+  def self.base_search(search, sub_categories, companies)
     prods = all
-    if search || category_id || sub_category_id || company_id
+    if search || sub_categories.is_a?(Array) || companies.is_a?(Array)
       prods = prods.where('products.name LIKE :search or products.description LIKE :search', search: "%#{search}%") if search
-      prods = prods.joins(:sub_category).where('sub_categories.category_id = ?', category_id) if category_id
-      prods = prods.where(sub_category_id: sub_category_id) if sub_category_id
-      prods = prods.where(company_id: company_id) if company_id
+      prods = prods.where(sub_category_id: sub_categories) if sub_categories.is_a?(Array)
+      prods = prods.where(company_id: companies) if companies.is_a?(Array)
       prods
     end
     prods
   end
 
-  def self.search( search, category_id, sub_category_id, company_id, start_row_index, take_count )
-    prods = self.base_search( search, category_id, sub_category_id, company_id ).offset( start_row_index ).limit( take_count )
+  def self.search( search, sub_categories, companies, start_row_index, take_count )
+    prods = self.base_search( search, sub_categories, companies ).offset( start_row_index ).limit( take_count )
   end
 
-  def self.search_count( search, category_id, sub_category_id, company_id )
-    prods = self.base_search( search, category_id, sub_category_id, company_id ).count
+  def self.search_count( search, sub_categories, companies )
+    prods = self.base_search( search, sub_categories, companies ).count
   end
 end

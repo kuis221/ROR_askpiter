@@ -12,4 +12,14 @@ class Company < ActiveRecord::Base
 
   scope :international, -> { where( international: true ) }
   scope :local, -> { where( international: false ) }
+
+  def self.with_sub_categories(sub_categories_ids)
+    sub_categories_ids ||= []
+    if sub_categories_ids.any?
+      joins(:products).where(products: { sub_category_id: sub_categories_ids.map(&:to_i) }).uniq
+    else
+      all
+    end
+  end
+
 end

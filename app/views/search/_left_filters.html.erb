@@ -1,7 +1,7 @@
 <aside class="side-panel-wrapper search-side-panel">
   <% if user_signed_in? %>
 
-    <%= render layout: 'left_filter', 
+    <%= render layout: 'left_filter',
         locals: { filter_name: 'Favourites', filter_type: 'favourites', icon_class: 'glyphicon glyphicon-star' } do %>
       <% current_user.favourite_categories.each do |category| %>
         <div class="filter-wrapper">
@@ -20,8 +20,8 @@
         </div>
       <% end  %>
     <% end %>
-    
-    <%= render layout: 'left_filter', 
+
+    <%= render layout: 'left_filter',
         locals: { filter_name: 'History Search', filter_type: 'history-search', icon_class: 'glyphicon glyphicon-search' } do %>
       <% current_user.searches.recent.each do |search| %>
       <div class="filter-wrapper">
@@ -36,23 +36,23 @@
     <% end %>
   <% end %>
 
-  <%= render layout: 'left_filter', 
+  <%= render layout: 'left_filter',
       locals: { filter_name: 'Your Categories', filter_type: 'your-categories', icon_class: 'glyphicon glyphicon-home' } do %>
     <% @categories.all.each do |category| %>
       <%= render partial: 'category_filter', locals: { category: category } %>
     <% end %>
   <% end %>
 
-  <%= render layout: 'left_filter', 
+  <%= render layout: 'left_filter',
       locals: { filter_name: 'International Brands', filter_type: 'international-brands', icon_class: 'glyphicon glyphicon-plane' } do %>
-    <% Company.international.each do |company| %>
+    <% Company.international.with_sub_categories(params[:sub_categories]).each do |company| %>
       <%= render partial: 'company_filter', locals: { company: company } %>
     <% end %>
   <% end %>
 
-  <%= render layout: 'left_filter', 
+  <%= render layout: 'left_filter',
       locals: { filter_name: 'Local Brands', filter_type: 'local-brands', icon_class: 'zmdi zmdi-directions-walk' } do %>
-    <% Company.local.each do |company| %>
+    <% Company.local.with_sub_categories(params[:sub_categories]).each do |company| %>
       <%= render partial: 'company_filter', locals: { company: company } %>
     <% end %>
   <% end %>
