@@ -10,8 +10,6 @@ ActiveAdmin.register Company do
                 user_ids: []
 
   scope :all
-  scope :international
-  scope :local
 
   filter :name_cont, label: 'Name'
   filter :description_cont, label: 'Description'
@@ -35,7 +33,6 @@ ActiveAdmin.register Company do
   form do |f|
     f.inputs do
       f.input :name
-      f.input :international
       f.input :url
       f.input :description
       f.input :email
@@ -50,6 +47,7 @@ ActiveAdmin.register Company do
       address.input :postcode
       address.input :city
       address.input :country, as: :string
+      address.input :country_code
       address.input :latitude
       address.input :longitude
     end
