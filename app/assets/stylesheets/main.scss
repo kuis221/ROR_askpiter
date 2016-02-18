@@ -1563,3 +1563,35 @@ $footer-links-color: #333333;
     background-color: darken($upload-button-color, 10%);
   }
 }
+
+.media-info{
+  .media-description, .media-share, .more-media{
+    color:#606060;
+  }
+  .media-share {
+    margin-top:3em;
+    margin-bottom: 3em;
+    li{
+      vertical-align: middle;
+    }
+  }
+  .more-media {
+    .more-media-title{
+      margin-bottom: 2em;
+      h2{
+        font-size:28px;
+        font-weight: 600;
+      }
+    }
+    .embed-responsive-16by9{
+      margin-bottom:16px;
+    }
+  }
+}
+
+.media-overlay {
+  height: 100%;
+  position: absolute;
+  width: 100%;
+  z-index: 1;
+}

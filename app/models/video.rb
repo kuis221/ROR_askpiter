@@ -29,6 +29,10 @@ class Video < ActiveRecord::Base
     new main: false, day: false
   end
 
+  def self.last_videos(except:, limit:)
+    all.where.not(id: except.id).order(created_at: :desc).limit(limit)
+  end
+
   private
 
   def url_changed?
@@ -40,7 +44,6 @@ class Video < ActiveRecord::Base
 
     HOSTS.each do |host, host_params|
       url_regexp, url_pattern = host_params
-      byebug
       if matchdata = url.match(url_regexp)
 
         self.host, self.code = host, matchdata[1]
