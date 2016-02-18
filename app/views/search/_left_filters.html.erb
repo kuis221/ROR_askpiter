@@ -3,19 +3,11 @@
 
     <%= render layout: 'left_filter',
         locals: { filter_name: 'Favourites', filter_type: 'favourites', icon_class: 'glyphicon glyphicon-star' } do %>
-      <% current_user.favourite_categories.each do |category| %>
+      <% current_user.favourite_products.each do |product| %>
         <div class="filter-wrapper">
             <span class="glyphicon glyphicon-trash"></span>
             <span class="filter-name">
-              <%= search_link category.name, [ param_change( :update, :category_id, category.id) ] %>
-            </span>
-        </div>
-      <% end  %>
-      <% current_user.favourite_companies.each do |company| %>
-        <div class="filter-wrapper">
-            <span class="glyphicon glyphicon-trash"></span>
-            <span class="filter-name">
-              <%= search_link company.name, [ param_change( :update, :company_id, company.id) ] %>
+              <%= search_link product.name, [ param_change( :update, :product_id, product.id) ] %>
             </span>
         </div>
       <% end  %>
