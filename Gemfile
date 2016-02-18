@@ -17,6 +17,7 @@ gem 'activeadmin', github: 'activeadmin/activeadmin'
 gem 'geocoder'
 gem 'paperclip', '~> 4.3'
 gem 'aws-sdk', '< 2'
+gem 'kaminari'
 
 group :development, :test do
   gem 'byebug'

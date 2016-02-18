@@ -57,6 +57,13 @@ class Product < ActiveRecord::Base
     picture.url *args
   end
 
+  def self.media
+    media = []
+    media += Photo.where(product_id:self.ids)
+    media += Video.where(product_id:self.ids)
+    media
+  end
+
   cattr_reader :default_picture do
     OpenStruct.new url: 'thumb-img-1.jpg', title: 'No images found'
   end

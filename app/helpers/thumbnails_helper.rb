@@ -12,6 +12,16 @@ module ThumbnailsHelper
     end
   end
 
+  def media_thumbnails media
+    media.each do |media_object|
+      if media_object.is_a?(Photo)
+        render partial: 'photos/thumbnail', locals: { photo: media_object }
+      elsif media_object.is_a?(Video)
+        render partial: 'videos/thumbnail', locals: { video: media_object }
+      end
+    end
+  end
+
   def product_thumbnails products
     capture { render partial: 'products/thumbnail', collection: products, as: :product }
   end
