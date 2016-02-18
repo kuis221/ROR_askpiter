@@ -3,11 +3,11 @@
 
     <%= render layout: 'left_filter',
         locals: { filter_name: 'Favourites', filter_type: 'favourites', icon_class: 'glyphicon glyphicon-star' } do %>
-      <% current_user.favourite_products.each do |product| %>
+      <% current_user.favourite_products.last(10).each do |product| %>
         <div class="filter-wrapper">
             <span class="glyphicon glyphicon-trash"></span>
             <span class="filter-name">
-              <%= search_link product.name, [ param_change( :update, :product_id, product.id) ] %>
+              <%= link_to product, product.name %>
             </span>
         </div>
       <% end  %>
