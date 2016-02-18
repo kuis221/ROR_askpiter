@@ -40,7 +40,7 @@ class Video < ActiveRecord::Base
 
     HOSTS.each do |host, host_params|
       url_regexp, url_pattern = host_params
-
+      byebug
       if matchdata = url.match(url_regexp)
 
         self.host, self.code = host, matchdata[1]

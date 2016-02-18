@@ -1298,6 +1298,11 @@ $upload-button-color: #70B29F;
 
         .thumb-footer-model{
           font-size: $thumbs-model-fontsize;
+          a, a:hover, a:focus {
+            color: #020023;
+            font-weight: bold;
+            text-decoration: none;
+          }
         }
 
         .glyphicon-star{
