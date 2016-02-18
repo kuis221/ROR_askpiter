@@ -10,9 +10,11 @@
       </span>
     </span>
   </div>
-    <div class='embed-responsive embed-responsive-16by9'>
-      <%= image_tag photo.picture.image.url(:thumbnail), alt: photo.title, class: 'img-responsive center-block' %>
-    </div>
+    <%= link_to photo do%>
+      <div class='embed-responsive embed-responsive-16by9'>
+        <%= image_tag photo.picture.image.url(:thumbnail), alt: photo.title, class: 'img-responsive center-block' %>
+      </div>
+    <% end %>
     <div class='flex thumb-footer'>
       <span class='thumb-footer-model'>
         <%= link_to photo.product do %>

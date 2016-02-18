@@ -13,6 +13,10 @@ class Photo < ActiveRecord::Base
 
   accepts_nested_attributes_for :picture
 
+  def self.last_photos(except:, limit:)
+    all.where.not(id: except.id).order(created_at: :desc).limit(limit)
+  end
+
   def self.add_billet
     new main: false, day: false, picture: Picture.new
   end

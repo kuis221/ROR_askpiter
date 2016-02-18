@@ -80,7 +80,7 @@
 <!-- videos section -->
 <div class='product-assets product-videos text-center'>
   <h1>Latest videos of <%= product.name %></h1>
-  <%= thumbnails_container { video_thumbnails videos } %>
+    <%= thumbnails_container { video_thumbnails videos } %>
   <div class='buttons'>
     <%= link_to "See more (#{product.videos_count})", '#',
                 class: 'btn btn-default', role: 'button' %>
