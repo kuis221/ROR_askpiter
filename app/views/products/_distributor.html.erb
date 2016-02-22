@@ -4,16 +4,24 @@
     <%= link_to distributor.url, distributor.url %>
   </small>
 </h1>
-<h2>Contacts:</h2>
 <address>
-  <p>
-    <strong>email:</strong>
-    <br>
-    <%= distributor.email %>
-  </p>
-  <p>
-    <strong>phone:</strong>
-    <br>
-    <%= distributor.phone %>
-  </p>
+  <% if distributor.email? %>
+    <p>
+      <strong>Contact Email: </strong><%= distributor.email %>
+    </p>
+  <% end %>
+  
+  <% unless distributor.address == nil %>
+    <p>
+      <strong>Address :</strong><%= distributor.address.street %> <%= distributor.address.city %> <%= distributor.address.postcode %>
+    </p>
+  <% end %>
+  
+  
+  <% if distributor.phone? %>
+    <p>
+      <strong>Contact Phone: </strong><%= distributor.phone %>
+    </p>
+  <% end %>
+
 </address>

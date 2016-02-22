@@ -9,21 +9,27 @@
 </p>
 <h2>Contacts:</h2>
 <address>
-  <p>
-    <strong>Contact Email: </strong><%= company.email %>
-  </p>
-  <p>
-    <% unless company.address == nil %>
+  <% if company.email? %>
+    <p>
+      <strong>Contact Email: </strong><%= company.email %>
+    </p>
+  <% end %>
+  
+  <% unless company.address == nil %>
+    <p>
       <strong>Address :</strong><%= company.address.street %> <%= company.address.city %> <%= company.address.postcode %>
-  </p>
-  <p>
-    <% if company.phone? %>
+    </p>
+  <% end %>
+  
+  
+  <% if company.phone? %>
+    <p>
       <strong>Contact Phone: </strong><%= company.phone %>
-    <% end %>
-  </p>
-  <p>
-    <% if company.fax? %>
+    </p>
+  <% end %>
+  <% if company.fax? %>
+    <p>
       <strong>Contact Fax: </strong><%= company.fax %>
-    <% end %>
-  </p>
+    </p> 
+  <% end %>
 </address>
