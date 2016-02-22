@@ -10,18 +10,20 @@
 <h2>Contacts:</h2>
 <address>
   <p>
-    <strong>email:</strong>
-    <br>
-    <%= company.email %>
+    <strong>Contact Email: </strong><%= company.email %>
   </p>
   <p>
-    <strong>phone:</strong>
-    <br>
-    <%= company.phone %>
+    <% unless company.address == nil %>
+      <strong>Address :</strong><%= company.address.street %> <%= company.address.city %> <%= company.address.postcode %>
   </p>
   <p>
-    <strong>fax:</strong>
-    <br>
-    <%= company.fax %>
+    <% if company.phone? %>
+      <strong>Contact Phone: </strong><%= company.phone %>
+    <% end %>
+  </p>
+  <p>
+    <% if company.fax? %>
+      <strong>Contact Fax: </strong><%= company.fax %>
+    <% end %>
   </p>
 </address>
