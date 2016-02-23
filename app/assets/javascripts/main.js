@@ -65,20 +65,32 @@ $(document).ready(function(){
         $(this).hide();
     });
   
+    // Update block position
+    function setBlockPosition(button, block) {
+      var leftPos = $(button).offset().left;
+      var topPos = $(button).offset().top + 35;
+      $(block).css({
+        'left': leftPos,
+        'top': topPos
+      });
+    }
+  
     // 'Buying guides' toggle block
     $("#buying-guides").click(function(e){
       $(".compare-block-wrapper").hide(300);
       $(".categories-block-wrapper").hide(300);
-      var leftPos = $(this).offset().left;
-      var topPos = $(this).offset().top + 35;
-      $(".buying-guides-block-wrapper").toggle(300).css({
-        'left': leftPos,
-        'top': topPos
-      });
+      setBlockPosition("#buying-guides", ".buying-guides-block-wrapper");
+      $(".buying-guides-block-wrapper").toggle(300);
       e.stopPropagation();
     });
     $(document).click(function(){
       $('.buying-guides-block-wrapper').hide(300);
+    });
+    $(window).resize(function() {
+      setBlockPosition("#buying-guides", ".buying-guides-block-wrapper");
+    });
+    $(window).scroll(function() {
+      setBlockPosition("#buying-guides", ".buying-guides-block-wrapper");
     });
     $('.buying-guides-block-wrapper').click(function(e){
       e.stopPropagation();
@@ -88,48 +100,39 @@ $(document).ready(function(){
     $("#compare-button").click(function(e){
       $(".buying-guides-block-wrapper").hide(300);
       $(".categories-block-wrapper").hide(300);
-      var leftPos = $(this).offset().left;
-      var topPos = $(this).offset().top + 35;
-      $(".compare-block-wrapper").toggle(300).css({
-        'left': leftPos,
-        'top': topPos
-      });
+      setBlockPosition("#compare-button", ".compare-block-wrapper");
+      $(".compare-block-wrapper").toggle(300);
       e.stopPropagation();
     });
     $(document).click(function(){
       $('.compare-block-wrapper').hide(300);
     });
+    $(window).resize(function() {
+      setBlockPosition("#compare-button", ".compare-block-wrapper");
+    });
+    $(window).scroll(function() {
+      setBlockPosition("#compare-button", ".compare-block-wrapper");
+    });
     $('.compare-block-wrapper').click(function(e){
       e.stopPropagation();
     });
-
-    // Example of the old toggle code
-//    $('#compare-button').click(function(){
-//        var leftPos = $(this).offset().left;
-//        var topPos = $(this).offset().top + 35;
-//        $('.compare-block-wrapper').toggle(300).css({
-//            'left': leftPos,
-//            'top': topPos
-//        });
-//        $(document).click( function(){
-//            $('.compare-block-wrapper').hide(300);
-//        });
-//    });
 
     // 'Categories' toggle block
     $("#categories-button").click(function(e){
       $(".compare-block-wrapper").hide(300);
       $(".buying-guides-block-wrapper").hide(300);
-      var leftPos = $(this).offset().left;
-      var topPos = $(this).offset().top + 35;
-      $(".categories-block-wrapper").toggle(300).css({
-        'left': leftPos,
-        'top': topPos
-      });
+      setBlockPosition("#categories-button", '.categories-block-wrapper');
+      $(".categories-block-wrapper").toggle(300);
       e.stopPropagation();
     });
     $(document).click(function(){
       $('.categories-block-wrapper').hide(300);
+    });
+    $(window).resize(function() {
+      setBlockPosition("#categories-button", '.categories-block-wrapper');
+    });
+    $(window).scroll(function() {
+      setBlockPosition("#categories-button", '.categories-block-wrapper');
     });
     $('.categories-block-wrapper').click(function(e){
       e.stopPropagation();
