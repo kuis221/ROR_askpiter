@@ -67,10 +67,11 @@ $(document).ready(function(){
   
     // Add pull-right and pull-left to side buttons in the header depending on the window size
     function repositionHeaderSideDropdowns() {
-      if ($(document).width() < 893 && $(document).width() > 691) {
+      var bodyWidth = $('body').width();
+      if (bodyWidth < (893 + 82) && bodyWidth > (691 + 60)) {
         $('.header-side-dropdown-button').removeClass('pull-left');
         $('.header-side-dropdown-button').addClass('pull-right');
-      } else if ($(document).width() <= 691) {
+      } else if (bodyWidth <= (691 + 60)) {
         $('.header-side-dropdown-button').removeClass('pull-right');
         $('.header-side-dropdown-button').addClass('pull-left');
       } else {
@@ -82,7 +83,7 @@ $(document).ready(function(){
     $(window).resize(function() {
       repositionHeaderSideDropdowns();
     });
-  
+    
     // Update block position
     function setBlockPosition(button, block) {
       var topPos = $(button).offset().top + 42;
