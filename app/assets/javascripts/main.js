@@ -67,7 +67,7 @@ $(document).ready(function(){
   
     // Update block position
     function setBlockPosition(button, block) {
-      var topPos = $(button).offset().top + 35;
+      var topPos = $(button).offset().top + 42;
       var rightOffset = $(document).width() - ($(button).offset().left + $(button).width())
       if (rightOffset > ($(block).outerWidth() - $(button).outerWidth())) {
         var leftPos = $(button).offset().left;
@@ -79,7 +79,7 @@ $(document).ready(function(){
       } else {
         $(block).css({
           'left': 'auto',
-          'right': 0,
+          'right': -1,
           'top': topPos
         });
       }
