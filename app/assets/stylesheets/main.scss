@@ -143,7 +143,7 @@ $menu-line-color: #ffffff;
   -webkit-align-items: center;
   justify-content: space-between;
   align-items: center;
-  min-height: 57px;
+  min-height: 50px;
   position: fixed;
   width: 100%;
   z-index: 9;
@@ -275,7 +275,7 @@ $menu-line-color: #ffffff;
 }
 
 .upload-btn-wrapper{
-  line-height: 57px;
+  line-height: 50px;
   .upload-btn {
     @extend .header-btn-bg;
     background-color: #F0AD4E;
@@ -283,7 +283,7 @@ $menu-line-color: #ffffff;
   }
 }
 .login-btn-wrapper{
-  line-height: 57px;
+  line-height: 50px;
   .btn {
     @extend .header-btn-bg;
     .dropdown-toggle {
