@@ -263,18 +263,17 @@ $menu-line-color: #ffffff;
     }
   }
   .submit-icon {
-    display: inline;
-    width: 18px;
-    height: 18px;
+    background: transparent;
+    border: none;
+    font-size: 17px;
+    color: #fff;
     position: absolute;
-    top: 8px;
-    right: 15px;
-    line-height: 30px;
-    vertical-align: middle;
+    top: 7px;
+    right: 10px;
   }
   .form-control:focus{
-    background: #fff;
-    color: #000;
+//    background: #fff;
+//    color: #000;
   }
   .form-control:focus::-webkit-input-placeholder { color:transparent; }
   .form-control:focus:-moz-placeholder { color:transparent; }
