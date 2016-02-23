@@ -10,7 +10,7 @@
 }
 
 .product-description {
-  padding: 3em;
+  padding: 4.5em 5em 5.5em 5em;
   color: #7a7a7a;
   background-color: #f7f9f9;
   font-size: 1.5em;
@@ -64,7 +64,6 @@
 
   .thumb-wrapper {
     background-color: #ffffff;
-
     .thumb-description {
       font-size: 0.8em;
       padding-top: 1.2em;
@@ -100,7 +99,13 @@
   }
 
   div.tab-content {
-    padding-top: 1em;
+    padding: 2em 12em 2em 12em;
+    h1 {
+      font-size: 1.5em;
+    }
+    p {
+      line-height: 1.5;
+    }
   }
 
   h1 {
