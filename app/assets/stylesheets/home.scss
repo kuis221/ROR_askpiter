@@ -32,11 +32,18 @@
     }
     .search-field-wrapper {
       margin-right: 0;
+      .submit-icon {
+        top: 5px;
+      }
     }
     form {
       display: inline-block;
     }
   }
+}
+
+#categories-button {
+  margin-top: 3px;
 }
 
 @media( max-width: 499px ) {
