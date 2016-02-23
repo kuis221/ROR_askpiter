@@ -67,12 +67,22 @@ $(document).ready(function(){
   
     // Update block position
     function setBlockPosition(button, block) {
-      var leftPos = $(button).offset().left;
       var topPos = $(button).offset().top + 35;
-      $(block).css({
-        'left': leftPos,
-        'top': topPos
-      });
+      var rightOffset = $(document).width() - ($(button).offset().left + $(button).width())
+      if (rightOffset > ($(block).outerWidth() - $(button).outerWidth())) {
+        var leftPos = $(button).offset().left;
+        $(block).css({
+          'right': 'auto',
+          'left': leftPos,
+          'top': topPos
+        });
+      } else {
+        $(block).css({
+          'left': 'auto',
+          'right': 0,
+          'top': topPos
+        });
+      }
     }
   
     // 'Buying guides' toggle block

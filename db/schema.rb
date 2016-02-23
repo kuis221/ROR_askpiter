@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160218161710) do
+ActiveRecord::Schema.define(version: 20160225153335) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -84,6 +84,34 @@ ActiveRecord::Schema.define(version: 20160218161710) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  create_table "filter_options", force: :cascade do |t|
+    t.integer  "filter_id"
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "filter_options", ["filter_id"], name: "index_filter_options_on_filter_id", using: :btree
+
+  create_table "filter_options_products", force: :cascade do |t|
+    t.integer  "product_id"
+    t.integer  "filter_option_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "filter_options_products", ["filter_option_id"], name: "index_filter_options_products_on_filter_option_id", using: :btree
+  add_index "filter_options_products", ["product_id"], name: "index_filter_options_products_on_product_id", using: :btree
+
+  create_table "filters", force: :cascade do |t|
+    t.integer  "sub_category_id"
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "filters", ["sub_category_id"], name: "index_filters_on_sub_category_id", using: :btree
 
   create_table "languages", force: :cascade do |t|
     t.string   "name"
@@ -230,5 +258,9 @@ ActiveRecord::Schema.define(version: 20160218161710) do
     t.string   "code",        limit: 20
   end
 
+  add_foreign_key "filter_options", "filters"
+  add_foreign_key "filter_options_products", "filter_options"
+  add_foreign_key "filter_options_products", "products"
+  add_foreign_key "filters", "sub_categories"
   add_foreign_key "user_favourites", "users"
 end

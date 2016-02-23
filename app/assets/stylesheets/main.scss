@@ -52,6 +52,7 @@ $main-background-color: #EFEFEF;
 
 html, body, .main-wrapper{
   min-height: 100%;
+  overflow: hidden;
 }
 .main-wrapper{
   background: $main-background-color;
@@ -203,6 +204,7 @@ $menu-line-color: #ffffff;
   position: absolute;
   top: 50px;
   z-index: 999;
+  min-width: 502px;
 
   .buying-guides-left-column, .buying-guides-right-column{
     float: left;
