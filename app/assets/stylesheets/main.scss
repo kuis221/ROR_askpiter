@@ -52,12 +52,11 @@ $main-background-color: #EFEFEF;
 
 html, body, .main-wrapper{
   min-height: 100%;
-  overflow: hidden;
 }
 .main-wrapper{
   background: $main-background-color;
   position: relative;
-
+  overflow: hidden;
   .sides-indents{
     padding-right: 15%;
     padding-left: 15%;
