@@ -64,75 +64,35 @@ $(document).ready(function(){
     $('.applied-filters-wrapper').on('click','.applied-filter', function(){
         $(this).hide();
     });
-  
-    // 'Buying guides' toggle block
-    $("#buying-guides").click(function(e){
-      $(".compare-block-wrapper").hide(300);
-      $(".categories-block-wrapper").hide(300);
-      var leftPos = $(this).offset().left;
-      var topPos = $(this).offset().top + 35;
-      $(".buying-guides-block-wrapper").toggle(300).css({
-        'left': leftPos,
-        'top': topPos
-      });
-      e.stopPropagation();
-    });
-    $(document).click(function(){
-      $('.buying-guides-block-wrapper').hide(300);
-    });
-    $('.buying-guides-block-wrapper').click(function(e){
-      e.stopPropagation();
+
+    // 'Buying guides' show block
+    $('#buying-guides').click(function(){
+        var leftPos = $(this).offset().left;
+        var topPos = $(this).offset().top + 35;
+        $('.buying-guides-block-wrapper').toggle(300).css({
+            'left': leftPos,
+            'top': topPos
+        });
     });
 
-    // 'Compare' toggle block
-    $("#compare-button").click(function(e){
-      $(".buying-guides-block-wrapper").hide(300);
-      $(".categories-block-wrapper").hide(300);
-      var leftPos = $(this).offset().left;
-      var topPos = $(this).offset().top + 35;
-      $(".compare-block-wrapper").toggle(300).css({
-        'left': leftPos,
-        'top': topPos
-      });
-      e.stopPropagation();
-    });
-    $(document).click(function(){
-      $('.compare-block-wrapper').hide(300);
-    });
-    $('.compare-block-wrapper').click(function(e){
-      e.stopPropagation();
+    // 'Compare' show block
+    $('#compare-button').click(function(){
+        var leftPos = $(this).offset().left;
+        var topPos = $(this).offset().top + 35;
+        $('.compare-block-wrapper').toggle(300).css({
+            'left': leftPos,
+            'top': topPos
+        });
     });
 
-    // Example of the old toggle code
-//    $('#compare-button').click(function(){
-//        var leftPos = $(this).offset().left;
-//        var topPos = $(this).offset().top + 35;
-//        $('.compare-block-wrapper').toggle(300).css({
-//            'left': leftPos,
-//            'top': topPos
-//        });
-//        $(document).click( function(){
-//            $('.compare-block-wrapper').hide(300);
-//        });
-//    });
-
-    // 'Categories' toggle block
-    $("#categories-button").click(function(e){
-      $(".compare-block-wrapper").hide(300);
-      $(".buying-guides-block-wrapper").hide(300);
-      var leftPos = $(this).offset().left;
-      var topPos = $(this).offset().top + 35;
-      $(".categories-block-wrapper").toggle(300).css({
-        'left': leftPos,
-        'top': topPos
-      });
-      e.stopPropagation();
-    });
-    $(document).click(function(){
-      $('.categories-block-wrapper').hide(300);
-    });
-    $('.categories-block-wrapper').click(function(e){
-      e.stopPropagation();
+    // 'Categories' show block
+    $('#categories-button').click(function(){
+        var leftPos = $(this).offset().left;
+        var topPos = $(this).offset().top + 30;
+        $('.categories-block-wrapper').toggle(300).css({
+            'left': leftPos,
+            'top': topPos
+        });
     });
 
     // Show 'burger' menu on mobile screen

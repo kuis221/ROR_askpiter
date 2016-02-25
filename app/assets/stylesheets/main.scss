@@ -68,7 +68,7 @@ html, body, .main-wrapper{
 /********************************/
 
 // Font-families
-$header-button-font: serif;
+$header-button-font: sans-serif;
 $flores-heading-font: sans-serif;
 $heading-subtext-font: sans-serif;
 $heading-button-font: sans-serif;
@@ -77,7 +77,7 @@ $mainmenu-link-font: sans-serif;
 $buying-list-font: sans-serif;
 
 // Font-sizes
-$upload-btn-fontsize: 1.1em;
+$upload-btn-fontsize: 1em;
 
 $flores-heading-fontsize: 3em;
 $flores-heading-weight: 700;
@@ -95,10 +95,9 @@ $mainmenu-link-fontsize: 1.2em;
 $mainmenu-link-weight: 700;
 
 // Colors
-$login-button-background: #fff;
+$login-button-background: #606060;
 $login-button-hovered: #373737;
-$login-button-text: #000;
-$login-button-text-hovered: #fff;
+$login-button-text: #ffffff;
 
 $buying-list-header-text: #4ad7fa;
 $buying-list-item-text: #ffffff;
@@ -132,65 +131,24 @@ $menu-line-color: #ffffff;
 }
 .black-header-stripe{
   background-color: #000;
-  padding: 0 50px;
   display: flex;
   flex-flow: row nowrap;
   -webkit-flex-flow: row nowrap;
   -ms-flex-pack: center;
   -ms-flex-align: center;
   align-content: center;
-  -webkit-justify-content: space-between;
+  -webkit-justify-content: center;
   -webkit-align-items: center;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
-  min-height: 57px;
+  height: 50px;
   position: fixed;
   width: 100%;
   z-index: 9;
-  
+
   .mobile-burger-menu, .mobile-filter-button{
     display: none;
   }
-  
-  .btn-default {
-    background: none;
-    color: #fff;
-    border: none;
-    font-family: $header-button-font;
-    font-size: $upload-btn-fontsize;
-    padding: 6px 15px 6px 15px;
-    height: 35px;
-    &:hover{
-      background-color: transparent;
-      color: #666666;
-    }
-    &:focus, &:active, &:active:focus{
-      color: #666666;
-      background-color: transparent;
-      outline: none;
-      border: none;
-    }
-  }
-}
-.header-btn-bg {
-  border-radius: 0;
-  background-color: $login-button-background;
-  font-family: $header-button-font;
-  font-size: $upload-btn-fontsize;
-  color: $login-button-text;
-  height: 35px;
-  border: 0;
-  margin-left: 20px;
-  &:hover{
-    background-color: $login-button-hovered;
-    color: $login-button-text-hovered;
-  }
-  .glyphicon {
-    line-height: 1.3;
-  }
-}
-.header-center, .header-right {
-  flex-flow: row nowrap;
 }
 .categories-block-wrapper, .buying-guides-block-wrapper, .compare-block-wrapper {
   background: #000000;
@@ -231,42 +189,68 @@ $menu-line-color: #ffffff;
   }
 }
 .red-man-logo{
-  margin-right: 30px;
+  margin-right: 50px;
   img {
-    width: 134px;
-    min-width: 134px;
+    width: 100px;
     height: auto;
   }
 }
+.bying-guides-btn-wrapper{
+  margin-right: 50px;
+  .btn {
+    font-family: $header-button-font;
+    height: 30px;
+    padding: 4px 12px;
+  }
+}
+.compare-button-wrapper {
+  margin-right: -5px;
+  .btn {
+    background: #ffffff;
+    border: none;
+    font-family: $header-button-font;
+    padding: 4px 50px 4px 12px;
+    background-image: image-url('down_arrow_small.jpg');
+    background-repeat: no-repeat;
+    background-position: 95% center;
+    background-size: 15px 15px;
+    height: 30px;
+  }
+  .btn:hover{
+    background-color: #ffffff;
+  }
+  .btn:focus, .btn:active{
+    outline: none;
+    border: none;
+    height: 30px;
+  }
+}
 .search-field-wrapper{
-  position: relative;
-  margin: 0 15px 0 15px;
-  height: 35px;
+
+  margin-right: 50px;
+  border-radius: 0 4px 4px 0;
+  height: 30px;
+  width: 260px;
+  background-color: #fff;
 
   .search-field{
-    border: 1px solid #fff;
-    border-radius: 0;
-    height: 35px;
-    width: 410px;
+    height: 30px;
+    border: none;
+    width: 225px;
     display: inline-block;
-    background-color: #000;
-    @media (max-width: 1300px) {
-      width: 180px;
-    }
   }
   .submit-icon {
     display: inline;
     width: 18px;
     height: 18px;
-    position: absolute;
-    top: 8px;
-    right: 15px;
+    position: relative;
+    top: -1px;
     line-height: 30px;
     vertical-align: middle;
   }
   .form-control:focus{
-    background: #fff;
-    color: #000;
+    border: none;
+    box-shadow: none;
   }
   .form-control:focus::-webkit-input-placeholder { color:transparent; }
   .form-control:focus:-moz-placeholder { color:transparent; }
@@ -275,20 +259,31 @@ $menu-line-color: #ffffff;
 }
 
 .upload-btn-wrapper{
-  line-height: 57px;
+  margin-right: 50px;
+
   .upload-btn {
-    @extend .header-btn-bg;
-    background-color: #F0AD4E;
     font-family: $header-button-font;
+    font-size: $upload-btn-fontsize;
+    height: 25px;
+    line-height: .8em;
+    width: 100px;
   }
 }
 .login-btn-wrapper{
-  line-height: 57px;
-  .btn {
-    @extend .header-btn-bg;
-    .dropdown-toggle {
-      padding-right: 30px;
-    }
+  position: absolute;
+  right: 20px;
+  line-height: 50px;
+  .login-btn{
+    background-color: $login-button-background;
+    font-family: $header-button-font;
+    font-size: $upload-btn-fontsize;
+    color: $login-button-text;
+    height: 25px;
+    line-height: .8em;
+    width: 100px;
+  }
+  .login-btn:hover{
+    background-color: $login-button-hovered;
   }
 }
 .authform{
@@ -422,61 +417,51 @@ $menu-line-color: #ffffff;
 /************************/
 /* HEADER TABLET STYLES */
 /************************/
-//@media screen and (min-width: 1025px) and (max-width: 1200px){
-//  .login-btn-wrapper{
-//    position: relative;
-//    top: 0;
-//    right: 0;
-//  }
-//}
+@media screen and (min-width: 1025px) and (max-width: 1200px){
+  .login-btn-wrapper{
+    position: relative;
+    top: 0;
+    right: 0;
+  }
+}
 
 @media screen and (min-width: 768px) and (max-width: 1024px){
-  .black-header-stripe {
-    padding: 0 10px;
-    .btn-default {
-      padding: 6px 7px;
-    }
-  }
-  
   .red-man-logo,
   .bying-guides-btn-wrapper,
   .compare-button-wrapper,
-  .upload-btn-wrapper
-  {
-    margin: 0px;
+  .search-field-wrapper,
+  .upload-btn-wrapper{
+    margin-right: 10px;
   }
-  
+
   .search-field-wrapper{
-    margin: 0 10px;
+    width: 185px;
+    border-radius: 4px;
+
+    .search-field{
+      border-radius: 4px;
+      width: 150px;
+    }
   }
-  
-  .header-btn-bg {
-    margin-left: 10px;
+  .compare-button-wrapper{
+    .btn{
+      padding-right: 25px;
+    }
   }
 
-//  .search-field-wrapper{
-//    width: 185px;
-//    border-radius: 4px;
-//
-//    .search-field{
-//      border-radius: 4px;
-//      width: 150px;
-//    }
-//  }
-
-//  .upload-btn-wrapper {
-//    .upload-btn{
-//      width: 90px;
-//    }
-//  }
-//  .login-btn-wrapper{
-//    position: relative;
-//    top: 0;
-//    right: 0;
-//    .login-btn{
-//      width: 90px;
-//    }
-//  }
+  .upload-btn-wrapper {
+    .upload-btn{
+      width: 90px;
+    }
+  }
+  .login-btn-wrapper{
+    position: relative;
+    top: 0;
+    right: 0;
+    .login-btn{
+      width: 90px;
+    }
+  }
   .background-wrapper{
     .main-heading-wrapper{
       margin-left: 0;
@@ -519,42 +504,42 @@ $menu-line-color: #ffffff;
     }
     .red-man-logo{
       text-align: center;
-      margin-top: 15px;
+
       img{
         margin-bottom: 20px;
         display: inline;
       }
     }
-//    .bying-guides-btn-wrapper{
-//      left: 10px;
-//      margin-bottom: 20px;
-//      position: relative;
-//      width: 120px;
-//    }
-//    .compare-button-wrapper{
-//      position: absolute;
-//      right: 10px;
-//      top: 66px;
-//      .btn{
-//        padding-right: 30px;
-//      }
-//    }
+    .bying-guides-btn-wrapper{
+      left: 10px;
+      margin-bottom: 20px;
+      position: relative;
+      width: 120px;
+    }
+    .compare-button-wrapper{
+      position: absolute;
+      right: 10px;
+      top: 66px;
+      .btn{
+        padding-right: 30px;
+      }
+    }
     .upload-btn-wrapper{
       position: absolute;
-      left: 15px;
-      top: 15px;
-      line-height: 0;
-      button {
-        margin: 0;
+      left: 10px;
+      top: 13px;
+
+      button{
+        width: 80px;
       }
     }
     .login-btn-wrapper{
       position: absolute;
-      right: 15px;
-      top: 15px;
-      line-height: 0;
-      button {
-        margin: 0;
+      right: 10px;
+      top: 0;
+
+      button{
+        width: 80px;
       }
     }
     form {
@@ -563,7 +548,6 @@ $menu-line-color: #ffffff;
 
     }
     .search-field-wrapper{
-      margin: 0;
       border-radius: 4px;
       .search-field{
         width: 225px;
@@ -1269,7 +1253,7 @@ $upload-button-color: #70B29F;
       font-family: $thumbs-main-font;
       margin: 15px;
       padding: 0 0 15px 0;
-      width: 486px;
+      width: 250px;
 
       .thumb-header{
         align-items: center;
@@ -1379,10 +1363,6 @@ $upload-button-color: #70B29F;
       }
     }
   }
-}
-
-.product-image-small {
-  margin-bottom: 15%;
 }
 
 //******************************//

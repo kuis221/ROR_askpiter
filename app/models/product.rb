@@ -65,7 +65,7 @@ class Product < ActiveRecord::Base
   end
 
   cattr_reader :default_picture do
-    OpenStruct.new url: 'thumb-img-1.png', title: 'No images found'
+    OpenStruct.new url: 'thumb-img-1.jpg', title: 'No images found'
   end
   default_picture.deep_freeze
 
