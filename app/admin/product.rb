@@ -9,7 +9,8 @@ ActiveAdmin.register Product do
                 attrs_attributes: [:title, :value, :_destroy, :id],
                 prices_attributes: [:amount, :currency_id, :_destroy, :id],
                 dimensions_attributes: [:text, :_destroy, :id],
-                pictures_attributes: [:title, :url, :_destroy, :id]
+                pictures_attributes: [:title, :url, :_destroy, :id],
+                :filter_option_ids => []
 
   action_item :videos, only: :show do
     link_to 'Videos', admin_product_videos_path(product)
@@ -77,6 +78,7 @@ ActiveAdmin.register Product do
 
   form do |f|
     f.inputs do
+      f.input :filter_options, as: :check_boxes, collection: FilterOption.all, label: 'Filter Options'
       f.input :name
       f.input :description
       f.input :year
