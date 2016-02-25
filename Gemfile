@@ -18,13 +18,13 @@ gem 'geocoder'
 gem 'paperclip', '~> 4.3'
 gem 'aws-sdk', '< 2'
 gem 'kaminari'
+gem 'pg'
 
 group :development, :test do
   gem 'byebug'
   gem 'factory_girl_rails'
   gem 'faker'
   gem 'rspec-rails'
-  gem 'sqlite3'
 end
 
 group :development do
@@ -45,7 +45,6 @@ group :test do
 end
 
 group :production do
-  gem 'pg'
   gem 'puma'
   gem 'rails_12factor'
 end
