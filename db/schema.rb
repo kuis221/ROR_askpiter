@@ -13,9 +13,6 @@
 
 ActiveRecord::Schema.define(version: 20160218161710) do
 
-  # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
-
   create_table "addresses", force: :cascade do |t|
     t.string   "street"
     t.string   "postcode"
@@ -181,8 +178,8 @@ ActiveRecord::Schema.define(version: 20160218161710) do
     t.datetime "updated_at",         null: false
   end
 
-  add_index "user_favourites", ["favouriteable_type", "favouriteable_id"], name: "favouriteable_polymorphic_index", using: :btree
-  add_index "user_favourites", ["user_id"], name: "index_user_favourites_on_user_id", using: :btree
+  add_index "user_favourites", ["favouriteable_type", "favouriteable_id"], name: "favouriteable_polymorphic_index"
+  add_index "user_favourites", ["user_id"], name: "index_user_favourites_on_user_id"
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -211,8 +208,8 @@ ActiveRecord::Schema.define(version: 20160218161710) do
     t.boolean  "company"
   end
 
-  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
-  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
+  add_index "users", ["email"], name: "index_users_on_email", unique: true
+  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
 
   create_table "videos", force: :cascade do |t|
     t.string   "title"
@@ -230,5 +227,4 @@ ActiveRecord::Schema.define(version: 20160218161710) do
     t.string   "code",        limit: 20
   end
 
-  add_foreign_key "user_favourites", "users"
 end
