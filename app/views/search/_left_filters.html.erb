@@ -2,7 +2,7 @@
   <% if user_signed_in? %>
 
     <%= render layout: 'left_filter',
-        locals: { filter_name: 'Favourites', filter_type: 'favourites', style: 'color: #ffffff' } do %>
+        locals: { filter_name: 'Favourites', filter_type: 'favourites', icon_class: 'glyphicon glyphicon-star' } do %>
       <% current_user.favourite_products.last(10).each do |product| %>
         <div class="filter-wrapper">
             <span class="glyphicon glyphicon-trash"></span>
@@ -14,7 +14,7 @@
     <% end %>
 
     <%= render layout: 'left_filter',
-        locals: { filter_name: 'History Search', filter_type: 'history-search', style: 'color: #ffffff' } do %>
+        locals: { filter_name: 'History Search', filter_type: 'history-search', icon_class: 'glyphicon glyphicon-search' } do %>
       <% current_user.searches.recent.each do |search| %>
       <div class="filter-wrapper">
         <%= search_link [ param_change( :update, :delete_search, search.id) ] do %>
