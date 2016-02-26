@@ -16,6 +16,7 @@ class Product < ActiveRecord::Base
   has_many :users, through: :user_favourites
   has_many :pictures, as: :imageable
   has_many :similars, -> (p) { where.not(id: p) }, through: :sub_category, source: :products
+  has_and_belongs_to_many :filter_options
 
   alias_attribute :characteristics, :attrs # .characteristics method
 
