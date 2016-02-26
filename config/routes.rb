@@ -53,6 +53,7 @@ Rails.application.routes.draw do
   get 'ajax_destroy_favourite', to: 'users#ajax_destroy_favourite', as: :ajax_destroy_favourite
   get 'ajax_destroy_all_favourites', to: 'users#ajax_destroy_all_favourites', as: :ajax_destroy_all_favourites
   get 'ajax_destroy_recent_searches', to: 'users#ajax_destroy_recent_searches', as: :ajax_destroy_recent_searches
+  get 'ajax_get_filter_options/:id' => 'products#set_filter_options', as: :set_filter_options
 
   resources :home, only: [:index]
   resources :search, only: [:index]

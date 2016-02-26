@@ -2,6 +2,11 @@ ActiveAdmin.register Product do
 
   controller do
     belongs_to :company, :user, :sub_category, optional: true
+
+    def edit
+      gon.product_id = params[:id]
+      super
+    end
   end
 
   permit_params :name, :description, :year, :url,
@@ -78,13 +83,13 @@ ActiveAdmin.register Product do
 
   form do |f|
     f.inputs do
-      f.input :filter_options, as: :check_boxes, collection: FilterOption.all, label: 'Filter Options'
       f.input :name
       f.input :description
       f.input :year
       f.input :url
-      f.input :sub_category
       f.input :company
+      f.input :sub_category
+      f.input :filter_options, as: :check_boxes, collection: FilterOption.all, label: 'Filter Options'
     end
     f.inputs 'Pictures' do
       f.has_many :pictures, allow_destroy: true do |attr|
