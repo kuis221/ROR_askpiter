@@ -20,6 +20,8 @@ gem 'aws-sdk', '< 2'
 gem 'kaminari'
 gem 'pg'
 
+gem 'gon'
+
 group :development, :test do
   gem 'byebug'
   gem 'factory_girl_rails'

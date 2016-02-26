@@ -11,6 +11,18 @@ class ProductsController < ApplicationController
     @similars = product.similars.recent.first(10)
   end
 
+    def set_filter_options
+      @product = Product.find(params[:product_id]) if params[:product_id].present?
+
+      sub_category = SubCategory.find(params[:id])
+      @filter_options = sub_category.filter_options
+
+      respond_to do |format|
+         format.html { render :layout => false }
+         format.js {}
+      end
+    end
+
   private
 
   def set_product

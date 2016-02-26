@@ -1,4 +1,12 @@
 ActiveAdmin.setup do |config|
+  ActiveAdmin::Views::Pages::Base.class_eval do
+    def build_footer_with_gon
+      build_footer_without_gon
+      current_arbre_element.add_child(include_gon(:init => true))
+    end
+
+    alias_method_chain :build_footer, :gon
+  end
   # == Site Title
   #
   # Set the title that is displayed on the main layout
