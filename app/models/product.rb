@@ -33,6 +33,9 @@ class Product < ActiveRecord::Base
   accepts_nested_attributes_for :dimensions, allow_destroy: true
   accepts_nested_attributes_for :pictures, allow_destroy: true
 
+  scope :filter, ->(filters) { includes(:filter_options)
+                              .where(filter_options: { id: filters }) if filters.present? }
+
   def title
     "#{name} - #{sub_category_name}"
   end

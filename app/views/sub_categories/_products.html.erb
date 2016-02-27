@@ -1,0 +1,39 @@
+<% if @products.count == 0 %>
+  <div class="flash alert alert-danger">
+    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+    Sorry, your search returned no products.
+  </div>
+<% else %>
+  <% @products.each do |product| %>
+
+    <div class='thumb-wrapper'>
+      <div class='flex thumb-header'>
+        <span class='thumb-header-abbr'>
+            <%= product.name %>
+        </span>
+
+      </div>
+        <%= link_to product do %>
+          <div class='embed-responsive embed-responsive-16by9'>
+            <%= image_tag 'pictures_image_thumbnail.png', alt: product.name, class: 'img-responsive center-block' %>
+          </div>
+        <% end %>
+        <div class='flex thumb-footer'>
+          <span class='thumb-footer-model'>
+            <%= link_to product do %>
+              <%= product.name %> <%= product.year %>
+            <% end %>
+          </span>
+
+        </div>
+        <div class='thumb-description text-left'>
+
+        </div>
+        <div class='thumb-moreinfo-link'>
+          <%= link_to 'More Info...', product %>
+        </div>
+    </div>
+
+  <%end %>
+<% end %>
+
