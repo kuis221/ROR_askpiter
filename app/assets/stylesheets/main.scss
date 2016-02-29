@@ -709,6 +709,7 @@ $subfilter-size: .8em;
   font-family: $sidepanel-main-font;
   top: 685px;
   width: 320px;
+  position: absolute;
   display: table-cell;
 
   .filter-group{
@@ -1222,6 +1223,7 @@ $upload-button-color: #70B29F;
   padding-bottom: 75px;
   margin-top: 0;
   display: table-cell;
+  padding-left: 300px;
 
   .applied-filters-wrapper{
     background: $appfilters-background;
