@@ -28,7 +28,7 @@
     <% end %>
   <% end %>
 
-  <%= form_tag '', method: 'get', id: 'filter_form' do %>
+  <%= form_tag(sub_category_path(@sub_category, format: :js), method: 'get', id: 'filter_form', remote: true) do %>
     <% @filters.each do |filt| %>
       <%= render layout: 'left_filter',
           locals: { filter_name: filt.name, filter_type: filt.name, icon_class: 'glyphicon glyphicon-home' } do %>

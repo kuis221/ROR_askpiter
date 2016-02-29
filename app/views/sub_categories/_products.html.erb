@@ -1,10 +1,11 @@
-<% if @products.count == 0 %>
+<div class="flex thumbs-matrix-wrapper search-results-container" id="products_goes_here">
+<% if products.count == 0 %>
   <div class="flash alert alert-danger">
     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
     Sorry, your search returned no products.
   </div>
 <% else %>
-  <% @products.each do |product| %>
+  <% products.each do |product| %>
 
     <div class='thumb-wrapper'>
       <div class='flex thumb-header'>
@@ -36,4 +37,4 @@
 
   <%end %>
 <% end %>
-
+</div>
