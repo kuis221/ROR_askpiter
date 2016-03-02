@@ -10,25 +10,38 @@
     <div class='thumb-wrapper'>
       <div class='flex thumb-header'>
         <span class='thumb-header-abbr'>
-            <%= product.name %>
+            <%= product.name && product.company && product.company.name %>
+        </span>
+        <span class='thumb-time-date'>
+          <span class='glyphicon glyphicon-time'></span>
+          <span>
+            <%= product.created_at.strftime("%d %b %H:%M") %>
+          </span>
         </span>
 
       </div>
         <%= link_to product do %>
           <div class='embed-responsive embed-responsive-16by9'>
-            <%= image_tag 'pictures_image_thumbnail.png', alt: product.name, class: 'img-responsive center-block' %>
+            <%= image_tag product.picture.url, alt: product.name, class: 'img-responsive center-block' %>
           </div>
         <% end %>
         <div class='flex thumb-footer'>
           <span class='thumb-footer-model'>
             <%= link_to product do %>
               <%= product.name %> <%= product.year %>
+              <%= product.name%> <%= "(#{product.year})" if product.year%>
             <% end %>
           </span>
+          <div class='thumb-star-wrapper'>
 
+            <%= product.prices.first.amount %>
+            <%= product.prices.first.currency.sign %>
+          </div>
         </div>
         <div class='thumb-description text-left'>
-
+          <p>
+            <%= truncate product.description, length: 110, separator: ' ' %>
+          </p>
         </div>
         <div class='thumb-moreinfo-link'>
           <%= link_to 'More Info...', product %>
@@ -38,3 +51,4 @@
   <%end %>
 <% end %>
 </div>
+
