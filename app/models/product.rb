@@ -76,7 +76,7 @@ class Product < ActiveRecord::Base
   def self.base_search(search, sub_categories, companies)
     prods = all
     if search || sub_categories.is_a?(Array) || companies.is_a?(Array)
-      prods = prods.where('products.name LIKE :search or products.description LIKE :search', search: "%#{search}%") if search
+      prods = prods.where('lower(products.name) LIKE lower(:search) or lower(products.description) LIKE lower(:search)', search: "%#{search}%") if search
       prods = prods.where(sub_category_id: sub_categories) if sub_categories.is_a?(Array)
       prods = prods.where(company_id: companies) if companies.is_a?(Array)
       prods
