@@ -6,6 +6,7 @@ $(document).ready(function(){
     var subFilter = $('.sub-filter-wrapper');
     var showMoreLink = $('.showmore-link-wrapper');
     var showMoreProducts = $('.showmore-thumbs-row');
+    var showMoreSimilar = $('#show-similar');
     var plusIcon = $('.filter-plus-icon');
     var checkBox = $('.checkbox-inline');
     var submitButtonSelector = 'a[data-submit-button="true"]';
@@ -51,7 +52,6 @@ $(document).ready(function(){
     displaySearchResultsMore();
 
     showMoreProducts.on('ajax:success', function( e, data, status, xhr ) {
-
       $('.search-results-container').append(data);
       displaySearchResultsMore();
       var prodLength = $('.search-results-container .thumb-wrapper').length;
@@ -59,6 +59,30 @@ $(document).ready(function(){
       showMoreProducts.find('a').each(function(idx, el){
         this.href = this.href.replace(/page=(\d+)/, 'page='+$('.search-results-have-more:last-child').data('hasmore'));
         this.href = this.href.replace(/start_row_index=(\d+)/, 'start_row_index='+prodLength);
+
+      });
+    });
+
+    var displaySimilarMore = function() {
+      var hasMore = $('.similar-have-more').last().data('hasmore');
+      if( hasMore ) {
+        showMoreSimilar.show();
+      }
+      else {
+        showMoreSimilar.hide();
+      }
+    }
+    displaySimilarMore();
+    showMoreSimilar.on('ajax:success', function( e, data, status, xhr ) {
+      $('.similar-wrapper').append(data);
+      displaySimilarMore();
+      var prodLength = $(data).filter('.thumb-wrapper').length;
+      showMoreSimilar.find('a').each(function(idx, el){
+
+        var remains = parseInt(this.text.replace("Show more (", "")) - prodLength;
+        this.href = this.href.replace(/page=(\d+)/, 'page='+$('.similar-have-more').last().data('hasmore'));
+        this.text =  "Show more ("+remains+")";
+
 
       });
     });

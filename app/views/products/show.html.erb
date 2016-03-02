@@ -12,7 +12,7 @@
           <%= picture_thumbnails pictures %>
           <% 5.times do %>
             <%= image_tag product.picture_url, alt: product.picture_title,
-                                                        class: 'product-image-small' %> 
+                                                        class: 'product-image-small' %>
           <% end %>
         </div>
         <div class='col-md-10'>
@@ -139,10 +139,16 @@
 <!-- similar products section -->
 <div class='product-assets product-similars text-center'>
   <h1>Similar Products</h1>
-  <%= thumbnails_container { product_thumbnails similars } %>
-  <div class='buttons'>
-    <%= link_to "See all (#{product.similars_count})",
-                search_index_path(sub_category_id: product.sub_category_id),
-                class: 'btn btn-default', role: 'button' %>
+  <div class="main-container">
+    <div class="main-content-wrapper">
+      <div class="flex thumbs-matrix-wrapper similar-wrapper">
+        <%= render partial: 'product_xhr', locals: { results: @similars } %>
+      </div>
+    </div>
+  </div>
+  <div class='buttons' id="show-similar">
+    <%= link_to "Show more (#{product.similars_count - 10})",
+                product_path(product, page: @similars.next_page),
+                { class: 'btn btn-default', role: 'button', 'data-remote': true}  %>
   </div>
 </div>

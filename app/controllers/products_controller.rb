@@ -8,7 +8,14 @@ class ProductsController < ApplicationController
     @reviews = product.reviews.recent.first(3)
     @photos = product.photos.recent.first(5)
     @videos = product.videos.recent.first(5)
-    @similars = product.similars.recent.first(10)
+    @similars = Kaminari.paginate_array(product.similars.recent)
+                     .page(params[:page])
+                     .per(10)
+    if request.xhr?
+      render partial: 'product_xhr', locals: { results: @similars }
+    else
+      render
+    end
   end
 
     def set_filter_options
