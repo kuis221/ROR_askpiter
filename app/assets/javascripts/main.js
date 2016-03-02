@@ -9,7 +9,6 @@ $(document).ready(function(){
     var plusIcon = $('.filter-plus-icon');
     var checkBox = $('.checkbox-inline');
     var submitButtonSelector = 'a[data-submit-button="true"]';
-
     window.filterStatus = window.filterStatus || {
       'favourites': 'hide',
       'history-search': 'hide',
@@ -52,19 +51,22 @@ $(document).ready(function(){
     displaySearchResultsMore();
 
     showMoreProducts.on('ajax:success', function( e, data, status, xhr ) {
+
       $('.search-results-container').append(data);
       displaySearchResultsMore();
       var prodLength = $('.search-results-container .thumb-wrapper').length;
 
       showMoreProducts.find('a').each(function(idx, el){
+        this.href = this.href.replace(/page=(\d+)/, 'page='+$('.search-results-have-more:last-child').data('hasmore'));
         this.href = this.href.replace(/start_row_index=(\d+)/, 'start_row_index='+prodLength);
+
       });
     });
 
     $('.applied-filters-wrapper').on('click','.applied-filter', function(){
         $(this).hide();
     });
-  
+
     // Add pull-right and pull-left to side buttons in the header depending on the window size
     function repositionHeaderSideDropdowns() {
       var bodyWidth = $('body').width();
@@ -83,7 +85,7 @@ $(document).ready(function(){
     $(window).resize(function() {
       repositionHeaderSideDropdowns();
     });
-    
+
     // Update block position
     function setBlockPosition(button, block) {
       var topPos = $(button).offset().top + 42;
@@ -103,7 +105,7 @@ $(document).ready(function(){
         });
       }
     }
-  
+
     // 'Buying guides' toggle block
     $("#buying-guides").click(function(e){
       $(".compare-block-wrapper").hide(300);
@@ -318,7 +320,7 @@ $(document).ready(function(){
 
       var myRating = rating(widget, currentRating, maxRating, callback);
     }
-    
+
 
 
 });
