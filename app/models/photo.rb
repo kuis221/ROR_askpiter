@@ -1,6 +1,8 @@
 class Photo < ActiveRecord::Base
   include Recentable
 
+  attr_accessor :company_id
+
   belongs_to :product
   belongs_to :user
   belongs_to :category
@@ -9,7 +11,7 @@ class Photo < ActiveRecord::Base
   has_many :users, through: :user_favourites
   has_one :picture, as: :imageable
 
-  delegate :url, :title, to: :picture, allow_nil: true # .url and .title methods
+  delegate :url, to: :picture, allow_nil: true # .url
 
   accepts_nested_attributes_for :picture
 

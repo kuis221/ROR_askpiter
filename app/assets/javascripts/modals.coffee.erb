@@ -71,6 +71,7 @@ $ ->
     update_footer   modal, data.footer
     attach_events modal, data.events
     modal.modal 'handleUpdate'
+    inintSelect modal
     true
 
   update_title = (modal, title) ->
@@ -111,6 +112,22 @@ $ ->
       true
 
     true
+
+  inintSelect = (modal) ->
+    modal.find('.select-former').change (e) ->
+      url = '/products?'
+      for property in ['category', 'company']
+        url += property + '_id=' + modal.find('.' + property + '-select').val() + '&'
+
+      $.getJSON url, (data) ->
+        products = data.products
+        $productSelect = modal.find('.product-select')
+        origin = $productSelect.val()
+        html = '<option value="">Please select</option>'
+        $.each products, (i) ->
+          product = products[i]
+          html += '<option value="' + product.id + '">' + product.name + '</option>'
+        $productSelect.html(html).val(origin)
 
   $(document).on 'hide.bs.modal', modal_selector, ->
     $(this).data modal_active_key, false

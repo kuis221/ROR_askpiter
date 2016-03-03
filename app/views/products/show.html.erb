@@ -3,7 +3,7 @@
     <%= render 'breadcrumbs' %>
     <div class='page-header'>
       <h1>
-        <%= product.title %>
+        <%= product.name %>
       </h1>
     </div>
     <div class='container-fluid'>
@@ -11,13 +11,11 @@
         <div class='col-md-2 visible-md visible-lg'>
           <%= picture_thumbnails pictures %>
           <% 5.times do %>
-            <%= image_tag product.picture_url, alt: product.picture_title,
-                                                        class: 'product-image-small' %>
+            <%= image_tag product.picture_url, alt: '', class: 'product-image-small' %>
           <% end %>
         </div>
         <div class='col-md-10'>
-          <%= image_tag product.picture_url, alt: product.picture_title,
-                        id: 'large-image', class: 'img-responsive center-block' %>
+          <%= image_tag product.picture_url, alt: '', id: 'large-image', class: 'img-responsive center-block' %>
         </div>
       </div>
     </div>

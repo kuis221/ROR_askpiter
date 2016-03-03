@@ -20,12 +20,12 @@ user.videos << video
 
 address = Address.create(street: "Default address", postcode: "000000", city: "Vologda", country: "Australia", latitude: 43.0, longitude: 131)
 
-company = Company.create(name: "Name for company", url: "http://yahoo.com", description: "Description for company", international: true, email: "c@yahoo.com", phone: "+7000000", fax: "fax")
+company = Company.create(name: "Name for company", url: "http://yahoo.com", description: "Description for company", email: "c@yahoo.com", phone: "+7000000", fax: "fax")
 company.address = address
 
 user.favourite_companies << company
 
-picture = Picture.create(title: "Default title for picture", url: "s3.url.com")
+picture = Picture.create(title: "Default title for picture")
 
 language = Language.create(name: "EN")
 
