@@ -1,13 +1,15 @@
+
+
 <div class="filter-wrapper">
-    <%= search_company_link company, params[:companies] do %>
-    <label class="checkbox-style">
-      <input "company-<%= company.id %>"
-       type="checkbox"
-       class="checkbox-inline"
-       <%= params[:companies].is_a?(Array) && params[:companies].include?(company.id.to_s) ? 'checked="checked"' : '' %>>
-        <span></span>
-    </label>
-    <label for="company-<%= company.id %>" class="filter-name"><%= company.name %></label>
-    <% end %>
-    <span class="filter-plus-icon glyphicon"></span>
+    <a class='sub-filter-checkbox'>
+      <label class="checkbox-style">
+
+        <%= check_box_tag "companies[]", company.id,
+                                       params[:companies] && params[:companies].include?(company.id.to_s),
+                                       :id => "checkbox_com_" + company.id.to_s,
+                                       :class => "check__form" %>
+      </label>
+      <label for="<%= "checkbox_com_#{company.id}" %>" class="filter-name"><%= company.name %></label>
+    </a>
 </div>
+

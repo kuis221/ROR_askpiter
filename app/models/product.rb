@@ -35,6 +35,8 @@ class Product < ActiveRecord::Base
   scope :filter, ->(filters) { includes(:filter_options)
                               .where(filter_options: { id: filters }) if filters.present? }
 
+  scope :companies, ->(companies) { where(company_id: companies ) if companies.present? }
+
   def title
     "#{name} - #{sub_category_name}"
   end
