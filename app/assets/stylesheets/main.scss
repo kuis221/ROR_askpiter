@@ -1412,7 +1412,7 @@ $upload-button-color: #70B29F;
 //******************************//
 @media screen and (min-width: 768px) and (max-width: 1024px){
   .main-content-wrapper{
-    margin-left: 240px;
+    // margin-left: 240px;
 
     .thumbs-matrix-wrapper{
         .thumb-wrapper{
@@ -1421,7 +1421,8 @@ $upload-button-color: #70B29F;
     }
   }
   .b-l-320 {
-    border-left: 0px;
+
+    border-left-width: 240px;
   }
 }
 
@@ -1454,7 +1455,7 @@ $upload-button-color: #70B29F;
     }
   }
   .b-l-320 {
-    border-left: 0px;
+    border-left-width: 255px;
   }
 }
 
