@@ -58,7 +58,7 @@ Rails.application.routes.draw do
   resources :home, only: [:index]
   resources :search, only: [:index]
   resources :sub_categories, only: [:show]
-  resources :products, only: [:index, :show] do
+  resources :products, only: [:show] do
     resources :reviews, only:[:new, :create], defaults: {format: :json}
     resources :user_favourite_products, only:[:add, :remove] do
       collection do
@@ -83,5 +83,5 @@ Rails.application.routes.draw do
   # end
 
   post '/modals/:action', controller: :modals, format: false, as: :modals
-
+  get '/modals/fetch' => 'modals#fetch', format: :json
 end
