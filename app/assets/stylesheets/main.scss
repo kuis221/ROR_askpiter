@@ -703,9 +703,11 @@ $subfilter-size: .8em;
 /* GENERAL SIDE PANEL STYLES */
 /*****************************/
 
-.safari-position-fix {
-  position: absolute;
+.side-panel-wrapper-fix {
+  display: block;
+  float: left;
 }
+
 .side-panel-wrapper{
   background: $sidepanel-background;
   bottom: 100px;
@@ -1222,11 +1224,17 @@ $upload-button-color: #70B29F;
 .p-l-300 {
   padding-left: 300px;
 }
+
+.b-l-320 {
+  border-left: 320px solid #232323;
+}
+
 .main-content-wrapper{
   background: #EFEFEF;
   padding-bottom: 75px;
   margin-top: 0;
-  display: table-cell;
+  padding-bottom: 0;
+  display: block;
 
   .applied-filters-wrapper{
     background: $appfilters-background;
@@ -1412,6 +1420,9 @@ $upload-button-color: #70B29F;
         }
     }
   }
+  .b-l-320 {
+    border-left: 0px;
+  }
 }
 
 @media screen and (min-width: 1025px) and (max-width: 1400px){
@@ -1441,6 +1452,9 @@ $upload-button-color: #70B29F;
         }
       }
     }
+  }
+  .b-l-320 {
+    border-left: 0px;
   }
 }
 
