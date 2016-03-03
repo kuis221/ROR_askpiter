@@ -2,14 +2,6 @@ class ProductsController < ApplicationController
   include HelperAttr
   helper_attr :product, :pictures, :reviews, :photos, :videos, :similars
   before_action :set_product, only:[:show]
-  respond_to :json, only: [:index]
-
-  def index
-    @products = Product
-    @products = @products.joins(:sub_category).where('sub_categories.category_id = ?', params[:category_id]) if params[:category_id].present?
-    @products = @products.where(company_id: params[:company_id]) if params[:company_id].present?
-    respond_with @products
-  end
 
   def show
     @pictures = product.pictures.recent.first(6)

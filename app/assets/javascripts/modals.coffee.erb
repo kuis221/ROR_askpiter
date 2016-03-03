@@ -115,19 +115,36 @@ $ ->
 
   inintSelect = (modal) ->
     modal.find('.select-former').change (e) ->
-      url = '/products?'
-      for property in ['category', 'company']
-        url += property + '_id=' + modal.find('.' + property + '-select').val() + '&'
+      $this = $(this)
+      val = $this.val()
+      return if val == ''
 
+      selector = '[data-select="product"]'
+      if $this.data('select') == 'category'
+        selector += ', [data-select="company"]'
+      $nextSelects = modal.find(selector)
+      $nextSelects.val('').prop('disabled', true)
+
+      url = '/modals/fetch?' + $this.data('select') + '_id=' + val
       $.getJSON url, (data) ->
-        products = data.products
-        $productSelect = modal.find('.product-select')
-        origin = $productSelect.val()
-        html = '<option value="">Please select</option>'
-        $.each products, (i) ->
-          product = products[i]
-          html += '<option value="' + product.id + '">' + product.name + '</option>'
-        $productSelect.html(html).val(origin)
+        $nextSelects.prop('disabled', false)
+        keys = Object.keys(data)
+        $.each keys, (j) ->
+          key = keys[j]
+          objs = data[key]
+          $select = modal.find('[data-select="' + key + '"]')
+          origin = $select.val()
+          existing = false
+          html = '<option value="">Please select</option>'
+          $.each objs, (i) ->
+            obj = objs[i]
+            html += '<option value="' + obj.id + '"'
+            if origin == obj.id.toString()
+              html += ' selected'
+              existing = true
+            html += '>' + obj.name + '</option>'
+          $select.html(html)
+          $select.val('') unless existing
 
   $(document).on 'hide.bs.modal', modal_selector, ->
     $(this).data modal_active_key, false
