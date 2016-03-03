@@ -75,6 +75,7 @@ $(document).ready(function(){
       }
     }
     displaySimilarMore();
+
     showMoreSimilar.on('ajax:success', function( e, data, status, xhr ) {
       $('.similar-wrapper').append(data);
       displaySimilarMore();
@@ -97,6 +98,7 @@ $(document).ready(function(){
         showMorePhoto.find('a').first().hide();
       }
     }
+    displayPhotoMore();
     showMorePhoto.on('ajax:success', function( e, data, status, xhr ) {
       $('.photo-wrapper').append(data);
       displayPhotoMore();
@@ -119,6 +121,8 @@ $(document).ready(function(){
         showMoreVideo.find('a').first().hide();
       }
     }
+
+    displayVideoMore();
     showMoreVideo.on('ajax:success', function( e, data, status, xhr ) {
       $('.video-wrapper').append(data);
       displayVideoMore();
