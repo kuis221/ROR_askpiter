@@ -14,22 +14,8 @@ class ModalsController < ApplicationController
   private
 
   def set_addendum_locals
-    case
-    when params[:product_id]
-      product = Product.find_by id: params[:product_id]
-      category = product.category
-    when params[:category_id]
-      category = Category.find_by id: params[:category_id]
-      products = category.products
-    else
-      categories = Category.includes(:products).all
-    end
-
-    self.body_locals[:addendum_locals] = OpenStruct.new({
-      product: product,
-      products: products,
-      category: category,
-      categories: categories,
-    }).freeze
+    @categories = Category.includes(:products).all
+    @companies = Company.includes(:products).all
+    @products = []
   end
 end

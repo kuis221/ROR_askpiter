@@ -12,6 +12,8 @@ class Video < ActiveRecord::Base
     host_params.each { |host_param| host_param.freeze }
   end
 
+  attr_accessor :company_id
+
   validates :host, inclusion: { in: HOSTS.keys }, if: :url_changed?
   before_validation :adjust_url, if: :url_changed?
 

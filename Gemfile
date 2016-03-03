@@ -21,6 +21,7 @@ gem 'kaminari'
 gem 'pg'
 
 gem 'gon'
+gem 'active_model_serializers'
 
 group :development, :test do
   gem 'byebug'

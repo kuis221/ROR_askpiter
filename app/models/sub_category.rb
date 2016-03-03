@@ -4,6 +4,7 @@ class SubCategory < ActiveRecord::Base
   has_many :filters
   has_many :filter_options, through: :filters
   has_one :picture, as: :imageable
+  has_many :companies, through: :products
 
   accepts_nested_attributes_for :filters, allow_destroy: true
 end
