@@ -7,6 +7,8 @@ $(document).ready(function(){
     var showMoreLink = $('.showmore-link-wrapper');
     var showMoreProducts = $('.showmore-thumbs-row');
     var showMoreSimilar = $('#show-similar');
+    var showMorePhoto = $('#show-photo');
+    var showMoreVideo = $('#show-video');
     var plusIcon = $('.filter-plus-icon');
     var checkBox = $('.checkbox-inline');
     var submitButtonSelector = 'a[data-submit-button="true"]';
@@ -80,13 +82,56 @@ $(document).ready(function(){
       showMoreSimilar.find('a').each(function(idx, el){
 
         var remains = parseInt(this.text.replace("Show more (", "")) - prodLength;
-        this.href = this.href.replace(/page=(\d+)/, 'page='+$('.similar-have-more').last().data('hasmore'));
+        this.href = this.href.replace(/similar=(\d+)/, 'similar='+$('.similar-have-more').last().data('hasmore'));
         this.text =  "Show more ("+remains+")";
 
 
       });
     });
+    var displayPhotoMore = function() {
+      var hasMore = $('.photo-have-more').last().data('hasmore');
+      if( hasMore ) {
+        showMorePhoto.find('a').first().show();
+      }
+      else {
+        showMorePhoto.find('a').first().hide();
+      }
+    }
+    showMorePhoto.on('ajax:success', function( e, data, status, xhr ) {
+      $('.photo-wrapper').append(data);
+      displayPhotoMore();
+      var prodLength = $(data).filter('.thumb-wrapper').length;
+      showMorePhoto.find('a').first().each(function(idx, el){
 
+        var remains = parseInt(this.text.replace("Show more (", "")) - prodLength;
+        this.href = this.href.replace(/photo=(\d+)/, 'similar='+$('.photo-have-more').last().data('hasmore'));
+        this.text =  "Show more ("+remains+")";
+
+
+      });
+    });
+    var displayVideoMore = function() {
+      var hasMore = $('.video-have-more').last().data('hasmore');
+      if( hasMore ) {
+        showMoreVideo.find('a').first().show();
+      }
+      else {
+        showMoreVideo.find('a').first().hide();
+      }
+    }
+    showMoreVideo.on('ajax:success', function( e, data, status, xhr ) {
+      $('.video-wrapper').append(data);
+      displayVideoMore();
+      var prodLength = $(data).filter('.thumb-wrapper').length;
+      showMoreVideo.find('a').first().each(function(idx, el){
+
+        var remains = parseInt(this.text.replace("Show more (", "")) - prodLength;
+        this.href = this.href.replace(/photo=(\d+)/, 'video='+$('.video-have-more').last().data('hasmore'));
+        this.text =  "Show more ("+remains+")";
+
+
+      });
+    });
     $('.applied-filters-wrapper').on('click','.applied-filter', function(){
         $(this).hide();
     });
