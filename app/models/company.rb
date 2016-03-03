@@ -3,11 +3,11 @@ class Company < ActiveRecord::Base
   has_many :pos, class_name: 'POS'
   has_many :distributors, through: :pos
   
-  has_many :sub_categories, through: :products
-  has_many :companies, through: :sub_categories
-
   has_one :address, as: :addressable
 
+  has_many :sub_categories, through: :products
+  has_many :companies, through: :sub_categories
+  
   has_many :user_favourites, as: :favouriteable
   has_many :users, through: :user_favourites
 
