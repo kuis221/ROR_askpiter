@@ -3,6 +3,8 @@ class SubCategoriesController < ApplicationController
     @sub_category = SubCategory.find(params[:id])
     @products = @sub_category.products.filter(params[:filters])
                                       .companies(params[:companies])
+                                      .year_from(params[:year_from])
+                                      .year_to(params[:year_to])
     @filters = @sub_category.filters
 
     respond_to do |format|

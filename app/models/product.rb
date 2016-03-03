@@ -36,6 +36,8 @@ class Product < ActiveRecord::Base
                               .where(filter_options: { id: filters }) if filters.present? }
 
   scope :companies, ->(companies) { where(company_id: companies ) if companies.present? }
+  scope :year_from, ->(year_from) { where('year >= ?', year_from ) if year_from.present? }
+  scope :year_to, ->(year_to) { where('year <= ?', year_to ) if year_to.present? }
 
   def title
     "#{name} - #{sub_category_name}"
