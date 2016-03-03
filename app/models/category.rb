@@ -4,6 +4,7 @@ class Category < ActiveRecord::Base
   has_many :videos
   has_many :photos
   has_many :products, through: :sub_categories
+  has_many :companies, through: :products
 
   has_many :user_favourites, as: :favouriteable
   has_many :users, through: :user_favourites
