@@ -2,6 +2,9 @@ class Company < ActiveRecord::Base
   has_many :products
   has_many :pos, class_name: 'POS'
   has_many :distributors, through: :pos
+  
+  has_many :sub_categories, through: :products
+  has_many :companies, through: :sub_categories
 
   has_one :address, as: :addressable
 
