@@ -7,4 +7,7 @@ class SubCategory < ActiveRecord::Base
   has_many :companies, through: :products
 
   accepts_nested_attributes_for :filters, allow_destroy: true
+  accepts_nested_attributes_for :picture
+
+  delegate :url, to: :picture, prefix: true, allow_nil: true # .picture_url
 end
