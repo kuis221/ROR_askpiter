@@ -88,7 +88,9 @@ ActiveAdmin.register Product do
       f.input :url
       f.input :company
       f.input :sub_category
-      f.input :filter_options, as: :check_boxes, collection: FilterOption.all, label: 'Filter Options'
+      f.input :filter_options, as: :grouped_check_boxes,
+                               collection: FilterOption.includes(:filter).all.group_by(&:filter),
+                               label: 'Filter Options'
     end
     f.inputs 'Pictures' do
       f.has_many :pictures, allow_destroy: true do |attr|
