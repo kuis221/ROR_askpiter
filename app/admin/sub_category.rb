@@ -2,7 +2,9 @@ ActiveAdmin.register SubCategory do
 
   belongs_to :category, optional: true
 
-  permit_params :name, :category_id, filters_attributes: [:id, :sub_category_id, :name, :_destroy]
+  permit_params :name, :category_id,
+                       filters_attributes: %i(id sub_category_id name _destroy),
+                       picture_attributes: %i(id imageable_id imageable_type image)
 
   filter :name
   filter :category
@@ -33,10 +35,22 @@ ActiveAdmin.register SubCategory do
     end
   end
 
+  sidebar :picture, only: :show do
+    image_tag sub_category.picture_url :thumbnail
+  end
+
   form do |f|
     f.inputs do
       f.input :category
       f.input :name
+    end
+
+    f.inputs 'Picture', for: [:picture_attributes, f.object.picture || f.object.build_picture] do |p|
+      p.input :id, as: :hidden, value: p.object.id
+      p.input :imageable_id, as: :hidden, value: f.object.id
+      p.input :imageable_type, as: :hidden, value: 'SubCategory'
+      p.input :image, required: true, as: :file,
+                      hint: (image_tag p.object.url :thumbnail if p.object.persisted?)
     end
 
     f.inputs "Filters" do
@@ -46,7 +60,6 @@ ActiveAdmin.register SubCategory do
     end
 
     f.actions
-
   end
 
 end
