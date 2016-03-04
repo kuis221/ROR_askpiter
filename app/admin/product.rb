@@ -14,7 +14,7 @@ ActiveAdmin.register Product do
                 attrs_attributes: [:title, :value, :_destroy, :id],
                 prices_attributes: [:amount, :currency_id, :_destroy, :id],
                 dimensions_attributes: [:text, :_destroy, :id],
-                pictures_attributes: [:title, :url, :_destroy, :id],
+                pictures_attributes: %i(image _destroy id),
                 :filter_option_ids => []
 
   action_item :videos, only: :show do
@@ -58,8 +58,7 @@ ActiveAdmin.register Product do
     end
     panel 'Pictures' do
       table_for product.pictures do
-        column :title
-        column :url
+        column { |p| image_tag p.url :thumbnail }
       end
     end
     panel 'Prices' do
@@ -93,8 +92,8 @@ ActiveAdmin.register Product do
     end
     f.inputs 'Pictures' do
       f.has_many :pictures, allow_destroy: true do |attr|
-        attr.input :title
-        attr.input :url
+        attr.input :image, required: true, as: :file,
+                           hint: (image_tag attr.object.url :thumbnail if attr.object.persisted?)
       end
     end
     f.inputs 'Prices' do

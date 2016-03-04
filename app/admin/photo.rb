@@ -6,7 +6,7 @@ ActiveAdmin.register Photo do
 
   permit_params :category_id, :product_id, :user_id,
                 :main, :comment, :day,
-                picture_attributes: [:id, :title, :url, :imageable_id, :imageable_type]
+                picture_attributes: %i(id imageable_id imageable_type image)
 
   action_item :users, only: :show do
     link_to 'Users', admin_photo_users_path(resource)
@@ -30,6 +30,10 @@ ActiveAdmin.register Photo do
     actions
   end
 
+  sidebar :picture, only: :show do
+    image_tag photo.url :thumbnail
+  end
+
   form do |f|
     f.inputs do
       f.input :category
@@ -43,13 +47,10 @@ ActiveAdmin.register Photo do
       picture.input :id, as: :hidden, value: picture.object.id
       picture.input :imageable_id, as: :hidden, value: f.object.id
       picture.input :imageable_type, as: :hidden, value: 'Photo'
-      picture.input :title
-      picture.input :url
+      picture.input :image, required: true, as: :file,
+                            hint: (image_tag picture.object.url :thumbnail if picture.object.persisted?)
     end
     actions
   end
-
-
-
 
 end
