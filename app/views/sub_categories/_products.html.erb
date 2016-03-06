@@ -28,7 +28,6 @@
         <div class='flex thumb-footer'>
           <span class='thumb-footer-model'>
             <%= link_to product do %>
-              <%= product.name %> <%= product.year %>
               <%= product.name%> <%= "(#{product.year})" if product.year%>
             <% end %>
           </span>
