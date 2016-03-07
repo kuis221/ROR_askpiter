@@ -321,6 +321,7 @@ DEPENDENCIES
   jbuilder (~> 2.0)
   jquery-rails
   jquery-turbolinks
+  jquery-ui-rails
   kaminari
   launchy
   paperclip (~> 4.3)

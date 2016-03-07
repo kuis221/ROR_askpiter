@@ -37,8 +37,20 @@
     <% end %>
 
     <%= render layout: 'left_filter',
+        locals: { filter_name: 'Price', filter_type: 'prive', icon_class: 'glyphicon glyphicon-plane' } do %>
+        <%= render partial: 'price_filter', locals: { prices: @sub_category.prices.map {|p| p.amount}.uniq } %>
+    <% end %>
+
+    <%= render layout: 'left_filter',
         locals: { filter_name: 'International Brands', filter_type: 'international-brands', icon_class: 'glyphicon glyphicon-plane' } do %>
-      <% @sub_category.companies.uniq.each do |company| %>
+      <% @sub_category.companies.international(@user_country).uniq.each do |company| %>
+        <%= render partial: 'company_filter', locals: { company: company } %>
+      <% end %>
+    <% end %>
+
+    <%= render layout: 'left_filter',
+        locals: { filter_name: 'Local Brands', filter_type: 'international-brands', icon_class: 'glyphicon glyphicon-plane' } do %>
+      <% @sub_category.companies.local(@user_country).uniq.each do |company| %>
         <%= render partial: 'company_filter', locals: { company: company } %>
       <% end %>
     <% end %>

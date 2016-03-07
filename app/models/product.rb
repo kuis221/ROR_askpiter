@@ -18,6 +18,8 @@ class Product < ActiveRecord::Base
   has_many :similars, -> (p) { where.not(id: p) }, through: :sub_category, source: :products
   has_and_belongs_to_many :filter_options
 
+  has_one :actual_price, -> { order created_at: :asc }, class_name: 'Price' # .actual_price method
+
   alias_attribute :characteristics, :attrs # .characteristics method
 
   delegate :name, to: :company, prefix: true # .company_name method
@@ -38,6 +40,8 @@ class Product < ActiveRecord::Base
   scope :companies, ->(companies) { where(company_id: companies ) if companies.present? }
   scope :year_from, ->(year_from) { where('year >= ?', year_from ) if year_from.present? }
   scope :year_to, ->(year_to) { where('year <= ?', year_to ) if year_to.present? }
+  scope :price_from, ->(price_from) { joins(:actual_price).where('prices.amount >= ?', price_from ) if price_from.present? }
+  scope :price_to, ->(price_to) { joins(:actual_price).where('prices.amount <= ?', price_to ) if price_to.present? }
 
   def title
     "#{name} - #{sub_category_name}"
