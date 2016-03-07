@@ -1,0 +1,21 @@
+<link rel="stylesheet" href="http://fortawesome.github.io/Font-Awesome/assets/font-awesome/css/font-awesome.css">
+<%= render partial: 'registrations/nav_filters' %>
+<div class="container settings-wrapper search-results-container">
+  <div class="center-block">
+    <div class="header-title text-center">
+      <h2>Your Latest Photos - Thanks for uploading :)</h2>
+    </div>
+    <% if @media.total_count == 0 %>
+      <div class="flash alert alert-danger">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+        Sorry, your search returned no products.
+      </div>
+    <% else %>
+      <% @media.each do |media_object| %>
+        <% if media_object.is_a?(Photo) %>
+          <%= render partial: 'photo_thumbnail', locals: { photo: media_object } %>
+        <% end %>
+      <%end %>
+    <% end %>
+  </div>
+</div>
