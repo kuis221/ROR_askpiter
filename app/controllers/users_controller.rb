@@ -86,10 +86,8 @@ class UsersController < ApplicationController
                      .per(16)
 
     if request.xhr?
-      binding.pry
-      render partial: 'review_thumbnail', locals: { results: @media }
+      render partial: 'review_result'
     else
-      binding.pry
       @categories = Category.includes(:sub_categories).all
       render
     end
@@ -101,6 +99,12 @@ class UsersController < ApplicationController
     @media = Kaminari.paginate_array(@media)
                      .page(params[:page])
                      .per(16)
+    if request.xhr?
+      render partial: 'photo_result'
+    else
+      @categories = Category.includes(:sub_categories).all
+      render
+    end
   end
 
   def video
@@ -109,6 +113,12 @@ class UsersController < ApplicationController
     @media = Kaminari.paginate_array(@media)
                      .page(params[:page])
                      .per(16)
+    if request.xhr?
+      render partial: 'video_result'
+    else
+      @categories = Category.includes(:sub_categories).all
+      render
+    end
   end
 
   private

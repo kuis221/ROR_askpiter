@@ -46,11 +46,75 @@ module SearchHelper
     end
     html_options[:data] = { 'turbolinks-scroll': false }
     if name.nil?
-      # binding.pry
       link_to search_index_path( p ), html_options, &block
     else
-      # binding.pry
       link_to name, search_index_path( p ), html_options, &block
+    end
+  end
+
+  def review_link( name = nil, param_changes = nil, html_options = nil, &block )
+
+    # Handle the case where param_changes is the first argument (block provided so no name)
+    if name.kind_of?( Array )
+      html_options = param_changes
+      param_changes = name
+      name = nil
+    end
+    html_options = {} if html_options.nil?
+
+    p = params.dup
+    param_changes.each do |change|
+      p = update_params( p, change[:action], change[:key], change[:value] )
+    end
+    html_options[:data] = { 'turbolinks-scroll': false }
+    if name.nil?
+      link_to review_users_path( p ), html_options, &block
+    else
+      link_to name, review_users_path( p ), html_options, &block
+    end
+  end
+
+  def photo_link( name = nil, param_changes = nil, html_options = nil, &block )
+
+    # Handle the case where param_changes is the first argument (block provided so no name)
+    if name.kind_of?( Array )
+      html_options = param_changes
+      param_changes = name
+      name = nil
+    end
+    html_options = {} if html_options.nil?
+
+    p = params.dup
+    param_changes.each do |change|
+      p = update_params( p, change[:action], change[:key], change[:value] )
+    end
+    html_options[:data] = { 'turbolinks-scroll': false }
+    if name.nil?
+      link_to photo_users_path( p ), html_options, &block
+    else
+      link_to name, photo_users_path( p ), html_options, &block
+    end
+  end
+
+  def video_link( name = nil, param_changes = nil, html_options = nil, &block )
+
+    # Handle the case where param_changes is the first argument (block provided so no name)
+    if name.kind_of?( Array )
+      html_options = param_changes
+      param_changes = name
+      name = nil
+    end
+    html_options = {} if html_options.nil?
+
+    p = params.dup
+    param_changes.each do |change|
+      p = update_params( p, change[:action], change[:key], change[:value] )
+    end
+    html_options[:data] = { 'turbolinks-scroll': false }
+    if name.nil?
+      link_to video_users_path( p ), html_options, &block
+    else
+      link_to name, video_users_path( p ), html_options, &block
     end
   end
 
