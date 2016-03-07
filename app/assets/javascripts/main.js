@@ -6,6 +6,8 @@ $(document).ready(function(){
     var subFilter = $('.sub-filter-wrapper');
     var showMoreLink = $('.showmore-link-wrapper');
     var showMoreProducts = $('.showmore-thumbs-row');
+    var reviewMore = $('.review-showmore-thumbs-row');
+    var photoVideoMore = $('.photo-video-showmore-thumbs-row');
     var showMoreSimilar = $('#show-similar');
     var showMorePhoto = $('#show-photo');
     var showMoreVideo = $('#show-video');
@@ -45,9 +47,13 @@ $(document).ready(function(){
       var hasMore = $('.search-results-have-more:last-child').data('hasmore');
       if( hasMore ) {
         showMoreProducts.show();
+        reviewMore.show();
+        photoVideoMore.show();
       }
       else {
         showMoreProducts.hide();
+        reviewMore.hide();
+        photoVideoMore.hide();
       }
     }
 
@@ -59,6 +65,30 @@ $(document).ready(function(){
       var prodLength = $('.search-results-container .thumb-wrapper').length;
 
       showMoreProducts.find('a').each(function(idx, el){
+        this.href = this.href.replace(/page=(\d+)/, 'page='+$('.search-results-have-more:last-child').data('hasmore'));
+        this.href = this.href.replace(/start_row_index=(\d+)/, 'start_row_index='+prodLength);
+
+      });
+    });
+
+    reviewMore.on('ajax:success', function( e, data, status, xhr ) {
+      $('.review-section').append(data);
+      displaySearchResultsMore();
+      var prodLength = $('.review-section .review-unit').length;
+
+      reviewMore.find('a').each(function(idx, el){
+        this.href = this.href.replace(/page=(\d+)/, 'page='+$('.search-results-have-more:last-child').data('hasmore'));
+        this.href = this.href.replace(/start_row_index=(\d+)/, 'start_row_index='+prodLength);
+
+      });
+    });
+
+    photoVideoMore.on('ajax:success', function( e, data, status, xhr ) {
+      $('.photo-video-section').append(data);
+      displaySearchResultsMore();
+      var prodLength = $('.photo-video-section .photo-wrapper').length;
+
+      photoVideoMore.find('a').each(function(idx, el){
         this.href = this.href.replace(/page=(\d+)/, 'page='+$('.search-results-have-more:last-child').data('hasmore'));
         this.href = this.href.replace(/start_row_index=(\d+)/, 'start_row_index='+prodLength);
 

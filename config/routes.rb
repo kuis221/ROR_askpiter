@@ -48,7 +48,13 @@ Rails.application.routes.draw do
 
   root to: 'home#index'
   devise_for :users, :controllers => { registrations: 'registrations'}
-  resources :users
+  resources :users do
+    collection do
+      get :review
+      get :photo
+      get :video
+    end
+  end
   get 'ajax_destroy_recent_search', to: 'users#ajax_destroy_recent_search', as: :ajax_destroy_recent_search
   get 'ajax_destroy_favourite', to: 'users#ajax_destroy_favourite', as: :ajax_destroy_favourite
   get 'ajax_destroy_all_favourites', to: 'users#ajax_destroy_all_favourites', as: :ajax_destroy_all_favourites

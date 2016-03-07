@@ -72,6 +72,7 @@ class Product < ActiveRecord::Base
     media = []
     media += Photo.where(product_id:self.ids)
     media += Video.where(product_id:self.ids)
+    media += Review.where(product_id:self.ids)
     media
   end
 

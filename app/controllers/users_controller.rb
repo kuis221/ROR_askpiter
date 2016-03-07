@@ -36,7 +36,7 @@ class UsersController < ApplicationController
     search = Search.where(id: @filter_id, user_id: current_user.id).last
     respond_to do |format|
       if search.destroy
-        format.js 
+        format.js
       else
         format.js { render js: "alert('Something went wrong!');" }
       end
@@ -58,7 +58,7 @@ class UsersController < ApplicationController
   end
 
   def ajax_destroy_all_favourites
-    favourites = current_user.favourites  
+    favourites = current_user.favourites
     respond_to do |format|
       if favourites.destroy_all
         format.js
@@ -76,6 +76,49 @@ class UsersController < ApplicationController
       else
         format.js { render js: "alert('Something went wrong!');" }
       end
+    end
+  end
+
+  def review
+    @media = ProductSearchService.new(params).search.media.select { |media| media.is_a?(Review) }
+
+    @media = Kaminari.paginate_array(@media)
+                     .page(params[:page])
+                     .per(16)
+
+    if request.xhr?
+      render partial: 'review_result'
+    else
+      @categories = Category.includes(:sub_categories).all
+      render
+    end
+  end
+
+  def photo
+    @media = ProductSearchService.new(params).search.media.select { |media| media.is_a?(Photo) }
+
+    @media = Kaminari.paginate_array(@media)
+                     .page(params[:page])
+                     .per(16)
+    if request.xhr?
+      render partial: 'photo_result'
+    else
+      @categories = Category.includes(:sub_categories).all
+      render
+    end
+  end
+
+  def video
+    @media = ProductSearchService.new(params).search.media.select { |media| media.is_a?(Video) }
+
+    @media = Kaminari.paginate_array(@media)
+                     .page(params[:page])
+                     .per(16)
+    if request.xhr?
+      render partial: 'video_result'
+    else
+      @categories = Category.includes(:sub_categories).all
+      render
     end
   end
 
