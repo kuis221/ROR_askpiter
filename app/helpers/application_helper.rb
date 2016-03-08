@@ -39,4 +39,11 @@ module ApplicationHelper
     is_button ? button_tag(tag_content, tag_options) : link_to(tag_content, '#', tag_options)
   end
 
+  def sub_category_cover(sub_category)
+    @sub_category = sub_category
+    if @sub_category.picture.present?
+      "background: url('#{ @sub_category.picture.url(:subcatcover) }') no-repeat top left"
+    end
+  end
+
 end
