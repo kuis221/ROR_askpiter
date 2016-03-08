@@ -424,6 +424,19 @@ $(document).ready(function(){
       var myRating = rating(widget, currentRating, maxRating, callback);
     }
 
+    var currentUrl = $(location).attr('href');
 
+    if (currentUrl.endsWith('users/edit'))
+      $('.navbar-default .navbar-nav > li').eq(0).addClass('active');
+    else if (currentUrl.endsWith('users/review'))
+      $('.navbar-default .navbar-nav > li').eq(1).addClass('active');
+    else if (currentUrl.endsWith('users/photo'))
+      $('.navbar-default .navbar-nav > li').eq(2).addClass('active');
+    else if (currentUrl.endsWith('users/video'))
+      $('.navbar-default .navbar-nav > li').eq(3).addClass('active');
 
+    $('.navbar-default .navbar-nav > li').on('click', function() {
+      $(this).siblings().removeClass('active');
+      $(this).addClass('active');
+    });
 });
