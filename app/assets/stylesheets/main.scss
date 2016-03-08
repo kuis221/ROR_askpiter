@@ -1824,3 +1824,11 @@ $footer-links-color: #333333;
     }
   }
 }
+
+.nav.navbar-nav.col-md-4 {
+  width: 39.333333% !important;
+}
+
+.navbar-default .navbar-nav > li > a {
+  text-align: center;
+}
