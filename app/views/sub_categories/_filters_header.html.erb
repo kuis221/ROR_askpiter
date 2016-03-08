@@ -1,7 +1,8 @@
-<div class="background-wrapper">
+<div class="background-wrapper" style="<%= sub_category_cover(@sub_category) %>">
+    <%= render 'breadcrumbs' %>
     <div class="flex main-heading-wrapper">
-        <h1 class="main-heading">You can Ask Piter everything</h1>
-        <span class="heading-sub-text">Your ultimate product base for extreme sports. Helping you to make the right choice.</span>
+        <h1 class="main-heading"><%= @sub_category.name %></h1>
+        <span class="heading-sub-text">Use the filters to find your perfect</span>
     </div>
     <div class="main-menu-wrapper">
         <nav class="flex">
