@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!
-  before_action :admin_only, :except => [:show, :ajax_destroy_favourite, :ajax_destroy_recent_search, 
+  before_action :admin_only, :except => [:review, :photo, :video, :show, :ajax_destroy_favourite, :ajax_destroy_recent_search,
                                           :ajax_destroy_all_favourites, :ajax_destroy_recent_searches]
 
   def index
@@ -46,7 +46,7 @@ class UsersController < ApplicationController
   def ajax_destroy_favourite
     @favourite_name = params[:favourite_name]
     @favourite_id = params[:favourite_id]
-    favourite = UserFavourite.where(user_id: current_user.id, favouriteable_id: @favourite_id, 
+    favourite = UserFavourite.where(user_id: current_user.id, favouriteable_id: @favourite_id,
                                     favouriteable_type: @favourite_name).last
     respond_to do |format|
       if favourite.destroy

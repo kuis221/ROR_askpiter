@@ -20,6 +20,7 @@ gem 'paperclip', '~> 4.3'
 gem 'aws-sdk', '< 2'
 gem 'kaminari'
 gem 'pg'
+gem 'pry'
 
 gem 'gon'
 gem 'active_model_serializers'
