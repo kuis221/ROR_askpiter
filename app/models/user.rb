@@ -16,7 +16,7 @@ class User < ActiveRecord::Base
   has_one :address, as: :addressable, dependent: :destroy
   has_many :ratings
   
-  has_many :favourites, foreign_key: 'user_id', class_name: 'UserFavourite'
+  has_many :favourites, foreign_key: 'user_id', class_name: 'UserFavourite', dependent: :destroy
 
   has_many :user_favourite_categories, -> { UserFavourite.categories }, class_name: 'UserFavourite'
   has_many :favourite_categories, through: :user_favourite_categories, source: :favouriteable, source_type: 'Category'
